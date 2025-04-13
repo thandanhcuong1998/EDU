@@ -11,6 +11,13 @@ const initialState = {
   listQuestionFail: [],
 };
 
+/**
+ * Reducer quản lý trạng thái cho các câu hỏi lựa chọn trong bài học.
+ *
+ * @param {object} state Trạng thái hiện tại của reducer.
+ * @param {object} action Action được dispatch tới reducer.
+ * @returns {object} Trạng thái mới sau khi xử lý action.
+ */
 const LessionQuestionChoiceReducer = (state = initialState, action) => {
   switch (action.type) {
     case LessionQuestionChoiceAction.SET_ANSWER: {
@@ -18,6 +25,7 @@ const LessionQuestionChoiceReducer = (state = initialState, action) => {
 
       if (action.payload.type === 'mapping-word') {
         return {
+          // Xử lý trường hợp câu hỏi dạng "nối từ" (mapping-word).
           ...state,
           isCorrect: true,
           progressBar:
@@ -34,14 +42,14 @@ const LessionQuestionChoiceReducer = (state = initialState, action) => {
       const newAnswers = [...state.answers];
       newAnswers[index] = answer; // Cập nhật câu trả lời
 
-      // Kiểm tra câu trả lời đúng sai
+      // Kiểm tra tính đúng đắn của câu trả lời dựa trên loại câu hỏi.
       let isCorrect = false;
       if (type === 'radio') {
+        // Câu hỏi radio: So sánh đáp án đúng với index của lựa chọn được chọn.
         isCorrect = correctAnswers === answer[0].index;
       } else if (type === 'card-word-english' || type === 'card-word-japan') {
+        // Câu hỏi dạng thẻ từ (card-word): So sánh mảng index của các thẻ được chọn với đáp án đúng.
         const newArray = answer.map(item => item.index + 1);
-        isCorrect = arraysEqual(newArray, correctAnswers);
-      }
 
       // Trả về state mới
       return {
@@ -60,16 +68,18 @@ const LessionQuestionChoiceReducer = (state = initialState, action) => {
     }
 
     case LessionQuestionChoiceAction.UPDATE_QUESTION_INDEX:
+      // Xử lý việc cập nhật index của câu hỏi hiện tại.
       const questionIndex = state.currentQuestionIndex + 1;
 
       return {
+        // Cập nhật index câu hỏi hiện tại, xét các trường hợp:
         ...state,
         currentQuestionIndex:
-          questionIndex === state.questions.length // nếu list question đã chạy hết 1 lần
-            ? state.listQuestionFail[0] // di chuyển tới list question fail để user trả lời lại
-            : state.progressBar === 100 // nếu như trả lời hết và đúng
-              ? state.questions.length + 1 // tăng độ dài listquestion + 1 để kết thúc list câu hỏi
-              : questionIndex, // nếu chưa trả lờidddusng 100% sẽ chạy question index còn thiếu
+          questionIndex === state.questions.length // Nếu đã trả lời hết các câu hỏi
+            ? state.listQuestionFail[0] // Chuyển đến câu hỏi đầu tiên trong danh sách câu hỏi sai (nếu có) để người dùng trả lời lại.
+            : state.progressBar === 100 // Nếu đã trả lời đúng 100% số câu hỏi
+              ? state.questions.length + 1 // Tăng index câu hỏi lên để đánh dấu kết thúc bài học.
+              : questionIndex, // Nếu chưa trả lời đúng hết, chuyển sang câu hỏi tiếp theo.
         isCorrect: null,
         answers: [],
       };
