@@ -1,0 +1,485 @@
+.learn-root {
+    display: flex;
+}
+
+.learn-root #card-menu {
+    width: 300px;
+    padding: 0 16px;
+    border-right: 2px solid var(--slate-gray);
+    height: 100%;
+}
+
+.learn-root .logo {
+    padding: 30px 0 30px 10px;
+    text-align: left;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 8px;
+    width: 259px;
+}
+
+.learn-root .left-content .menu {
+    text-align: left;
+    width: 80%;
+}
+
+.learn-root .menu .nav-item {
+    /*padding-left: 15px;*/
+}
+
+.learn-root .menu .nav-item a {
+    height: 52px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    padding: 4px 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.learn-root .menu .nav-item:active {
+    background-color: rgb(33, 41, 47);
+    border-radius: 8px;
+    outline: 2px solid var(--primary-color);
+}
+
+.learn-root .menu .nav-link.active {
+    background-color: rgb(33, 41, 47);
+    border-radius: 8px;
+    outline: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.learn-root .menu .nav-link {
+    color: #DCE6Fc;
+}
+
+.learn-root .menu .nav-item a:hover {
+    background-color: rgb(33, 41, 47);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.learn-root #main-content-study-app {
+    width: 700px;
+    margin: 0 75px;
+    padding: 20px 0;
+}
+
+.learn-root .left-content {
+    padding-left: 15px;
+}
+
+.learn-root .left-content .col-sm-9 .tab-content {
+    margin-left: 100px;
+}
+
+.learn-root .left-content .row .col-sm-3 {
+    border-right: 1px solid rgb(55, 70, 79);
+}
+
+.learn-root .right-content {
+    width: 30%;
+}
+
+.learn-root #main-learn .top-header {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.learn-root #main-learn .top-header .heading a {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+    opacity: .7;
+    color: #fff;
+}
+
+.learn-root #main-learn .top-header .heading a span {
+    margin-left: 10px;
+}
+
+.learn-root #main-learn .top-header .heading p {
+    font-size: 22px;
+    line-height: 35px;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-right: 2px;
+    margin-bottom: 0px;
+}
+
+.learn-root .tips {
+    border: 2px solid rgb(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 13px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.learn-root .tips:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.learn-root .line-study {
+    margin-top: 75px;
+    transform: translate(10%, 0px);
+}
+
+.learn-root .line-study .step-course .course {
+    border-radius: 50%;
+    outline: 5px solid #ccc;
+    outline-offset: 6px;
+    padding: 10px;
+    background-color: var(--primary-color);
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.lession-root .footer-lession .content-footer {
+    position: relative;
+    top: 50%;
+}
+
+.lession-root .footer-lession .button button.isFail {
+    background-color: rgb(238, 85, 85);
+}
+
+.learn-root .line-study .step-course .course.not-active {
+    background-color: #37464f;
+    outline: unset;
+}
+
+.learn-root .line-study .step-course .course:hover .lucide-star {
+    animation: rotate 2s linear infinite; /* Áp dụng animation */
+}
+
+.learn-root .line-study .step-course .course .tooltiptext {
+    visibility: hidden;
+    width: 295px;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 16px;
+    position: absolute;
+    z-index: 1;
+    top: 62px;
+    left: 50%;
+    transform: translate(-50%, 16%);
+    text-align: left;
+    border-radius: 8px;
+}
+
+.learn-root .line-study .step-course .course .tooltiptext p:nth-child(1) {
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.learn-root .line-study .step-course .course .tooltiptext p:nth-child(2) {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.learn-root .line-study .step-course .course .tooltiptext button {
+    background-color: #ffffff;
+    padding: 10px;
+    color: var(--primary-color);
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.learn-root .line-study .step-course .course .tooltiptext button:hover {
+    background-color: #ffffff !important;
+    color: var(--primary-color-light);
+}
+
+.learn-root .line-study .step-course .course.click .tooltiptext {
+    visibility: visible;
+}
+
+.lession-root .card-word-english,
+.lession-root .card-word-japan {
+    width: 600px;
+}
+
+.lession-root .radio .content-question,
+.lession-root .mapping-word .content-answer {
+    width: 650px;
+}
+
+.lession-root .radio .content-question .options,
+    /*.lession-root .card-word-english .content-question .options,*/
+.lession-root .card-word-japan .content-question .options {
+    width: 150px;
+    border: 2px solid var(--slate-gray);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.lession-root .radio .content-question .options.selected {
+    border: 2px solid var(--primary-color);
+}
+
+/*.lession-root .radio .content-question .options.isFail {*/
+/*    border: 2px solid rgb(238, 85, 85);*/
+/*}*/
+
+.lession-root .radio .content-question .options:hover,
+.lession-root .card-word-japan .content-question .options:hover,
+.lession-root .card-word-english .content-question .options:hover {
+    cursor: pointer;
+    background-color: rgb(32, 47, 45);
+}
+
+.lession-root .radio .content-question .options img {
+    width: 92px;
+    height: 160px;
+}
+
+.lession-root .content-question .options ruby,
+.lession-root .content-answer .list-answer li ruby,
+.lession-root .answer-choice .list-answer li ruby {
+    font-size: 19px;
+}
+
+.lession-root .content-question .options rt,
+.lession-root .content-answer .list-answer li rt,
+.lession-root .answer-choice .list-answer li rt {
+    font-size: 16px;
+    color: rgb(82, 101, 109);
+    padding-top: 10px;
+}
+
+.lession-root .mapping-word .content-answer .list-answer2.options2 li {
+    padding: 17px 10px !important;
+}
+
+.lession-root .question-step h3 {
+    font-size: 32px;
+    color: #F1F7FB;
+    line-height: 1.25;
+    font-weight: 700;
+    margin: 20px 0px;
+}
+
+.lession-root .card-word-english .content-question {
+    border: 2px solid var(--slate-gray);
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.lession-root .answer-choice {
+    border-top: 2px solid var(--slate-gray);
+    border-bottom: 2px solid var(--slate-gray);
+    height: 67px;
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.lession-root .card-word-japan .answer-choice {
+    height: 80px !important;
+}
+
+.lession-root .answer-choice ul {
+    margin: 5px 0;
+}
+
+.lession-root .content-answer {
+    margin: 0 auto;
+}
+
+.lession-root .content-answer .list-answer,
+.lession-root .answer-choice .list-answer {
+    display: flex;
+    list-style-type: none;
+    touch-action: none;
+}
+
+.lession-root .mapping-word .content-answer .list-answer {
+    display: block;
+}
+
+.lession-root .card-word-japan .content-answer .list-answer li {
+    padding: 10px 15px;
+}
+
+.lession-root .content-answer .list-answer li,
+.lession-root .answer-choice .list-answer li {
+    border: 2px solid var(--slate-gray);
+    border-radius: 8px;
+    padding: 10px 10px;
+    font-size: 19px;
+    color: #F1F7FB;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.lession-root .content-answer .list-answer li.selected,
+.lession-root .content-answer .list-answer li.selected rt {
+    background-color: var(--slate-gray);
+    color: var(--slate-gray);
+    cursor: default;
+}
+
+.lession-root .mapping-word .content-answer .list-answer li {
+    padding: 6px 10px !important;
+}
+
+
+.lession-root .mapping-word .content-answer .list-answer2.options2 li {
+    border: 2px solid var(--slate-gray);
+    border-radius: 8px;
+    font-size: 19px;
+    color: #F1F7FB;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.lession-root .mapping-word .content-answer .list-answer li,
+.lession-root .mapping-word .content-answer .list-answer2.options2 li {
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+.index-answer {
+    font-size: 15px;
+    color: #52656D;
+    border: 2px solid #52656D;
+    padding: 2px 8px;
+    border-radius: 8px;
+}
+
+.lession-root .active-mapping,
+.lession-root .active-mapping .index-answer {
+    border: 2px solid var(--primary-color) !important;
+    transition: border 1s ease; /* Hiệu ứng chuyển tiếp */
+    background-color: rgb(33, 41, 47) !important;
+}
+
+.lession-root .active-mapping .index-answer,
+.lession-root .active-mapping ruby,
+.lession-root .active-mapping ruby rt {
+    color: var(--primary-color) !important;
+}
+
+.lession-root .success-option,
+.lession-root .success-option .index-answer {
+    /*background-color: var(--slate-gray) !important;*/
+    border: 2px solid #37464F !important;
+    cursor: default;
+    transition: border 0.5s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+.lession-root .success-option,
+.lession-root .success-option .index-answer,
+.lession-root .success-option ruby,
+.lession-root .success-option ruby rt {
+    color: #37464F !important;
+    transition: color 0.5s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+.lession-root .error-option,
+.lession-root .error-option .index-answer {
+    border: 2px solid red !important;
+    transition: border 1s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+.lession-root .error-option,
+.lession-root .error-option .index-answer,
+.lession-root .error-option ruby,
+.lession-root .error-option ruby rt {
+    color: red !important; /* Hoặc màu bạn muốn */
+    transition: color 1s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+.zoom-in {
+    animation: zoomIn 0.5s forwards;
+}
+
+.zoom-out {
+    animation: zoomOut 0.5s forwards;
+}
+
+.lession-root .icon-circle-check path {
+    stroke-width: 50px;
+}
+
+.lession-root .status-resutl-question .text,
+.lession-root .status-resutl-question .text {
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+
+.lession-root .status-resutl-question.success .text {
+    color: var(--success-color) !important;
+}
+
+.lession-root .status-resutl-question.isFail .text {
+    color: var(--false) !important;
+}
+
+.lession-root .radio .selected.isFail {
+    border: 2px solid var(--false) !important;
+}
+
+.lession-root .radio .selected.success {
+    border: 2px solid var(--success-color) !important;
+}
+
+.complete {
+    font-size: 33px;
+    color: var(--primary-color-light) !important;
+}
+
+.complete p {
+    color: #52656D;
+    font-size: 19px;
+}
+
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+
+/* Định nghĩa animation quay 360 độ */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg); /* Bắt đầu từ 0 độ */
+    }
+    to {
+        transform: rotate(360deg); /* Kết thúc ở 360 độ */
+    }
+}

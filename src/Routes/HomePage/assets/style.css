@@ -1,0 +1,244 @@
+
+.change-language {
+    background-color: unset;
+    color: rgb(175, 175, 175);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 15px;
+    position: relative;
+    border: none;
+}
+
+#languages-list {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    top: 25px;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    width: 310px;
+    text-align: left;
+}
+
+#languages-list .nav-link.text-primary {
+    color: #777 !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+#languages-list .col-md-6 {
+    padding: 0px;
+}
+
+#languages-list .nav-item {
+    /*width: 193px;*/
+}
+
+#languages-list .nav-item:hover {
+    background-color: #ccc;
+    border-radius: 7px;
+}
+
+.change-language:hover {
+    border-color: unset;
+}
+
+.change-language:hover #languages-list {
+    display: block;
+}
+
+.justify-content-space-around {
+    justify-content: space-around !important;
+}
+
+.section-3 .card-group .card {
+    width: 400px;
+    border-radius: 40px;
+}
+
+.section-4 h1 {
+    font-size: 72px;
+    color: var(--bs-emphasis-color);
+    font-weight: 700;
+}
+
+.navbar-brand img {
+    width: 85px;
+}
+
+.section-1.banner {
+    height: 80vh;
+}
+
+.section-div-1 {
+    margin-bottom: 150px;
+}
+
+.section-div-1 .dh-highlight-text {
+    width: 908px;
+}
+
+.section-div-1 .dh-highlight-text .title {
+    color: rgb(var(--color_15));
+    background-color: transparent;
+    font-size: 83px;
+    margin-bottom: 10px;
+    --bs-body-font-weight: bold;
+}
+
+.section-div-1 .dh-highlight-text .subtitle {
+    color: rgb(119, 119, 119);
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.section-2 .container {
+    height: auto;
+}
+
+.section-2 .title {
+    color: var(--primary-color);
+    font-size: var(--title-desktop);
+}
+
+.section-2 .customer-logos {
+    height: 100px
+}
+
+.section-2 .customer-logos img {
+    width: 100%;
+}
+
+.section-3 {
+    padding: 56px 0 90px;
+    background: #fafafa;
+}
+
+.section-3 .div-title {
+    margin-bottom: 75px;
+}
+
+.section-3 .title {
+    color: var(--primary-color);
+    font-size: var(--title-desktop);
+}
+
+.section-3 .subtitle {
+    color: rgb(119, 119, 119);
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.section-3 .card-group {
+    padding-top: 25px;
+    padding-bottom: 50px;
+    width: 100%;
+}
+
+.section-3 .card-group .card-title {
+    margin-top: 10px;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+.section-4 .fixed-top {
+    position: sticky;
+    top: 0;
+}
+
+.section-4 .row > div {
+    padding: 55px;
+}
+
+.section-4 .fixed-top .btn.btn-link {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.section-4 h2.title {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.section-4 p.subtitle {
+    font-size: 20px;
+    color: #767676;
+}
+
+.section-4 .card {
+    width: 300px;
+    height: 300px;
+}
+
+.section-5 {
+    background: #fafafa;
+    padding: 80px;
+}
+
+.section-5 .title {
+    font-size: 61px;
+    color: rgb(23, 22, 22);
+    font-weight: 600;
+}
+
+.section-5 .card-group-section-5 {
+    height: 400px;
+}
+
+.section-5 .card-group-section-5 .image-card {
+    width: 300px;
+    height: 300px;
+}
+
+.section-5 .card-section-5 {
+    width: 600px
+}
+
+.section-5 .card-section-5 .title {
+    color: var(--primary-color);
+    font-size: 25px;
+}
+
+.section-5 .card-section-5 .subtitle {
+    font-size: 20px;
+}
+
+.section-5 .card-section-5 .subtitle span {
+    color: rgb(119, 119, 119);
+}
+
+.section-6 {
+    background: #fafafa
+}
+
+.section-6 .example-box {
+    background: url('./img/shape.png') center / cover no-repeat;
+    height: 490px;
+}
+
+.section-6 .example-box .background-shapes {
+    background: url('./img/shape.png') center / cover no-repeat;
+}
+
+.section-6 .example-box .title {
+    color: var(--primary-color);
+}
+
+.section-6 .example-box .btn.btn-link {
+    color: var(--primary-color);
+}
+
+.banner .btn {
+    color: var(--bs-btn-disabled-color);
+    background: var(--primary-color);
+    width: 311px;
+    border-radius: 21px;
+    --bs-body-font-weight: 600;
+    font-size: 20px;
+    border-color: var(--primary-color);
+}

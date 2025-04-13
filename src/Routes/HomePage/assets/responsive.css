@@ -1,0 +1,104 @@
+@media only screen and (max-width: 320px) {
+    /* Đối với màn hình nhỏ hơn 320px */
+}
+
+@media only screen and (min-width: 321px) and (max-width: 480px) {
+    /* Đối với màn hình từ 321px đến 480px */
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    /* Đối với màn hình từ 481px đến 768px */
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+
+    /* Đối với màn hình từ 769px đến 1024px */
+    .banner h1 {
+        font-size: 71px
+    }
+    .section-2 h2,
+    .section-3 h2 {
+        font-size: 43px
+    }
+
+    .banner .btn,
+    .section-3 p {
+        font-size: 25px
+    }
+
+    .section-3 .card-title {
+        font-size: 23px
+    }
+
+    .col-sm-1,
+    .col-sm-10,
+    .col-sm-11,
+    .col-sm-12,
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4,
+    .col-sm-5,
+    .col-sm-6,
+    .col-sm-7,
+    .col-sm-8,
+    .col-sm-9 {
+        float: left
+    }
+
+    .col-sm-4 {
+        width: 33.33333333%
+    }
+
+    .section-3 .card-group .card {
+        width: 380px;
+    }
+
+    .section-4 h1 {
+        font-size: 60px;
+        font-weight: 600;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .col-md-1,
+    .col-md-10,
+    .col-md-11,
+    .col-md-12,
+    .col-md-2,
+    .col-md-3,
+    .col-md-4,
+    .col-md-5,
+    .col-md-6,
+    .col-md-7,
+    .col-md-8,
+    .col-md-9 {
+        float: left
+    }
+
+    .col-md-3 {
+        width: 25%
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .col-lg-1,
+    .col-lg-10,
+    .col-lg-11,
+    .col-lg-12,
+    .col-lg-2,
+    .col-lg-3,
+    .col-lg-4,
+    .col-lg-5,
+    .col-lg-6,
+    .col-lg-7,
+    .col-lg-8,
+    .col-lg-9 {
+        float: left
+    }
+
+    .col-lg-2 {
+        width: 16.66666667%
+    }
+}

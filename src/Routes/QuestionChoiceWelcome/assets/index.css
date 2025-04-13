@@ -1,0 +1,140 @@
+.welcome-root,
+.lession-root {
+    height: 100vh;
+    background: rgb(19, 31, 36);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Be Vietnam Pro", sans-serif;
+    flex-direction: column;
+}
+
+
+.chat-bubble {
+    position: relative;
+    background: rgb(19, 31, 36);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 300px;
+    max-width: 400px;
+    margin: 20px;
+    border: 2px solid #6a6a6a;
+    font-size: 14px;
+}
+
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%; /* Đưa mũi tên xuống dưới */
+    left: 88px; /* Định vị mũi tên */
+    border-width: 10px;
+    border-style: solid;
+    border-color: #6a6a6a transparent transparent transparent; /* Mũi tên chỉ vào hộp thoại */
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.typewriter {
+    display: inline-block;
+    border-right: 2px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 2s steps(30, end);
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+
+.welcome-root .footer-welcome,
+.lession-root .footer-lession {
+    width: 100%;
+    border-top: 2px solid #6a6a6a;
+}
+
+.welcome-root .footer-welcome .button button,
+.lession-root .footer-lession .button button {
+    color: #fff;
+    padding: 10px 45px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.welcome-root .footer-welcome .button,
+.lession-root .footer-lession .button {
+    position: relative;
+    /*top: 50px;*/
+    /*left: 75px;*/
+}
+
+.fade-welcome {
+    transition: opacity 0.5s ease;
+}
+
+.fade-in-welcome {
+    opacity: 1;
+}
+
+.fade-out-welcome {
+    opacity: 0;
+}
+
+.welcome-root ul.list-question-step,
+.lession-root ul.list-question-step {
+    max-width: 500px;
+    min-width: 485px;
+}
+
+.welcome-root ul.list-question-step li,
+.lession-root ul.list-question-step li {
+    padding: 8px 16px;
+    border: 2px solid rgb(55, 70, 79);
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 13px;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
+.welcome-root ul.list-question-step li:hover,
+.lession-root ul.list-question-step li:hover {
+    background: rgb(33, 41, 47);
+    cursor: pointer;
+}
+
+.welcome-root ul.list-question-step li svg,
+.lession-root ul.list-question-step li svg {
+    margin-right: 16px;
+}
+
+.welcome-root ul.list-question-step li.active,
+.lession-root ul.list-question-step li.active {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: rgb(33, 41, 47);
+}
+
+.welcome-root .progress-bar,
+.lession-root .progress-bar {
+    background-color: var(--primary-color) !important;
+}
