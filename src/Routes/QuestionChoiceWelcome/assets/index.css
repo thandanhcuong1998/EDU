@@ -6,10 +6,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Be Vietnam Pro", sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     flex-direction: column;
 }
-
 
 .chat-bubble {
     position: relative;
@@ -63,7 +62,6 @@
         width: 100%;
     }
 }
-
 
 .welcome-root .footer-welcome,
 .lession-root .footer-lession {

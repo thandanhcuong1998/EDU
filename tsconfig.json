@@ -1,68 +1,58 @@
 // tsconfig.json
 {
-  "compilerOptions": {
-    // --- Target Environment ---
-    "target": "ES2016",
-    // Hoặc "ES6", "ES2020", "ESNext" tùy vào môi trường đích của bạn
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
-    // Bao gồm các thư viện chuẩn cho web và ES mới nhất
-    "jsx": "react-jsx",
-    // Sử dụng JSX runtime mới của React (không cần import React ở mỗi file)
+    "compilerOptions": {
+        // --- Target Environment ---
+        "target": "ES2016",
+        // Hoặc "ES6", "ES2020", "ESNext" tùy vào môi trường đích của bạn
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        // Bao gồm các thư viện chuẩn cho web và ES mới nhất
+        "jsx": "react-jsx",
+        // Sử dụng JSX runtime mới của React (không cần import React ở mỗi file)
 
-    // --- Module System ---
-    "module": "ESNext",
-    // Sử dụng module ES mới nhất
-    "moduleResolution": "node",
-    // Hoặc "bundler" nếu dùng bundler hiện đại như Vite
-    "resolveJsonModule": true,
-    // Cho phép import file .json
-    "isolatedModules": true,
-    // Đảm bảo các file có thể biên dịch độc lập (cần cho Babel/Vite)
+        // --- Module System ---
+        "module": "ESNext",
+        // Sử dụng module ES mới nhất
+        "moduleResolution": "node",
+        // Hoặc "bundler" nếu dùng bundler hiện đại như Vite
+        "resolveJsonModule": true,
+        // Cho phép import file .json
+        "isolatedModules": true,
+        // Đảm bảo các file có thể biên dịch độc lập (cần cho Babel/Vite)
 
-    // --- Type Checking (Quan trọng) ---
-    //    "strict": true,
-    // **Bật TẤT CẢ các tùy chọn kiểm tra kiểu nghiêm ngặt**
-    // **Điều này BAO GỒM cả "strictNullChecks": true**
-    // Rất khuyến khích để đảm bảo chất lượng code và phát hiện lỗi sớm
-    "strictNullChecks": true,
-    // Bạn có thể chỉ bật cái này nếu không muốn bật toàn bộ "strict", nhưng "strict": true tốt hơn
+        // --- Type Checking (Quan trọng) ---
+        //    "strict": true,
+        // **Bật TẤT CẢ các tùy chọn kiểm tra kiểu nghiêm ngặt**
+        // **Điều này BAO GỒM cả "strictNullChecks": true**
+        // Rất khuyến khích để đảm bảo chất lượng code và phát hiện lỗi sớm
+        "strictNullChecks": true,
+        // Bạn có thể chỉ bật cái này nếu không muốn bật toàn bộ "strict", nhưng "strict": true tốt hơn
 
-    "noUnusedLocals": true,
-    // Báo lỗi nếu có biến local không được sử dụng
-    "noUnusedParameters": true,
-    // Báo lỗi nếu có tham số hàm không được sử dụng
-    "noFallthroughCasesInSwitch": true,
-    // Báo lỗi nếu thiếu break trong switch case
+        "noUnusedLocals": true,
+        // Báo lỗi nếu có biến local không được sử dụng
+        "noUnusedParameters": true,
+        // Báo lỗi nếu có tham số hàm không được sử dụng
+        "noFallthroughCasesInSwitch": true,
+        // Báo lỗi nếu thiếu break trong switch case
 
-    // --- Interoperability ---
-    "esModuleInterop": true,
-    // Cho phép tương tác tốt hơn với các module CommonJS
-    "allowSyntheticDefaultImports": true,
-    // Cho phép import default từ module không có export default
-    "forceConsistentCasingInFileNames": true,
-    // Đảm bảo cách viết hoa/thường tên file nhất quán
+        // --- Interoperability ---
+        "esModuleInterop": true,
+        // Cho phép tương tác tốt hơn với các module CommonJS
+        "allowSyntheticDefaultImports": true,
+        // Cho phép import default từ module không có export default
+        "forceConsistentCasingInFileNames": true,
+        // Đảm bảo cách viết hoa/thường tên file nhất quán
 
-    // --- Build Process ---
-    "noEmit": true,
-    // **QUAN TRỌNG:** TypeScript chỉ kiểm tra kiểu, không tạo ra file JS.
-    // Giả định bạn dùng bundler như Vite, Create React App, Next.js, Webpack với Babel để build code.
-    // Nếu bạn dùng `tsc` để build thì đặt là `false` và cấu hình "outDir".
-    "skipLibCheck": true
-    // Bỏ qua kiểm tra kiểu của các file thư viện (.d.ts), tăng tốc độ
-  },
-  // --- Files to Include/Exclude ---
-  "include": [
-    "src"
-  ],
-  // Chỉ biên dịch các file trong thư mục 'src'
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist"
-  ]
-  // Loại trừ các thư mục này
+        // --- Build Process ---
+        "noEmit": true,
+        // **QUAN TRỌNG:** TypeScript chỉ kiểm tra kiểu, không tạo ra file JS.
+        // Giả định bạn dùng bundler như Vite, Create React App, Next.js, Webpack với Babel để build code.
+        // Nếu bạn dùng `tsc` để build thì đặt là `false` và cấu hình "outDir".
+        "skipLibCheck": true
+        // Bỏ qua kiểm tra kiểu của các file thư viện (.d.ts), tăng tốc độ
+    },
+    // --- Files to Include/Exclude ---
+    "include": ["src"],
+    // Chỉ biên dịch các file trong thư mục 'src'
+    "exclude": ["node_modules", "build", "dist"]
+    // Loại trừ các thư mục này
 }

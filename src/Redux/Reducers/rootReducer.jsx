@@ -4,9 +4,9 @@ import ProgressBarReducer from './ProgressBar.jsx';
 import LessionQuestionChoiceReducer from './LessionQuestionChoiceReducer.jsx';
 
 const rootReducer = combineReducers({
-  questionChoiceWelcome: QuestionSetWelcomeReducer,
-  progressBar: ProgressBarReducer,
-  LessionQuestionChoice: LessionQuestionChoiceReducer,
+    questionChoiceWelcome: QuestionSetWelcomeReducer,
+    progressBar: ProgressBarReducer,
+    LessionQuestionChoice: LessionQuestionChoiceReducer,
 });
 
 export default rootReducer;

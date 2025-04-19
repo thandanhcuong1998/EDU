@@ -1,4 +1,3 @@
-
 .change-language {
     background-color: unset;
     color: rgb(175, 175, 175);
@@ -107,7 +106,7 @@
 }
 
 .section-2 .customer-logos {
-    height: 100px
+    height: 100px;
 }
 
 .section-2 .customer-logos img {
@@ -196,7 +195,7 @@
 }
 
 .section-5 .card-section-5 {
-    width: 600px
+    width: 600px;
 }
 
 .section-5 .card-section-5 .title {
@@ -213,7 +212,7 @@
 }
 
 .section-6 {
-    background: #fafafa
+    background: #fafafa;
 }
 
 .section-6 .example-box {

@@ -1,91 +1,113 @@
-import { LessionQuestionChoiceAction } from '../Actions/LessionQuestionChoiceAction.jsx';
+import { createSlice } from '@reduxjs/toolkit';
 import ListQuestionFakeDataLession from '../../Helpers/ListQuestionFakeDataLession.jsx';
+import {
+   checkRadioAnswer,
+   checkCardWordAnswer,
+} from '../../Helpers/answerCheckers.js';
 import { arraysEqual } from '../../Helpers/util.jsx';
 
 const initialState = {
-  questions: ListQuestionFakeDataLession.N5.orderFood.level1, // Lưu trữ danh sách câu hỏi
-  currentQuestionIndex: 0,
-  answers: [],
-  isCorrect: null,
-  progressBar: 0,
-  listQuestionFail: [],
+   questions: ListQuestionFakeDataLession.N5.orderFood.level1,
+   currentQuestionIndex: 0,
+   answers: [],
+   isCorrect: null,
+   progressBar: 0,
+   listQuestionFail: [],
 };
 
-/**
- * Reducer quản lý trạng thái cho các câu hỏi lựa chọn trong bài học.
- *
- * @param {object} state Trạng thái hiện tại của reducer.
- * @param {object} action Action được dispatch tới reducer.
- * @returns {object} Trạng thái mới sau khi xử lý action.
- */
-const LessionQuestionChoiceReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LessionQuestionChoiceAction.SET_ANSWER: {
-      const { index, answer, type } = action.payload;
+const lessionQuestionChoiceSlice = createSlice({
+   name: 'lessionQuestionChoice', // Tên của slice state (ví dụ: state.lessionQuestionChoice)
+   initialState,
+   reducers: {
+      setAnswer(state, action) {
+         // Nhận state (là một proxy Immer) và action
+         const { index, answer, type } = action.payload;
 
-      if (action.payload.type === 'mapping-word') {
-        return {
-          // Xử lý trường hợp câu hỏi dạng "nối từ" (mapping-word).
-          ...state,
-          isCorrect: true,
-          progressBar:
-            state.isCorrect === true
-              ? state.progressBar + 100 / state.questions.length
-              : state.progressBar,
-        };
-      }
+         // --- Xử lý mapping-word ---
+         if (type === 'mapping-word') {
+            if (typeof index !== 'number') {
+               console.error("Action 'mapping-word' thiếu 'index'.");
+               return; // Không cần return state, Immer xử lý
+            }
+            // Với Immer, bạn có thể "mutate" state trực tiếp ở đây
+            state.isCorrect = true;
+            state.progressBar = Math.min(
+               state.progressBar + 100 / state.questions.length,
+               100
+            );
+            state.listQuestionFail = state.listQuestionFail.filter(
+               failIndex => failIndex !== index
+            );
+            state.answers[index] = true; // Cập nhật trực tiếp
+            return; // Kết thúc xử lý cho mapping-word
+         }
 
-      // lấy kết quả câu hi theo index
-      const correctAnswers = state.questions[index].correctAnswer;
+         // --- Xử lý các type khác ---
+         const currentQuestion = state.questions[index];
+         if (!currentQuestion) {
+            console.error(`Không tìm thấy câu hỏi tại index: ${index}`);
+            return;
+         }
+         const correctAnswersData = currentQuestion.correctAnswer;
+         let isCorrect = false;
 
-      // Tạo một bản sao của mảng answers
-      const newAnswers = [...state.answers];
-      newAnswers[index] = answer; // Cập nhật câu trả lời
+         if (type === 'radio') {
+            isCorrect = checkRadioAnswer(correctAnswersData, answer);
+         } else if (
+            type === 'card-word-english' ||
+            type === 'card-word-japan'
+         ) {
+            isCorrect = checkCardWordAnswer(
+               correctAnswersData,
+               answer,
+               arraysEqual
+            );
+         }
 
-      // Kiểm tra tính đúng đắn của câu trả lời dựa trên loại câu hỏi.
-      let isCorrect = false;
-      if (type === 'radio') {
-        // Câu hỏi radio: So sánh đáp án đúng với index của lựa chọn được chọn.
-        isCorrect = correctAnswers === answer[0].index;
-      } else if (type === 'card-word-english' || type === 'card-word-japan') {
-        // Câu hỏi dạng thẻ từ (card-word): So sánh mảng index của các thẻ được chọn với đáp án đúng.
-        const newArray = answer.map(item => item.index + 1);
+         // Cập nhật state với Immer
+         state.answers[index] = answer;
+         state.isCorrect = isCorrect;
+         state.progressBar = Math.min(
+            isCorrect
+               ? state.progressBar + 100 / state.questions.length
+               : state.progressBar,
+            100
+         );
 
-      // Trả về state mới
-      return {
-        ...state,
-        answers: newAnswers,
-        isCorrect,
-        progressBar:
-          isCorrect === true
-            ? state.progressBar + 100 / state.questions.length
-            : state.progressBar,
-        listQuestionFail:
-          isCorrect === false
-            ? [...state.listQuestionFail, index]
-            : state.listQuestionFail,
-      };
-    }
+         if (isCorrect) {
+            state.listQuestionFail = state.listQuestionFail.filter(
+               failIndex => failIndex !== index
+            );
+         } else if (!state.listQuestionFail.includes(index)) {
+            state.listQuestionFail.push(index); // Thêm trực tiếp với Immer
+         }
+      },
+      updateQuestionIndex(state) {
+         // Chỉ cần state vì không có payload
+         if (state.progressBar >= 100) {
+            state.currentQuestionIndex = state.questions.length + 1;
+         } else {
+            const nextQuestionIndexRegular = state.currentQuestionIndex + 1;
+            if (nextQuestionIndexRegular < state.questions.length) {
+               state.currentQuestionIndex = nextQuestionIndexRegular;
+            } else if (state.listQuestionFail.length > 0) {
+               state.currentQuestionIndex = state.listQuestionFail[0];
+            } else {
+               console.warn(
+                  'Hết câu hỏi, không còn câu sai, progressBar < 100.'
+               );
+               state.currentQuestionIndex = state.questions.length + 1;
+            }
+         }
+         // Reset isCorrect và answers khi chuyển câu (nếu cần)
+         state.isCorrect = null;
+         // state.answers = []; // Xem xét có nên reset answers không
+      },
+      // Có thể thêm các reducers khác ở đây
+   },
+});
 
-    case LessionQuestionChoiceAction.UPDATE_QUESTION_INDEX:
-      // Xử lý việc cập nhật index của câu hỏi hiện tại.
-      const questionIndex = state.currentQuestionIndex + 1;
-
-      return {
-        // Cập nhật index câu hỏi hiện tại, xét các trường hợp:
-        ...state,
-        currentQuestionIndex:
-          questionIndex === state.questions.length // Nếu đã trả lời hết các câu hỏi
-            ? state.listQuestionFail[0] // Chuyển đến câu hỏi đầu tiên trong danh sách câu hỏi sai (nếu có) để người dùng trả lời lại.
-            : state.progressBar === 100 // Nếu đã trả lời đúng 100% số câu hỏi
-              ? state.questions.length + 1 // Tăng index câu hỏi lên để đánh dấu kết thúc bài học.
-              : questionIndex, // Nếu chưa trả lời đúng hết, chuyển sang câu hỏi tiếp theo.
-        isCorrect: null,
-        answers: [],
-      };
-    default:
-      return state;
-  }
-};
-
-export default LessionQuestionChoiceReducer;
+// Export action creators và reducer
+export const { setAnswer, updateQuestionIndex } =
+   lessionQuestionChoiceSlice.actions;
+export default lessionQuestionChoiceSlice.reducer;

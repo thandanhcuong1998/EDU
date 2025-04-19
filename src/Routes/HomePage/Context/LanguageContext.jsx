@@ -8,17 +8,21 @@ export const LanguageContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('vi');
+    const [language, setLanguage] = useState('vi');
 
-  const changeLanguage = lang => {
-    setLanguage(lang);
-  };
+    const changeLanguage = lang => {
+        setLanguage(lang);
+    };
 
-  return (
-    <LanguageContext.Provider
-      value={{ translations: translations[language], changeLanguage, language }}
-    >
-      {children}
-    </LanguageContext.Provider>
-  );
+    return (
+        <LanguageContext.Provider
+            value={{
+                translations: translations[language],
+                changeLanguage,
+                language,
+            }}
+        >
+            {children}
+        </LanguageContext.Provider>
+    );
 };

@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
-  return (
-    <LanguageProvider>
-      <RouterProvider router={router} />
-    </LanguageProvider>
-  );
+    return (
+        <LanguageProvider>
+            <RouterProvider router={router} />
+        </LanguageProvider>
+    );
 }
 
 export default App;

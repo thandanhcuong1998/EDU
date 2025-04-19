@@ -11,23 +11,22 @@
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
-
     /* Đối với màn hình từ 769px đến 1024px */
     .banner h1 {
-        font-size: 71px
+        font-size: 71px;
     }
     .section-2 h2,
     .section-3 h2 {
-        font-size: 43px
+        font-size: 43px;
     }
 
     .banner .btn,
     .section-3 p {
-        font-size: 25px
+        font-size: 25px;
     }
 
     .section-3 .card-title {
-        font-size: 23px
+        font-size: 23px;
     }
 
     .col-sm-1,
@@ -42,11 +41,11 @@
     .col-sm-7,
     .col-sm-8,
     .col-sm-9 {
-        float: left
+        float: left;
     }
 
     .col-sm-4 {
-        width: 33.33333333%
+        width: 33.33333333%;
     }
 
     .section-3 .card-group .card {
@@ -60,7 +59,6 @@
 }
 
 @media (min-width: 992px) {
-
     .col-md-1,
     .col-md-10,
     .col-md-11,
@@ -73,16 +71,15 @@
     .col-md-7,
     .col-md-8,
     .col-md-9 {
-        float: left
+        float: left;
     }
 
     .col-md-3 {
-        width: 25%
+        width: 25%;
     }
 }
 
 @media (min-width: 1200px) {
-
     .col-lg-1,
     .col-lg-10,
     .col-lg-11,
@@ -95,10 +92,10 @@
     .col-lg-7,
     .col-lg-8,
     .col-lg-9 {
-        float: left
+        float: left;
     }
 
     .col-lg-2 {
-        width: 16.66666667%
+        width: 16.66666667%;
     }
 }

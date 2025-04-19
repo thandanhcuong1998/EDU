@@ -55,7 +55,7 @@
 }
 
 .learn-root .menu .nav-link {
-    color: #DCE6Fc;
+    color: #dce6fc;
 }
 
 .learn-root .menu .nav-item a:hover {
@@ -99,7 +99,7 @@
     font-weight: 700;
     line-height: 24px;
     margin: 0;
-    opacity: .7;
+    opacity: 0.7;
     color: #fff;
 }
 
@@ -268,7 +268,7 @@
 
 .lession-root .question-step h3 {
     font-size: 32px;
-    color: #F1F7FB;
+    color: #f1f7fb;
     line-height: 1.25;
     font-weight: 700;
     margin: 20px 0px;
@@ -321,7 +321,7 @@
     border-radius: 8px;
     padding: 10px 10px;
     font-size: 19px;
-    color: #F1F7FB;
+    color: #f1f7fb;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -337,12 +337,11 @@
     padding: 6px 10px !important;
 }
 
-
 .lession-root .mapping-word .content-answer .list-answer2.options2 li {
     border: 2px solid var(--slate-gray);
     border-radius: 8px;
     font-size: 19px;
-    color: #F1F7FB;
+    color: #f1f7fb;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -355,8 +354,8 @@
 
 .index-answer {
     font-size: 15px;
-    color: #52656D;
-    border: 2px solid #52656D;
+    color: #52656d;
+    border: 2px solid #52656d;
     padding: 2px 8px;
     border-radius: 8px;
 }
@@ -377,7 +376,7 @@
 .lession-root .success-option,
 .lession-root .success-option .index-answer {
     /*background-color: var(--slate-gray) !important;*/
-    border: 2px solid #37464F !important;
+    border: 2px solid #37464f !important;
     cursor: default;
     transition: border 0.5s ease; /* Hiệu ứng chuyển tiếp */
 }
@@ -386,7 +385,7 @@
 .lession-root .success-option .index-answer,
 .lession-root .success-option ruby,
 .lession-root .success-option ruby rt {
-    color: #37464F !important;
+    color: #37464f !important;
     transition: color 0.5s ease; /* Hiệu ứng chuyển tiếp */
 }
 
@@ -422,7 +421,6 @@
     font-size: 24px;
 }
 
-
 .lession-root .status-resutl-question.success .text {
     color: var(--success-color) !important;
 }
@@ -445,10 +443,9 @@
 }
 
 .complete p {
-    color: #52656D;
+    color: #52656d;
     font-size: 19px;
 }
-
 
 @keyframes zoomIn {
     0% {
@@ -472,7 +469,6 @@
         opacity: 0;
     }
 }
-
 
 /* Định nghĩa animation quay 360 độ */
 @keyframes rotate {
