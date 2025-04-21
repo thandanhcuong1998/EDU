@@ -237,8 +237,7 @@
 /*}*/
 
 .lession-root .radio .content-question .options:hover,
-.lession-root .card-word-japan .content-question .options:hover,
-.lession-root .card-word-english .content-question .options:hover {
+.lession-root .card-word-japan .content-question .options:hover {
     cursor: pointer;
     background-color: rgb(32, 47, 45);
 }
@@ -434,7 +433,7 @@
 }
 
 .lession-root .radio .selected.success {
-    border: 2px solid var(--success-color) !important;
+    border: 2px solid var(--primary-color-light) !important;
 }
 
 .complete {

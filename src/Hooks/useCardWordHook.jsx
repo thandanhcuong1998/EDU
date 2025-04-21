@@ -66,6 +66,14 @@ const useCardWordHook = (handleAnswer, type) => {
       e.preventDefault(); // Ngăn chặn hành vi mặc định để cho phép thả
    };
 
+   const handleOnClickPlayAudio = question => {
+      const { hintToken } = question || [];
+      if (hintToken.length > 0) {
+         const romaji = hintToken.map(item => item.text);
+         playApiAudio(romaji.join(''));
+      }
+   };
+
    return {
       listAnswer,
       onHandleAnswer,
@@ -74,6 +82,7 @@ const useCardWordHook = (handleAnswer, type) => {
       handleDrop,
       handleDragEnd,
       handleDragOver,
+      handleOnClickPlayAudio,
    };
 };
 

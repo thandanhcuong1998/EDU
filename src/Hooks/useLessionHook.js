@@ -5,7 +5,7 @@ import {
    setAnswer,
    updateQuestionIndex,
 } from '../Redux/Reducers/LessionQuestionChoiceReducer.jsx';
-import { useNavigate, useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const useLessionHook = () => {
    const navigation = useNavigate();
@@ -32,6 +32,8 @@ export const useLessionHook = () => {
    useEffect(() => {
       if (isObject(answerState) && answerState.answer?.length > 0) {
          setIsActiveButtonContinue(true);
+      } else {
+         setIsActiveButtonContinue(false);
       }
    }, [answerState]);
 

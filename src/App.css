@@ -19,6 +19,32 @@
     font-size: theme('fontSize.title-desktop', '48px');
 }
 
+.theme-text {
+    color: var(--primary-color-light);
+}
+
+.theme-bg {
+    background-color: var(--primary-color-light);
+}
+
+.radioPlay {
+    margin-right: 7px;
+    color: var(--primary-color);
+}
+
+.radioPlay button {
+    color: var(--primary-color);
+    background: none;
+
+
+}
+
+.button-check-question,
+.radioPlay button {
+    box-shadow: none;
+    border: none;
+}
+
 body #ja {
     font-family: 'Noto Sans JP', sans-serif;
 }

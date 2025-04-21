@@ -1,5 +1,6 @@
 import useCardWordHook from '../../../../../Hooks/useCardWordHook.jsx';
 import { playApiAudio } from '../../../../../Helpers/util.jsx';
+import { Volume2 } from 'lucide-react';
 
 export default function CardWord({
    listConfigQuestion,
@@ -15,6 +16,7 @@ export default function CardWord({
       handleDrop,
       handleDragEnd,
       handleDragOver,
+      handleOnClickPlayAudio,
    } = useCardWordHook(handleAnswer, type);
 
    return (
@@ -23,6 +25,17 @@ export default function CardWord({
       >
          <h3 className="text-white">{listConfigQuestion.title}</h3>
          <div className="content-question d-flex justify-content-start align-items-baseline">
+            {type === 'card-word-english' && (
+               <div className="radioPlay">
+                  <button
+                     onClick={() => {
+                        handleOnClickPlayAudio(listConfigQuestion);
+                     }}
+                  >
+                     <Volume2 />
+                  </button>
+               </div>
+            )}
             <ListOptionsByType
                type={type}
                listConfigQuestion={listConfigQuestion}
@@ -54,20 +67,13 @@ export default function CardWord({
 
 const ListOptionsByType = ({ type, listConfigQuestion }) => {
    const { hintToken, pronunciation } = listConfigQuestion || {};
-   const handleOnHover = romaji => {
-      playApiAudio(romaji); // call api text to speed
-   };
 
    if (type === 'card-word-english') {
       return (
          <>
             {hintToken?.map((option, index) => (
                <div className="options" key={index}>
-                  <ruby
-                     onMouseEnter={() => {
-                        handleOnHover(option?.text);
-                     }}
-                  >
+                  <ruby>
                      {option?.text}
                      <rp>(</rp>
                      <rt>{option?.pronunciation}</rt>
