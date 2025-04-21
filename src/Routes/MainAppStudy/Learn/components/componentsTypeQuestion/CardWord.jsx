@@ -1,4 +1,5 @@
 import useCardWordHook from '../../../../../Hooks/useCardWordHook.jsx';
+import { playApiAudio } from '../../../../../Helpers/util.jsx';
 
 export default function CardWord({
    listConfigQuestion,
@@ -53,13 +54,20 @@ export default function CardWord({
 
 const ListOptionsByType = ({ type, listConfigQuestion }) => {
    const { hintToken, pronunciation } = listConfigQuestion || {};
+   const handleOnHover = romaji => {
+      playApiAudio(romaji); // call api text to speed
+   };
 
    if (type === 'card-word-english') {
       return (
          <>
             {hintToken?.map((option, index) => (
                <div className="options" key={index}>
-                  <ruby>
+                  <ruby
+                     onMouseEnter={() => {
+                        handleOnHover(option?.text);
+                     }}
+                  >
                      {option?.text}
                      <rp>(</rp>
                      <rt>{option?.pronunciation}</rt>

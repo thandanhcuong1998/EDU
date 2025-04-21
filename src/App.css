@@ -1,14 +1,22 @@
+@import url('./assets/fonts/font.css');
+
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
 
 :root {
     --primary-color: rgb(234 155 0);
     --primary-color-light: rgb(255, 185, 0);
-    --title-desktop: 48px;
     --slate-gray: rgb(55, 70, 79);
     --false: rgb(187, 75, 66);
     --success-color: #7eb137;
+    --bg-primary-app: rgb(19, 31, 36)
+}
+
+.section-2 .title,
+.section-3 .title {
+    color: var(--primary-color);
+    font-size: theme('fontSize.title-desktop', '48px');
 }
 
 body #ja {
@@ -23,6 +31,10 @@ body .lession-root {
     font-family: 'Noto Sans JP', sans-serif;
 }
 
+.bg-app-primary {
+    background-color: var(--bg-primary-app);
+}
+
 #root {
     margin: 0 auto;
     text-align: center;
@@ -30,10 +42,6 @@ body .lession-root {
 
 a {
     text-decoration: none;
-}
-
-.cursor-pointer:hover {
-    cursor: pointer;
 }
 
 .mr-10 {
@@ -58,7 +66,7 @@ button.disabled {
     border: none;
 }
 
-button {
+button.bg-primary-color {
     background-color: var(--primary-color);
 }
 
@@ -75,8 +83,13 @@ button.success {
 }
 
 
-button:hover:not(.disabled):not(.isFail):not(.success) {
+button:hover:not(.disabled):not(.isFail):not(.success).hv-primary-color {
     background-color: #ffbf42 !important;
+}
+
+.root-bg-gray {
+    background-color: rgb(55, 70, 79) !important;
+    color: rgb(82, 101, 109) !important;
 }
 
 .w-1000 {
@@ -114,420 +127,4 @@ button:hover:not(.disabled):not(.isFail):not(.success) {
     -webkit-user-select: none; /* Dành cho trình duyệt WebKit (Chrome, Safari) */
     -moz-user-select: none; /* Dành cho Firefox */
     -ms-user-select: none; /* Dành cho Internet Explorer/Edge */
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-09fdaf57b55d5b911d8b0d8748bb86a3.woff2) format('woff2');
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-d8ed13913401341d423cb4c1eb5116bc.woff2) format('woff2');
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-f9dc27a106380481933e9f72c0c9715c.woff2) format('woff2');
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-605354226e44a5bf975079764612f55b.woff2) format('woff2');
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-0ec18ba9d3851351c01937eecbcb43de.woff2) format('woff2');
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-bcb7418247f746650321e0805df16f36.woff2) format('woff2');
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-c692405d0447ee5a40b9f81b6a75aa63.woff2) format('woff2');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-f09c464a30efd69094dd45e7cde59079.woff2) format('woff2');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-8fd4d0fec94d0a91e7638106fb77397d.woff2) format('woff2');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-f0b8aae97d7f7da0d783595a5cd98a4e.woff2) format('woff2');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-de4e3359f5d3d37400f3275bb140dc8f.woff2) format('woff2');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-68f87cc2a634b629cf9fd73f0536eefa.woff2) format('woff2');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-7fdc7245c7b21ed078966dff884a02a6.woff2) format('woff2');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-0b3c60361f3847c8603e1ba0fde69ef3.woff2) format('woff2');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-9660adbb7f400da34fde76c8dada93cb.woff2) format('woff2');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-16f48e26c5495c56f8497f84aa0f67aa.woff2) format('woff2');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-f3baa9d0824a7f8e1c3564f5ad1c2fe7.woff2) format('woff2');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-1ac8a27b096db0cab48d09b17149ab97.woff2) format('woff2');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-7519a8cfb41708306d9214ef1de9a429.woff2) format('woff2');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-4bf7352c3d9e441a3361e1a572031fe2.woff2) format('woff2');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-fe006d97a6c623b43c9a38faa5ff6db7.woff2) format('woff2');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-b964de54ccf05fcb1cb85cbe6b2430fa.woff2) format('woff2');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-3d35d59dda15c3f8b991d099623855fd.woff2) format('woff2');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-988b9bb9cd245ee11b6ba0a8eabd96d1.woff2) format('woff2');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-6180e57a684d8c859fd192b9bd0c8fe3.woff2) format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-ee45cfb53ec4c5d537f80c1dc1cd8255.woff2) format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-d507be144e345d803899b1ba88334a1d.woff2) format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-b1a8f4e0242af152307da5e6adeaa89b.woff2) format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-899e75b3ff80b2bcbabb91a2a5d11911.woff2) format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-d06d2c3d514ec14dfb9fd4e5ffd6cbb2.woff2) format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-a0076503d32416910cfde5253087daa9.woff2) format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-250df628fd802411d30dde5cee065383.woff2) format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-164f5d3b328e46b681be74357d874ba5.woff2) format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-b60f605508a23e18fda7899f6c3651ae.woff2) format('woff2');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-ca95f88b37a02fa14b07d7531dd32972.woff2) format('woff2');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-eb61fdb93ab1d8182cc11d5e5c105f35.woff2) format('woff2');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-bb837e37c22bb23f381960bc26b66d02.woff2) format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323,
-    U+0329, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-f8788fc4c7f30438e2f6093b03415af2.woff2) format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
-    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url(./assets/fonts/Be%20Vietnam%20Pro-fd992239bea5ab536ddde867bf021d28.woff2) format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

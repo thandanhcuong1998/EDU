@@ -1,0 +1,121 @@
+/* src/components/Alphabet.css */
+
+#characters {
+    background-color: rgb(19, 31, 36);
+}
+
+.alphabet-container {
+    font-family: sans-serif;
+    max-width: 600px; /* Giới hạn chiều rộng */
+    margin: 20px auto; /* Canh giữa */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden; /* Để bo góc hoạt động đúng */
+}
+
+.tabs {
+    display: flex;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+    padding: 12px 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-bottom: 3px solid transparent; /* Đường gạch chân ẩn */
+    margin-bottom: -1px; /* Chồng lên border-bottom của .tabs */
+}
+
+.tab-button:hover {
+    background-color: #e0e0e0;
+}
+
+.tab-button.active {
+    color: #007bff; /* Màu chữ khi active */
+    border-bottom-color: #007bff; /* Hiển thị đường gạch chân */
+    font-weight: 600;
+}
+
+.tab-content {
+    padding: 20px;
+}
+
+.alphabet-grid {
+    display: grid;
+    /* Tạo 5 cột bằng nhau */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px; /* Khoảng cách giữa các ô */
+}
+
+.character-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    min-height: 70px; /* Chiều cao tối thiểu */
+    text-align: center;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif; /* Font hỗ trợ tiếng Nhật */
+    line-height: 1.2;
+}
+
+.character-cell:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.03); /* Hiệu ứng phóng to nhẹ khi hover */
+}
+
+.character-cell:active {
+    transform: scale(0.98); /* Hiệu ứng thu nhỏ khi click */
+}
+
+.character-cell.empty {
+    background-color: #f8f8f8; /* Màu nền khác cho ô trống */
+    border-color: #eee;
+    cursor: default; /* Không có con trỏ khi là ô trống */
+}
+
+.character-cell.empty:hover {
+    transform: none; /* Bỏ hiệu ứng hover cho ô trống */
+}
+
+
+.kana {
+    font-size: 2rem; /* Kích thước chữ Kana lớn */
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.romaji {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+#characters .tab-active-characters {
+    border: none;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+#characters .inactive {
+    color: rgb(82, 101, 109);
+}
+
+#characters button:hover {
+    background-color: rgb(33, 41, 47);
+}
+
+#characters button.alb {
+    border-radius: 5px;
+    border: 2px solid rgb(55, 70, 79) !important;
+    background-color: rgb(33, 41, 47) !important;
+}

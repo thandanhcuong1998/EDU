@@ -100,10 +100,6 @@
     height: auto;
 }
 
-.section-2 .title {
-    color: var(--primary-color);
-    font-size: var(--title-desktop);
-}
 
 .section-2 .customer-logos {
     height: 100px;
@@ -120,11 +116,6 @@
 
 .section-3 .div-title {
     margin-bottom: 75px;
-}
-
-.section-3 .title {
-    color: var(--primary-color);
-    font-size: var(--title-desktop);
 }
 
 .section-3 .subtitle {

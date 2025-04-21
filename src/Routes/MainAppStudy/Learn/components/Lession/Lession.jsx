@@ -1,5 +1,6 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { CheckmarkCircleOutline, CloseCircleOutline } from 'react-ionicons';
+// import { CheckmarkCircleOutline, CloseCircleOutline } from 'react-ionicons'; // Xóa dòng này
+import { CheckCircle2, XCircle } from 'lucide-react'; // Thêm dòng này
 import Question from '../Question.jsx';
 import { useLessionHook } from '../../../../../Hooks/useLessionHook.js';
 import ListQuestionFakeDataLession from '../../../../../Helpers/ListQuestionFakeDataLession.jsx';
@@ -18,11 +19,15 @@ export default function Lession() {
          <div className="container-fluid d-flex justify-content-center align-items-center">
             <div className="row">
                <div className="col-md-12">
-                  <div className="w-1000 height-80vh">
+                  {/* Sử dụng lớp Tailwind thay thế nếu có thể */}
+                  <div className="max-w-5xl mx-auto h-[80vh]">
+                     {' '}
+                     {/* Ví dụ thay thế w-1000 và height-80vh */}
                      <div className="header-top d-flex align-items-center">
                         <ProgressBar
                            now={progressBar}
-                           style={{ width: '950px' }}
+                           // Cân nhắc dùng lớp Tailwind cho width nếu ProgressBar hỗ trợ className
+                           style={{ width: '95%' }} // Hoặc dùng % hay lớp w-[950px]
                         />
                      </div>
                      <div className="question-step text-white d-flex justify-content-center align-items-center flex-column">
@@ -39,17 +44,18 @@ export default function Lession() {
             </div>
          </div>
          <div className="footer-lession">
+            {/* Cân nhắc dùng Tailwind cho layout footer */}
             <div className="content-footer content d-flex justify-content-around align-items-center">
                <div
-                  className={`status-resutl-question d-flex justify-content-center align-items-center ${isCorrect === null ? '' : isCorrect ? 'success' : 'isFail'}`}
+                  // Sử dụng Tailwind classes cho màu sắc thay vì .success/.isFail nếu có thể
+                  className={`status-resutl-question d-flex justify-content-center align-items-center ${isCorrect === null ? '' : isCorrect ? 'text-success' : 'text-danger'}`} // Ví dụ dùng text-success/text-danger từ config
                >
                   {isCorrect ? (
                      <>
-                        <CheckmarkCircleOutline
-                           color={'#7eb137'}
-                           height="80px"
-                           width="80px"
-                           className="icon-circle-check"
+                        {/* Thay thế icon và props */}
+                        <CheckCircle2
+                           color={'#7eb137'} // Hoặc dùng theme('colors.success') nếu CSS xử lý
+                           size={80} // Dùng size thay cho height/width
                         />
                         <div className="text">
                            <p>Great job</p>
@@ -57,24 +63,33 @@ export default function Lession() {
                      </>
                   ) : isCorrect === false ? (
                      <>
-                        <CloseCircleOutline
-                           color={'#bb4b42'}
-                           height="80px"
-                           width="80px"
-                           className="icon-circle-check"
+                        {/* Thay thế icon và props */}
+                        <XCircle
+                           color={'#bb4b42'} // Hoặc dùng theme('colors.danger')
+                           size={80}
                         />
                         <div className="text">
                            <p>Not Correct</p>
                         </div>
                      </>
                   ) : (
-                     <></>
+                     <div style={{ height: '80px', width: '80px' }}></div> // Placeholder để giữ layout
                   )}
                </div>
                <div className="button">
                   <button
                      onClick={handleButtonClick}
-                     className={`${!isActiveButtonContinue ? 'disabled' : ''} ${isCorrect === null ? '' : isCorrect ? 'success' : 'isFail'}`}
+                     // Sử dụng Tailwind classes cho trạng thái button
+                     className={`py-2 px-4 rounded text-white font-semibold ${
+                        !isActiveButtonContinue
+                           ? 'bg-slate-gray cursor-not-allowed opacity-50' // Lớp disabled từ config Tailwind
+                           : isCorrect === null
+                             ? 'root-bg-gray hover:bg-primary-light' // Lớp màu primary từ config
+                             : isCorrect
+                               ? 'bg-success' // Lớp success từ config
+                               : 'bg-danger' // Lớp danger từ config
+                     }`}
+                     disabled={!isActiveButtonContinue && isCorrect === null} // Thêm thuộc tính disabled chuẩn
                   >
                      {buttonValue}
                   </button>
