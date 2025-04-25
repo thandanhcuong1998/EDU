@@ -8,10 +8,13 @@ import Sidebar from './components/Sidebar.jsx';
 import './assets/style.css';
 import MainLearn from './components/MainLearn.jsx';
 import { Home, Languages, Trophy, User } from 'lucide-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import MainContentStudyApp from '../../common/components/MainContentStydyApp.jsx';
+import { LanguageContext } from '../../../Routes/HomePage/Context/LanguageContext.jsx';
 
 export default function Learn() {
+    const { translations } = useContext(LanguageContext);
+
     return (
         <>
             <div className="left-content">
@@ -27,25 +30,25 @@ export default function Learn() {
                                 <Nav.Item>
                                     <Nav.Link eventKey="learn">
                                         <Home className="w-5 h-5 mr-10" />
-                                        learn
+                                        {translations.learn.navigation.learn}
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="characters">
                                         <Languages className="w-5 h-5  mr-10" />
-                                        characters
+                                        {translations.learn.navigation.characters}
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="leaderboards">
                                         <Trophy className="w-5 h-5  mr-10" />
-                                        leaderboards
+                                        {translations.learn.navigation.leaderboards}
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="profile">
                                         <User className="w-5 h-5  mr-10" />
-                                        proile
+                                        {translations.learn.navigation.profile}
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>

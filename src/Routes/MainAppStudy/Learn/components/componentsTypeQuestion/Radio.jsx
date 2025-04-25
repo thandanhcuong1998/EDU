@@ -27,6 +27,7 @@ export default function Radio({
       }
    };
 
+
    const getClassNames = index => {
       const isCheckedIndex = !isEmpty(isChecked) && isChecked === index;
       return `options d-flex justify-content-center align-items-center flex-column ${isCheckedIndex ? 'selected' : ''} ${isCheckedIndex && isCorrectRedux === true ? 'success' : isCorrectRedux === false ? 'isFail' : ''}`;
@@ -46,7 +47,7 @@ export default function Radio({
                      hanldeChoiceAnswer(option, index);
                   }}
                >
-                  <img src={listConfigQuestion?.images[index]} alt="option" />
+                  {/*<img src={listConfigQuestion?.images[index]} alt="option" />*/}
                   <ruby>
                      {option}
                      <rp>(</rp>

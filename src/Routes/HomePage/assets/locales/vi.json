@@ -22,5 +22,32 @@
     "headingSection42": "Miễn phí, hiệu quả",
     "subHeadingSection42": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
     "headingSection43": "Miễn phí, hiệu quả",
-    "subHeadingSection43": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng."
+    "subHeadingSection43": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
+
+    "learn": {
+        "buttons": {
+            "check": "Kiểm tra",
+            "continue": "Tiếp tục",
+            "nextLevel": "Cấp độ tiếp theo",
+            "notCorrect": "Không đúng"
+        },
+        "feedback": {
+            "greatJob": "Làm tốt lắm",
+            "notCorrect": "Không đúng"
+        },
+        "navigation": {
+            "learn": "Học",
+            "characters": "Ký tự",
+            "leaderboards": "Bảng xếp hạng",
+            "profile": "Hồ sơ",
+            "guidebook": "Sách hướng dẫn"
+        },
+        "lessons": {
+            "theory": "Lý thuyết",
+            "level": "Bài tập {{level}}",
+            "startLearning": "Bắt đầu học",
+            "vocabulary": "Từ vựng",
+            "grammar": "Ngữ pháp"
+        }
+    }
 }

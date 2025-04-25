@@ -6,6 +6,9 @@ import {
 } from '../../Helpers/answerCheckers.js';
 import { arraysEqual } from '../../Helpers/util.jsx';
 
+/**
+ * Initial state for the lesson question choice reducer
+ */
 const initialState = {
    questions: ListQuestionFakeDataLession.N5.orderFood.level1,
    currentQuestionIndex: 0,
@@ -15,39 +18,74 @@ const initialState = {
    listQuestionFail: [],
 };
 
+/**
+ * Helper function to update progress bar
+ * @param {Object} state - Current state
+ * @param {boolean} isCorrect - Whether the answer is correct
+ */
+const updateProgressBar = (state, isCorrect) => {
+   if (isCorrect) {
+      state.progressBar = Math.min(
+         state.progressBar + 100 / state.questions.length,
+         100
+      );
+   }
+};
+
+/**
+ * Helper function to update failed questions list
+ * @param {Object} state - Current state
+ * @param {number} index - Question index
+ * @param {boolean} isCorrect - Whether the answer is correct
+ */
+const updateFailedQuestions = (state, index, isCorrect) => {
+   if (isCorrect) {
+      state.listQuestionFail = state.listQuestionFail.filter(
+         failIndex => failIndex !== index
+      );
+   } else if (!state.listQuestionFail.includes(index)) {
+      state.listQuestionFail.push(index);
+   }
+};
+
+/**
+ * Lesson question choice slice
+ */
 const lessionQuestionChoiceSlice = createSlice({
-   name: 'lessionQuestionChoice', // Tên của slice state (ví dụ: state.lessionQuestionChoice)
+   name: 'lessionQuestionChoice',
    initialState,
    reducers: {
+      /**
+       * Set answer for a question
+       * @param {Object} state - Current state
+       * @param {Object} action - Action with payload containing index, answer, and type
+       */
       setAnswer(state, action) {
-         // Nhận state (là một proxy Immer) và action
          const { index, answer, type } = action.payload;
 
-         // --- Xử lý mapping-word ---
-         if (type === 'mapping-word') {
-            if (typeof index !== 'number') {
-               console.error("Action 'mapping-word' thiếu 'index'.");
-               return; // Không cần return state, Immer xử lý
-            }
-            // Với Immer, bạn có thể "mutate" state trực tiếp ở đây
-            state.isCorrect = true;
-            state.progressBar = Math.min(
-               state.progressBar + 100 / state.questions.length,
-               100
-            );
-            state.listQuestionFail = state.listQuestionFail.filter(
-               failIndex => failIndex !== index
-            );
-            state.answers[index] = true; // Cập nhật trực tiếp
-            return; // Kết thúc xử lý cho mapping-word
-         }
-
-         // --- Xử lý các type khác ---
-         const currentQuestion = state.questions[index];
-         if (!currentQuestion) {
-            console.error(`Không tìm thấy câu hỏi tại index: ${index}`);
+         // Validate index is a number
+         if (typeof index !== 'number') {
+            console.error("Action requires a numeric 'index'.");
             return;
          }
+
+         // Handle mapping-word type questions
+         if (type === 'mapping-word') {
+            state.isCorrect = true;
+            state.answers[index] = true;
+            updateProgressBar(state, true);
+            updateFailedQuestions(state, index, true);
+            return;
+         }
+
+         // Handle other question types
+         const currentQuestion = state.questions[index];
+         if (!currentQuestion) {
+            console.error(`Question not found at index: ${index}`);
+            return;
+         }
+
+         // Check if answer is correct based on question type
          const correctAnswersData = currentQuestion.correctAnswer;
          let isCorrect = false;
 
@@ -64,50 +102,59 @@ const lessionQuestionChoiceSlice = createSlice({
             );
          }
 
-         // Cập nhật state với Immer
+         // Update state
          state.answers[index] = answer;
          state.isCorrect = isCorrect;
-         state.progressBar = Math.min(
-            isCorrect
-               ? state.progressBar + 100 / state.questions.length
-               : state.progressBar,
-            100
-         );
-
-         if (isCorrect) {
-            state.listQuestionFail = state.listQuestionFail.filter(
-               failIndex => failIndex !== index
-            );
-         } else if (!state.listQuestionFail.includes(index)) {
-            state.listQuestionFail.push(index); // Thêm trực tiếp với Immer
-         }
+         updateProgressBar(state, isCorrect);
+         updateFailedQuestions(state, index, isCorrect);
       },
+
+      /**
+       * Update current question index
+       * @param {Object} state - Current state
+       */
       updateQuestionIndex(state) {
-         // Chỉ cần state vì không có payload
+         // If progress is complete, move to end
          if (state.progressBar >= 100) {
             state.currentQuestionIndex = state.questions.length + 1;
          } else {
-            const nextQuestionIndexRegular = state.currentQuestionIndex + 1;
-            if (nextQuestionIndexRegular < state.questions.length) {
-               state.currentQuestionIndex = nextQuestionIndexRegular;
+            const nextIndex = state.currentQuestionIndex + 1;
+
+            if (nextIndex < state.questions.length) {
+               // Move to next question if available
+               state.currentQuestionIndex = nextIndex;
             } else if (state.listQuestionFail.length > 0) {
+               // Move to first failed question if no more regular questions
                state.currentQuestionIndex = state.listQuestionFail[0];
             } else {
+               // No more questions and no failed questions
                console.warn(
-                  'Hết câu hỏi, không còn câu sai, progressBar < 100.'
+                  'No more questions available, progress < 100%.'
                );
                state.currentQuestionIndex = state.questions.length + 1;
             }
          }
-         // Reset isCorrect và answers khi chuyển câu (nếu cần)
+
+         // Reset correct status for new question
          state.isCorrect = null;
-         // state.answers = []; // Xem xét có nên reset answers không
       },
-      // Có thể thêm các reducers khác ở đây
+
+      /**
+       * Reset state for a new lesson
+       * @param {Object} state - Current state
+       * @param {Object} action - Action with payload containing questions
+       */
+      resetState(state, action) {
+         return {
+            ...initialState,
+            questions: action.payload?.questions || initialState.questions,
+            // Preserve any other state properties if needed
+         };
+      },
    },
 });
 
-// Export action creators và reducer
-export const { setAnswer, updateQuestionIndex } =
+// Export action creators and reducer
+export const { setAnswer, updateQuestionIndex, resetState } =
    lessionQuestionChoiceSlice.actions;
 export default lessionQuestionChoiceSlice.reducer;

@@ -20,5 +20,32 @@
     "headingSection42": "無料で効果的",
     "subHeadingSection42": "研究がアプリの効果を証明しています！短い学習を通じて、スコアを獲得し、新しいレベルを開放し、実用的なコミュニケーションスキルを練習します。",
     "headingSection43": "無料で効果的",
-    "subHeadingSection43": "研究がアプリの効果を証明しています！短い学習を通じて、スコアを獲得し、新しいレベルを開放し、実用的なコミュニケーションスキルを練習します。"
+    "subHeadingSection43": "研究がアプリの効果を証明しています！短い学習を通じて、スコアを獲得し、新しいレベルを開放し、実用的なコミュニケーションスキルを練習します。",
+
+    "learn": {
+        "buttons": {
+            "check": "確認",
+            "continue": "続ける",
+            "nextLevel": "次のレベル",
+            "notCorrect": "不正解"
+        },
+        "feedback": {
+            "greatJob": "よくできました",
+            "notCorrect": "不正解"
+        },
+        "navigation": {
+            "learn": "学習",
+            "characters": "文字",
+            "leaderboards": "ランキング",
+            "profile": "プロフィール",
+            "guidebook": "ガイドブック"
+        },
+        "lessons": {
+            "theory": "理論",
+            "level": "練習 {{level}}",
+            "startLearning": "学習を始める",
+            "vocabulary": "語彙",
+            "grammar": "文法"
+        }
+    }
 }
