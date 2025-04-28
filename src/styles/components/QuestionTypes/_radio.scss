@@ -1,0 +1,58 @@
+@import '../../variables/colors';
+@import '../../variables/mixins';
+
+// Radio component styles
+.radio {
+  @extend .question-container;
+  
+  .content-question {
+    @include flex-center;
+    justify-content: space-around;
+    width: 650px;
+    
+    &.no-select {
+      @include no-select;
+    }
+    
+    .options {
+      width: 150px;
+      border: 2px solid $slate-gray;
+      border-radius: 8px;
+      padding: 15px;
+      @include transition;
+      
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($slate-gray, 0.2);
+      }
+      
+      &.selected {
+        border: 2px solid var(--primary-color);
+        
+        &.success {
+          border: 2px solid var(--primary-color-light) !important;
+        }
+        
+        &.isFail {
+          border: 2px solid $error-color !important;
+        }
+      }
+      
+      img {
+        width: 92px;
+        height: 160px;
+        margin-bottom: 10px;
+      }
+      
+      ruby {
+        font-size: 19px;
+        
+        rt {
+          font-size: 16px;
+          color: rgba(var(--text-color), 0.6);
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+}

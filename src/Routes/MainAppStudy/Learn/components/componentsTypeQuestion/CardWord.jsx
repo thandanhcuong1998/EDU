@@ -7,6 +7,7 @@ export default function CardWord({
    classRoot,
    handleAnswer,
    type,
+   theme,
 }) {
    const {
       listAnswer,
@@ -21,7 +22,7 @@ export default function CardWord({
 
    return (
       <div
-         className={`${classRoot} d-flex justify-content-start flex-column align-items-start`}
+         className={`${classRoot} ${theme} d-flex justify-content-start flex-column align-items-start`}
       >
          <h3 className="text-white">{listConfigQuestion.title}</h3>
          <div className="content-question d-flex justify-content-start align-items-baseline">

@@ -4,13 +4,54 @@
 @tailwind utilities;
 @tailwind components;
 
-:root {
-    --primary-color: rgb(234 155 0);
-    --primary-color-light: rgb(255, 185, 0);
+/* Định nghĩa màu cho Theme Sáng */
+html[data-theme='light'] {
+    --bg-color: #FAF3E0;
+    --text-color: #5A4C43;
+    --accent-color: #6A8E7F;
+    --text-on-accent-color: #FFFFFF;
+    --secondary-text-color: #8A7F78;
+
+    /* Original Variables - Light Theme */
+    --primary-color: #6A8E7F;
+    --primary-color-light: #6A8E7F;
     --slate-gray: rgb(55, 70, 79);
     --false: rgb(187, 75, 66);
     --success-color: #7eb137;
-    --bg-primary-app: rgb(19, 31, 36)
+    --bg-primary-app: #F2EADF;
+}
+
+/* Định nghĩa màu cho Theme Tối */
+html[data-theme='dark'] {
+    --bg-color: #313F57;
+    --text-color: #FFFFFF;
+    --accent-color: #F8D673;
+    --text-on-accent-color: #313F57;
+    --secondary-text-color: #BDBDBD;
+
+    /* Original Variables - Dark Theme */
+    --primary-color: #F8D673;
+    --primary-color-light: #F8D673;
+    --slate-gray: rgb(55, 70, 79);
+    --false: rgb(187, 75, 66);
+    --success-color: #7eb137;
+    --bg-primary-app: #313F57;
+}
+
+/* Default theme (dark) for backward compatibility */
+:root {
+    --bg-color: #313F57;
+    --text-color: #FFFFFF;
+    --accent-color: #F8D673;
+    --text-on-accent-color: #313F57;
+    --secondary-text-color: #BDBDBD;
+
+    --primary-color: #F8D673;
+    --primary-color-light: #F8D673;
+    --slate-gray: rgb(55, 70, 79);
+    --false: rgb(187, 75, 66);
+    --success-color: #7eb137;
+    --bg-primary-app: #313F57;
 }
 
 .section-2 .title,
@@ -20,23 +61,22 @@
 }
 
 .theme-text {
-    color: var(--primary-color-light);
+    color: var(--accent-color);
 }
 
 .theme-bg {
-    background-color: var(--primary-color-light);
+    background-color: var(--accent-color);
+    color: var(--text-on-accent-color);
 }
 
 .radioPlay {
     margin-right: 7px;
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 .radioPlay button {
-    color: var(--primary-color);
+    color: var(--accent-color);
     background: none;
-
-
 }
 
 .button-check-question,
@@ -93,7 +133,8 @@ button.disabled {
 }
 
 button.bg-primary-color {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
+    color: var(--text-on-accent-color);
 }
 
 button.success {
@@ -110,7 +151,7 @@ button.success {
 
 
 button:hover:not(.disabled):not(.isFail):not(.success).hv-primary-color {
-    background-color: #ffbf42 !important;
+    filter: brightness(1.1) !important;
 }
 
 .root-bg-gray {
@@ -127,10 +168,10 @@ button:hover:not(.disabled):not(.isFail):not(.success).hv-primary-color {
 }
 
 .learn-root {
-    background-color: rgb(19, 31, 36);
+    background-color: var(--bg-color);
     width: 100%;
     height: 100vh;
-    color: #dce6fc;
+    color: var(--text-color);
     font-family: 'Be Vietnam Pro', sans-serif;
     justify-content: space-between;
     align-items: start;
@@ -153,4 +194,36 @@ button:hover:not(.disabled):not(.isFail):not(.success).hv-primary-color {
     -webkit-user-select: none; /* Dành cho trình duyệt WebKit (Chrome, Safari) */
     -moz-user-select: none; /* Dành cho Firefox */
     -ms-user-select: none; /* Dành cho Internet Explorer/Edge */
+}
+
+/* Theme Toggle Styles */
+.theme-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.theme-toggle-button {
+    background-color: var(--accent-color);
+    color: var(--text-on-accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the icon inside the button */
+.theme-toggle-button svg {
+    width: 20px;
+    height: 20px;
 }

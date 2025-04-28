@@ -1,0 +1,185 @@
+@import '../../../styles/variables/colors';
+@import '../../../styles/variables/mixins';
+
+// Common styles for card word components
+.card-word {
+  @include flex-column;
+  align-items: flex-start;
+  width: 600px;
+  
+  &.light {
+    @include light-theme;
+  }
+  
+  &.dark {
+    @include dark-theme;
+  }
+  
+  h3 {
+    @include heading-medium;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+  
+  // Question section
+  .content-question {
+    @include flex;
+    align-items: baseline;
+    
+    // Audio button for English card
+    .radioPlay {
+      margin-right: 0.5rem;
+      
+      button {
+        color: var(--accent-color);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        @include transition;
+        
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+    
+    // Options display
+    .options {
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
+      
+      ruby {
+        font-size: 1.2rem;
+        
+        rt {
+          font-size: 1rem;
+          color: rgba(var(--text-color), 0.6);
+          padding-top: 0.5rem;
+        }
+      }
+    }
+    
+    // Hint text for Japanese card
+    .hint-text {
+      font-size: 1.2rem;
+      color: var(--text-color);
+    }
+  }
+  
+  // Selected answers section
+  .answer-choice {
+    border-top: 2px solid $slate-gray;
+    border-bottom: 2px solid $slate-gray;
+    height: 4rem;
+    width: 100%;
+    margin: 1.25rem 0;
+    padding: 0.5rem 0;
+    
+    // English card specific
+    &.card-word-english {
+      height: 4rem;
+    }
+    
+    // Japanese card specific
+    &.card-word-japan {
+      height: 5rem;
+    }
+    
+    .list-answer {
+      @include flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0.25rem 0;
+      
+      li {
+        border: 2px solid $slate-gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-right: 0.75rem;
+        cursor: pointer;
+        @include transition;
+        @include no-select;
+        
+        &:hover {
+          background-color: rgba($slate-gray, 0.1);
+        }
+        
+        ruby {
+          font-size: 1.2rem;
+          
+          rt {
+            font-size: 1rem;
+            color: rgba(var(--text-color), 0.6);
+            padding-top: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  
+  // Available answers section
+  .content-answer {
+    width: 100%;
+    
+    .list-answer {
+      @include flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+      
+      li {
+        border: 2px solid $slate-gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-right: 0.75rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        @include transition;
+        
+        &:hover {
+          background-color: rgba($slate-gray, 0.1);
+        }
+        
+        &.selected {
+          background-color: $slate-gray;
+          color: $slate-gray;
+          cursor: default;
+          
+          rt {
+            color: $slate-gray;
+          }
+        }
+        
+        ruby {
+          font-size: 1.2rem;
+          
+          rt {
+            font-size: 1rem;
+            color: rgba(var(--text-color), 0.6);
+            padding-top: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  
+  // Type-specific styles
+  &.card-word-english {
+    .content-question {
+      border: 2px solid $slate-gray;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+  
+  &.card-word-japan {
+    .content-answer .list-answer li {
+      padding: 0.75rem 1rem;
+    }
+  }
+}

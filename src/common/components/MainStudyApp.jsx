@@ -16,6 +16,7 @@ import Sidebar from '../../Routes/MainAppStudy/Learn/components/Sidebar.jsx';
 import MainContentStudyApp from '../../common/components/MainContentStydyApp.jsx';
 import MainLearn from '../../Routes/MainAppStudy/Learn/components/MainLearn.jsx';
 import Logo from './Logo.jsx';
+import ThemeToggle from './ThemeToggle.jsx';
 import JapaneseAlphabet from '../../Routes/MainAppStudy/JapaneseAlphabets/JapaneseAlphabet.jsx';
 
 export default function MainStudyApp() {
@@ -32,6 +33,9 @@ export default function MainStudyApp() {
                <Row>
                   <Col sm={3}>
                      <Logo />
+                     <div className="theme-toggle-container">
+                        <ThemeToggle />
+                     </div>
                      <Nav variant="pills" className="flex-column menu">
                         {listMenu.length > 0 &&
                            listMenu.map((menuItem, index) => (

@@ -1,0 +1,132 @@
+@import '../../variables/colors';
+@import '../../variables/mixins';
+
+// Common styles for card word components
+%card-word-base {
+  @extend .question-container;
+  width: 600px;
+  @include flex-column;
+  align-items: flex-start;
+  
+  .content-question {
+    @include flex-center;
+    align-items: baseline;
+    
+    .options {
+      font-size: 19px;
+      
+      ruby {
+        font-size: 19px;
+        
+        rt {
+          font-size: 16px;
+          color: rgba(var(--text-color), 0.6);
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+  
+  .answer-choice {
+    border-top: 2px solid $slate-gray;
+    border-bottom: 2px solid $slate-gray;
+    height: 67px;
+    width: 100%;
+    margin: 20px 0;
+    
+    ul {
+      margin: 5px 0;
+    }
+    
+    .list-answer {
+      @include flex;
+      list-style-type: none;
+      touch-action: none;
+      
+      li {
+        border: 2px solid $slate-gray;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 19px;
+        color: var(--text-color);
+        margin-right: 10px;
+        cursor: pointer;
+        @include no-select;
+        
+        ruby {
+          font-size: 19px;
+          
+          rt {
+            font-size: 16px;
+            color: rgba(var(--text-color), 0.6);
+            padding-top: 10px;
+          }
+        }
+      }
+    }
+  }
+  
+  .content-answer {
+    margin: 0 auto;
+    
+    .list-answer {
+      @include flex;
+      list-style-type: none;
+      touch-action: none;
+      
+      li {
+        border: 2px solid $slate-gray;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 19px;
+        color: var(--text-color);
+        margin-right: 10px;
+        cursor: pointer;
+        
+        &.selected {
+          background-color: $slate-gray;
+          color: $slate-gray;
+          cursor: default;
+          
+          rt {
+            color: $slate-gray;
+          }
+        }
+        
+        ruby {
+          font-size: 19px;
+          
+          rt {
+            font-size: 16px;
+            color: rgba(var(--text-color), 0.6);
+            padding-top: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// English card word
+.card-word-english {
+  @extend %card-word-base;
+  
+  .content-question {
+    border: 2px solid $slate-gray;
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+}
+
+// Japanese card word
+.card-word-japan {
+  @extend %card-word-base;
+  
+  .answer-choice {
+    height: 80px !important;
+  }
+  
+  .content-answer .list-answer li {
+    padding: 10px 15px;
+  }
+}

@@ -1,0 +1,45 @@
+/* Vocabulary item with audio button */
+.vocabulary-item {
+  transition: all 0.2s ease;
+}
+
+.vocabulary-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Locked level styling */
+.course.locked {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.locked-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locked-message {
+  color: #bb4b42;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Level introduction styling */
+.level-introduction {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* XP progress bar */
+.xp-progress {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #4f46e5, #8b5cf6);
+  transition: width 0.5s ease;
+}

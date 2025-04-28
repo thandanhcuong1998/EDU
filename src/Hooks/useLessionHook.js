@@ -5,7 +5,12 @@ import {
    setAnswer,
    updateQuestionIndex,
    resetState,
+   setLessonQuestions,
 } from '../Redux/Reducers/LessionQuestionChoiceReducer.jsx';
+import {
+   addExperience,
+   completeLevel,
+} from '../Redux/Reducers/UserProgressReducer.jsx';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ListQuestionFakeDataLession from '../Helpers/ListQuestionFakeDataLession.jsx';
 import { LanguageContext } from '../Routes/HomePage/Context/LanguageContext.jsx';
@@ -27,30 +32,83 @@ export const useLessionHook = () => {
    const progressBar = useSelector(
       state => state.LessionQuestionChoice.progressBar
    );
+   const listQuestionFail = useSelector(
+      state => state.LessionQuestionChoice.listQuestionFail
+   );
 
    const [isActiveButtonContinue, setIsActiveButtonContinue] = useState(false);
    const [answerState, setAnswerState] = useState([]);
 
+   // Add state for tracking time and incorrect attempts
+   const [startTime, setStartTime] = useState(null);
+   const [timeSpent, setTimeSpent] = useState(0);
+   const [incorrectAttempts, setIncorrectAttempts] = useState(0);
+   const [showReport, setShowReport] = useState(false);
+   const [lessonStats, setLessonStats] = useState(null);
+
    // Calculate button value using translations
    const buttonValue = useMemo(() => {
+      // For theory lessons, use different button text
+      if (lessonType === 'theory') {
+         if (progressBar === 100) return translations.learn.buttons.nextLevel;
+         return translations.learn.buttons.continue;
+      }
+
+      // For regular lessons
       if (isCorrect === true) return translations.learn.buttons.continue;
       if (isCorrect === false) return translations.learn.buttons.notCorrect;
       if (progressBar === 100) return translations.learn.buttons.nextLevel;
 
       return translations.learn.buttons.check;
-   }, [isCorrect, progressBar, translations.learn.buttons]);
+   }, [isCorrect, progressBar, translations.learn.buttons, lessonType]);
+
+   // Initialize timer when lesson starts
+   useEffect(() => {
+      setStartTime(Date.now());
+      return () => {
+         // Cleanup timer if component unmounts
+         if (startTime) {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            setTimeSpent(elapsed);
+         }
+      };
+   }, []);
+
+   // Track incorrect attempts
+   useEffect(() => {
+      if (isCorrect === false) {
+         setIncorrectAttempts(prev => prev + 1);
+      }
+   }, [isCorrect]);
 
    useEffect(() => {
+      // For theory lessons, always enable the button
+      if (lessonType === 'theory') {
+         setIsActiveButtonContinue(true);
+         return;
+      }
+
+      // For regular lessons, check if an answer has been selected
       if (isObject(answerState) && answerState.answer?.length > 0) {
          setIsActiveButtonContinue(true);
       } else {
          setIsActiveButtonContinue(false);
       }
-   }, [answerState]);
+   }, [answerState, lessonType]);
 
    const changeScreenQuestion = () => {
-      dispatch(updateQuestionIndex());
-      setIsActiveButtonContinue(false);
+      // For theory lessons, pass isTheory flag
+      if (lessonType === 'theory') {
+         dispatch(updateQuestionIndex({ isIntroduction: true }));
+      } else {
+         dispatch(updateQuestionIndex());
+      }
+
+      // For theory lessons, keep the button active
+      if (lessonType !== 'theory') {
+         setIsActiveButtonContinue(false);
+      }
+
       setAnswerState([]);
    };
 
@@ -220,29 +278,115 @@ export const useLessionHook = () => {
       return nextLevelQuestions;
    };
 
+   /**
+    * Calculate XP based on performance
+    * @returns {number} XP earned
+    */
+   const calculateXP = () => {
+      // Base XP for the level (simple algorithm)
+      const baseXP = 50;
+
+      // Deduct for errors (up to 50% reduction)
+      const errorPenalty = Math.min(incorrectAttempts * 5, 50);
+
+      // Time bonus for quick completion (up to 20% bonus)
+      const expectedTime = 120; // 2 minutes as expected time
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const timeBonus =
+         elapsed < expectedTime ? Math.floor((expectedTime - elapsed) / 6) : 0;
+
+      // Calculate final XP
+      const finalXP = Math.floor(
+         baseXP * (1 - errorPenalty / 100) * (1 + timeBonus / 100)
+      );
+      return Math.max(finalXP, Math.floor(baseXP * 0.3)); // Minimum 30% of base XP
+   };
+
+   /**
+    * Format topic name for display
+    */
+   const formatTopicName = topicName => {
+      return topicName
+         .replace(/([A-Z])/g, ' $1') // Add space before capital letters
+         .replace(/^./, str => str.toUpperCase()); // Capitalize first letter
+   };
+
+   /**
+    * Get human-readable lesson name
+    */
+   const getLessonName = lessonTypeName => {
+      if (lessonTypeName === 'theory') return translations.learn.lessons.theory;
+
+      const levelMatch = lessonTypeName.match(/level(\d+)/);
+      if (levelMatch) {
+         return translations.learn.lessons.level.replace(
+            '{{level}}',
+            levelMatch[1]
+         );
+      }
+
+      return lessonTypeName;
+   };
+
    const handleButtonClick = () => {
-      if (isCorrect === null) {
-         checkAnswer();
-      } else if (progressBar === 100) {
-         // Level completed, determine next level
-         const nextLevelInfo = getNextLevel();
+      // Force the button to be active for theory lessons
+      if (lessonType === 'theory') {
+         if (progressBar === 100) {
+            // Calculate final time spent
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            setTimeSpent(elapsed);
 
-         if (nextLevelInfo) {
-            // Navigate to the next level
-            const { level, topic, type } = nextLevelInfo;
+            // Prepare lesson stats for report
+            setLessonStats({
+               timeSpent: elapsed,
+               incorrectAttempts,
+               topic: formatTopicName(topic),
+               level: getLessonName(lessonType),
+               xpEarned: calculateXP(),
+            });
 
-            // Create combined questions with review
-            const combinedQuestions = createCombinedQuestions(nextLevelInfo);
+            // Mark level as completed
+            dispatch(completeLevel({ jlptLevel, topic, level: lessonType }));
 
-            // Update Redux store with the new questions
-            dispatch(resetState({ questions: combinedQuestions }));
-
-            // Navigate to the next level
-            navigation(`/lession?level=${level}&topic=${topic}&type=${type}`);
+            // Show report instead of immediately navigating
+            setShowReport(true);
          } else {
-            // If no next level, go back to learn page
-            navigation('/learn');
+            // Instead of just updating the question index, navigate to level1 of the same topic
+            // This will refresh the page and load the actual lesson content
+            navigation(`/lession?level=${jlptLevel}&topic=${topic}&type=level1`);
          }
+         return;
+      }
+
+      // For regular lessons
+      if (isCorrect === null) {
+         // Only check answer if an answer has been selected
+         if (isObject(answerState) && answerState.answer?.length > 0) {
+            checkAnswer();
+         }
+      } else if (progressBar === 100 && listQuestionFail.length === 0) {
+         // Only show completion report if progress is 100% AND there are no failed questions
+         // Calculate final time spent
+         const elapsed = Math.floor((Date.now() - startTime) / 1000);
+         setTimeSpent(elapsed);
+
+         // Prepare lesson stats for report
+         setLessonStats({
+            timeSpent: elapsed,
+            incorrectAttempts,
+            topic: formatTopicName(topic),
+            level: getLessonName(lessonType),
+            xpEarned: calculateXP(),
+         });
+
+         // Mark level as completed
+         dispatch(completeLevel({ jlptLevel, topic, level: lessonType }));
+
+         // Show report instead of immediately navigating
+         setShowReport(true);
+      } else if (progressBar === 100 && listQuestionFail.length > 0) {
+         // If progress is 100% but there are failed questions, move to the first failed question
+         changeScreenQuestion();
       } else {
          changeScreenQuestion();
       }
@@ -255,5 +399,14 @@ export const useLessionHook = () => {
       handleButtonClick,
       isCorrect,
       progressBar,
+      showReport,
+      lessonStats,
+      setShowReport,
+      timeSpent,
+      incorrectAttempts,
+      getNextLevel,
+      formatTopicName,
+      getLessonName,
+      createCombinedQuestions,
    };
 };

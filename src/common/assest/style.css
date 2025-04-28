@@ -55,7 +55,7 @@
 }
 
 .learn-root .menu .nav-link {
-    color: #dce6fc;
+    color: var(--secondary-text-color);
 }
 
 .learn-root .menu .nav-item a:hover {

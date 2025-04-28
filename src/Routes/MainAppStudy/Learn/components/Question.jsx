@@ -5,7 +5,7 @@ import MappingWord from './componentsTypeQuestion/MappingWord.jsx';
 import { useSelector } from 'react-redux';
 import { Complete } from './Complete.jsx';
 
-const Question = ({ questions, setAnswerState, isCorrectRedux }) => {
+const Question = ({ questions, setAnswerState, isCorrectRedux, theme }) => {
    const currentQuestionIndex = useSelector(
       state => state.LessionQuestionChoice.currentQuestionIndex
    );
@@ -31,6 +31,7 @@ const Question = ({ questions, setAnswerState, isCorrectRedux }) => {
                            listConfigQuestion={currentQuestion}
                            handleAnswer={handleAnswerQuestion}
                            isCorrectRedux={isCorrectRedux}
+                           theme={theme}
                         />
                      );
                   case 'card-word-english':
@@ -42,6 +43,7 @@ const Question = ({ questions, setAnswerState, isCorrectRedux }) => {
                            handleAnswer={handleAnswerQuestion}
                            type={currentQuestion.type}
                            isCorrectRedux={isCorrectRedux}
+                           theme={theme}
                         />
                      );
 
@@ -52,6 +54,7 @@ const Question = ({ questions, setAnswerState, isCorrectRedux }) => {
                            listConfigQuestion={currentQuestion}
                            handleAnswer={handleAnswerQuestion}
                            isCorrectRedux={isCorrectRedux}
+                           theme={theme}
                         />
                      );
                   default:

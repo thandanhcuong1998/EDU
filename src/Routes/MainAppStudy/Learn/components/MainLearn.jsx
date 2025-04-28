@@ -1,9 +1,13 @@
-import { ArrowLeft, NotebookText, Star } from 'lucide-react';
+import { ArrowLeft, NotebookText, Star, Lock } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { unlockTopic } from '../../../../Redux/Reducers/UserProgressReducer.jsx';
+import { setLessonQuestions } from '../../../../Redux/Reducers/LessionQuestionChoiceReducer.jsx';
 import ListQuestionFakeDataLession from '../../../../Helpers/ListQuestionFakeDataLession.jsx';
 import { LanguageContext } from '../../../../Routes/HomePage/Context/LanguageContext.jsx';
+import './styles.css';
 
 export default function MainLearn({ children }) {
    const [selectedJlptLevel, setSelectedJlptLevel] = useState('N5');
@@ -16,6 +20,54 @@ export default function MainLearn({ children }) {
    const { translations } = useContext(LanguageContext);
 
    const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   // Get user progress from Redux
+   const userProgress = useSelector(state => state.userProgress);
+
+   // Check if a topic is unlocked
+   const isTopicUnlocked = (jlptLevel, topicName) => {
+      return userProgress.unlockedTopics[jlptLevel]?.includes(topicName);
+   };
+
+   // Check if a level is unlocked
+   const isLevelUnlocked = (jlptLevel, topicName, levelType) => {
+      // Theory is always available for unlocked topics
+      if (levelType === 'theory') {
+         return isTopicUnlocked(jlptLevel, topicName);
+      }
+
+      // Extract level number
+      const levelMatch = levelType.match(/level(\d+)/);
+      if (!levelMatch) return false;
+
+      const levelNum = parseInt(levelMatch[1]);
+
+      // Level 1 is available if the topic is unlocked
+      if (levelNum === 1) {
+         return isTopicUnlocked(jlptLevel, topicName);
+      }
+
+      // Higher levels require previous level to be completed
+      const prevLevel = `level${levelNum - 1}`;
+      return userProgress.completedLevels[jlptLevel]?.[topicName]?.includes(prevLevel);
+   };
+
+   // Check if user has enough XP to unlock a topic
+   const hasEnoughXP = (jlptLevel, topicName) => {
+      // Get required XP from metadata (if available)
+      const requiredXP = ListQuestionFakeDataLession[jlptLevel]?.[topicName]?.metadata?.requiredXp || 0;
+      return userProgress.experience >= requiredXP;
+   };
+
+   // Try to unlock a topic if user has enough XP
+   const tryUnlockTopic = (jlptLevel, topicName) => {
+      if (!isTopicUnlocked(jlptLevel, topicName) && hasEnoughXP(jlptLevel, topicName)) {
+         dispatch(unlockTopic({ jlptLevel, topic: topicName }));
+         return true;
+      }
+      return false;
+   };
 
    // Initialize available topics and select the first one
    useEffect(() => {
@@ -69,6 +121,31 @@ export default function MainLearn({ children }) {
    };
 
    const onHandleStartLession = lessonType => {
+      // Check if the level is unlocked
+      if (!isLevelUnlocked(selectedJlptLevel, selectedTopic, lessonType)) {
+         // Try to unlock if it's the first level and user has enough XP
+         if (lessonType === 'level1' || lessonType === 'theory') {
+            if (!tryUnlockTopic(selectedJlptLevel, selectedTopic)) {
+               // Show message that more XP is needed
+               const requiredXP = ListQuestionFakeDataLession[selectedJlptLevel]?.[selectedTopic]?.metadata?.requiredXp || 0;
+               alert(`Bạn cần ${requiredXP} XP để mở khóa chủ đề này. Hiện tại bạn có ${userProgress.experience} XP.`);
+               return;
+            }
+         } else {
+            // Show message that previous level needs to be completed
+            alert('Bạn cần hoàn thành cấp độ trước để mở khóa cấp độ này.');
+            return;
+         }
+      }
+
+      // Get the questions for the selected lesson
+      const lessonQuestions = 
+         ListQuestionFakeDataLession[selectedJlptLevel][selectedTopic][lessonType];
+
+      // Update Redux store with the selected questions
+      dispatch(setLessonQuestions({ questions: lessonQuestions }));
+
+      // Navigate to the lesson
       navigate(
          `/lession?level=${selectedJlptLevel}&topic=${selectedTopic}&type=${lessonType}`
       );
@@ -145,31 +222,51 @@ export default function MainLearn({ children }) {
          </div>
          <div className="line-study d-flex justify-content-center align-items-center">
             <ul className="step-course">
-               {topicLessons.map((lessonType, index) => (
-                  <li
-                     key={lessonType}
-                     className={`course position-relative ${getPositionClass(index, topicLessons.length)} ${clickedLessonIndex === index ? 'click' : ''}`}
-                     onClick={() => onHandleClickCourse(index)}
-                  >
-                     <Star
-                        size={42}
-                        color={
-                           index === 0 || clickedLessonIndex === index
-                              ? undefined
-                              : 'rgb(77, 89, 97)'
-                        }
-                     />
-                     <div className="tooltiptext">
-                        <p>{formatTopicName(selectedTopic)}</p>
-                        <p>{getLessonName(lessonType)}</p>
-                        <button
-                           onClick={() => onHandleStartLession(lessonType)}
-                        >
-                           {translations.learn.lessons.startLearning}
-                        </button>
-                     </div>
-                  </li>
-               ))}
+               {topicLessons.map((lessonType, index) => {
+                  const isUnlocked = isLevelUnlocked(selectedJlptLevel, selectedTopic, lessonType);
+
+                  return (
+                     <li
+                        key={lessonType}
+                        className={`course position-relative ${getPositionClass(index, topicLessons.length)} ${clickedLessonIndex === index ? 'click' : ''} ${!isUnlocked ? 'locked' : ''}`}
+                        onClick={() => isUnlocked && onHandleClickCourse(index)}
+                     >
+                        {isUnlocked ? (
+                           <Star
+                              size={42}
+                              color={
+                                 index === 0 || clickedLessonIndex === index
+                                    ? undefined
+                                    : 'rgb(77, 89, 97)'
+                              }
+                           />
+                        ) : (
+                           <div className="locked-icon">
+                              <Lock size={42} color="rgb(77, 89, 97)" />
+                           </div>
+                        )}
+
+                        <div className="tooltiptext">
+                           <p>{formatTopicName(selectedTopic)}</p>
+                           <p>{getLessonName(lessonType)}</p>
+
+                           {isUnlocked ? (
+                              <button onClick={() => onHandleStartLession(lessonType)}>
+                                 {translations.learn.lessons.startLearning}
+                              </button>
+                           ) : (
+                              <div className="locked-message">
+                                 {lessonType === 'level1' || lessonType === 'theory' ? (
+                                    <p>Cần {ListQuestionFakeDataLession[selectedJlptLevel]?.[selectedTopic]?.metadata?.requiredXp || 0} XP để mở khóa</p>
+                                 ) : (
+                                    <p>Hoàn thành cấp độ trước để mở khóa</p>
+                                 )}
+                              </div>
+                           )}
+                        </div>
+                     </li>
+                  );
+               })}
             </ul>
 
             <div className="lottie">

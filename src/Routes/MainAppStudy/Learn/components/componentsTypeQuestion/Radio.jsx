@@ -7,6 +7,7 @@ export default function Radio({
    classRoot,
    handleAnswer,
    isCorrectRedux,
+   theme,
 }) {
    // add. services
 
@@ -16,7 +17,7 @@ export default function Radio({
    // use effect
    // add functions
    const hanldeChoiceAnswer = (value, index) => {
-      if (!isEmpty(index)) {
+      if (index !== undefined && index !== null) {
          handleAnswer([
             {
                answer: value,
@@ -34,7 +35,7 @@ export default function Radio({
    };
 
    return (
-      <div className={classRoot}>
+      <div className={`${classRoot} ${theme}`}>
          <h3 className="text-white m-5">{listConfigQuestion.title}</h3>
          <div
             className={`content-question d-flex justify-content-around align-items-center ${isCorrectRedux === true ? 'no-select' : ''}`}
@@ -47,7 +48,9 @@ export default function Radio({
                      hanldeChoiceAnswer(option, index);
                   }}
                >
-                  {/*<img src={listConfigQuestion?.images[index]} alt="option" />*/}
+                  {listConfigQuestion?.images && listConfigQuestion?.images[index] ? (
+                     <img src={listConfigQuestion.images[index]} alt="option" className="mb-2" />
+                  ) : null}
                   <ruby>
                      {option}
                      <rp>(</rp>

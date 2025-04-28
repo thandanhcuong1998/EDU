@@ -1,0 +1,68 @@
+@import 'variables/colors';
+@import 'variables/mixins';
+
+// Import component styles
+@import 'components/Lesson/lesson';
+@import 'components/QuestionTypes/questionTypes';
+
+// Global styles
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+// Theme utility classes
+.theme-text {
+  color: var(--accent-color);
+}
+
+.theme-bg {
+  background-color: var(--accent-color);
+  color: var(--text-on-accent-color);
+}
+
+// Common utility classes
+.no-select {
+  @include no-select;
+}
+
+.success {
+  color: $success-color !important;
+}
+
+.error, .isFail {
+  color: $error-color !important;
+}
+
+// Button styles
+.button-check-question {
+  @include button-primary;
+  box-shadow: none;
+  border: none;
+  
+  &.success {
+    background-color: $success-color !important;
+  }
+  
+  &.disabled {
+    background-color: $slate-gray;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+// Audio button styles
+.radioPlay {
+  margin-right: 7px;
+  color: var(--accent-color);
+  
+  button {
+    color: var(--accent-color);
+    background: none;
+    box-shadow: none;
+    border: none;
+  }
+}

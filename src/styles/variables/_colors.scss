@@ -1,0 +1,61 @@
+// Theme Colors
+// Light Theme
+$light-bg-color: #FAF3E0;
+$light-text-color: #5A4C43;
+$light-accent-color: #6A8E7F;
+$light-text-on-accent-color: #FFFFFF;
+$light-secondary-text-color: #8A7F78;
+$light-primary-color: #6A8E7F;
+$light-primary-color-light: #6A8E7F;
+$light-bg-primary-app: #F2EADF;
+
+// Dark Theme
+$dark-bg-color: #313F57;
+$dark-text-color: #FFFFFF;
+$dark-accent-color: #F8D673;
+$dark-text-on-accent-color: #313F57;
+$dark-secondary-text-color: #BDBDBD;
+$dark-primary-color: #F8D673;
+$dark-primary-color-light: #F8D673;
+$dark-bg-primary-app: #313F57;
+
+// Common Colors
+$slate-gray: rgb(55, 70, 79);
+$error-color: rgb(187, 75, 66);
+$success-color: #7eb137;
+
+// Mixins for theme application
+@mixin light-theme {
+  --bg-color: #{$light-bg-color};
+  --text-color: #{$light-text-color};
+  --accent-color: #{$light-accent-color};
+  --text-on-accent-color: #{$light-text-on-accent-color};
+  --secondary-text-color: #{$light-secondary-text-color};
+  --primary-color: #{$light-primary-color};
+  --primary-color-light: #{$light-primary-color-light};
+  --bg-primary-app: #{$light-bg-primary-app};
+}
+
+@mixin dark-theme {
+  --bg-color: #{$dark-bg-color};
+  --text-color: #{$dark-text-color};
+  --accent-color: #{$dark-accent-color};
+  --text-on-accent-color: #{$dark-text-on-accent-color};
+  --secondary-text-color: #{$dark-secondary-text-color};
+  --primary-color: #{$dark-primary-color};
+  --primary-color-light: #{$dark-primary-color-light};
+  --bg-primary-app: #{$dark-bg-primary-app};
+}
+
+// Apply themes
+html[data-theme='light'] {
+  @include light-theme;
+}
+
+html[data-theme='dark'] {
+  @include dark-theme;
+}
+
+:root {
+  @include dark-theme; // Default theme
+}

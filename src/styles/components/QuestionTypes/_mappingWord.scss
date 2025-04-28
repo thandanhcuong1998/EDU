@@ -1,0 +1,136 @@
+@import '../../variables/colors';
+@import '../../variables/mixins';
+
+// MappingWord component styles
+.mapping-word {
+  @extend .question-container;
+  @include flex-column;
+  align-items: flex-start;
+  
+  .content-answer {
+    @include flex-between;
+    width: 650px;
+    
+    // Common list styles
+    .list-answer,
+    .list-answer2.options2 {
+      display: block;
+      
+      li {
+        @include flex-between;
+        width: 250px;
+        margin-bottom: 15px;
+        border: 2px solid $slate-gray;
+        border-radius: 8px;
+        font-size: 19px;
+        color: var(--text-color);
+        margin-right: 10px;
+        cursor: pointer;
+        @include transition(border, 1s);
+        
+        // Index number
+        .index-answer {
+          font-size: 15px;
+          color: rgba(var(--text-color), 0.6);
+          border: 2px solid rgba(var(--text-color), 0.6);
+          padding: 2px 8px;
+          border-radius: 8px;
+          @include transition(color, 1s);
+        }
+        
+        // Ruby text
+        ruby {
+          font-size: 19px;
+          @include transition(color, 1s);
+          
+          rt {
+            font-size: 16px;
+            color: rgba(var(--text-color), 0.6);
+            padding-top: 10px;
+            @include transition(color, 1s);
+          }
+        }
+      }
+    }
+    
+    // First list specific styles
+    .list-answer li {
+      padding: 6px 10px;
+    }
+    
+    // Second list specific styles
+    .list-answer2.options2 li {
+      padding: 17px 10px;
+    }
+  }
+  
+  // Active state
+  .active-mapping,
+  .active-mapping .index-answer {
+    border: 2px solid var(--primary-color) !important;
+    background-color: rgba($slate-gray, 0.2) !important;
+  }
+  
+  .active-mapping,
+  .active-mapping .index-answer,
+  .active-mapping ruby,
+  .active-mapping ruby rt {
+    color: var(--primary-color) !important;
+  }
+  
+  // Success state
+  .success-option,
+  .success-option .index-answer {
+    border: 2px solid $slate-gray !important;
+    cursor: default;
+    @include transition(border, 0.5s);
+  }
+  
+  .success-option,
+  .success-option .index-answer,
+  .success-option ruby,
+  .success-option ruby rt {
+    color: $slate-gray !important;
+    @include transition(color, 0.5s);
+  }
+  
+  // Error state
+  .error-option,
+  .error-option .index-answer {
+    border: 2px solid $error-color !important;
+    @include transition(border, 1s);
+  }
+  
+  .error-option,
+  .error-option .index-answer,
+  .error-option ruby,
+  .error-option ruby rt {
+    color: $error-color !important;
+    @include transition(color, 1s);
+  }
+  
+  // Feedback messages
+  .success-message,
+  .error-message {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  // Animation
+  .zoom-in {
+    animation: zoomIn 0.5s forwards;
+  }
+  
+  @keyframes zoomIn {
+    0% {
+      transform: scale(0.9);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}

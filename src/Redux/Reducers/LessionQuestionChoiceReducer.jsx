@@ -112,11 +112,28 @@ const lessionQuestionChoiceSlice = createSlice({
       /**
        * Update current question index
        * @param {Object} state - Current state
+       * @param {Object} action - Action with payload containing isIntroduction flag
        */
-      updateQuestionIndex(state) {
-         // If progress is complete, move to end
-         if (state.progressBar >= 100) {
+      updateQuestionIndex(state, action) {
+         // Check if we're on an introduction screen
+         const isIntroduction = action.payload?.isIntroduction || false;
+
+         // If on introduction screen, always move to the first question
+         if (isIntroduction) {
+            state.currentQuestionIndex = 0;
+            state.isCorrect = null;
+            return;
+         }
+
+         // If progress is complete AND there are no failed questions, move to end
+         if (state.progressBar >= 100 && state.listQuestionFail.length === 0) {
             state.currentQuestionIndex = state.questions.length + 1;
+         } else if (
+            state.progressBar >= 100 &&
+            state.listQuestionFail.length > 0
+         ) {
+            // If progress is complete but there are failed questions, move to the first failed question
+            state.currentQuestionIndex = state.listQuestionFail[0];
          } else {
             const nextIndex = state.currentQuestionIndex + 1;
 
@@ -128,9 +145,7 @@ const lessionQuestionChoiceSlice = createSlice({
                state.currentQuestionIndex = state.listQuestionFail[0];
             } else {
                // No more questions and no failed questions
-               console.warn(
-                  'No more questions available, progress < 100%.'
-               );
+               console.warn('No more questions available, progress < 100%.');
                state.currentQuestionIndex = state.questions.length + 1;
             }
          }
@@ -151,10 +166,31 @@ const lessionQuestionChoiceSlice = createSlice({
             // Preserve any other state properties if needed
          };
       },
+
+      /**
+       * Set lesson questions for a new lesson
+       * @param {Object} state - Current state
+       * @param {Object} action - Action with payload containing questions
+       */
+      setLessonQuestions(state, action) {
+         // Validate that questions are provided
+         if (!action.payload?.questions) {
+            console.error("Action requires 'questions' in payload.");
+            return state;
+         }
+
+         // Update only the questions and reset related state
+         state.questions = action.payload.questions;
+         state.currentQuestionIndex = 0;
+         state.answers = [];
+         state.isCorrect = null;
+         state.progressBar = 0;
+         state.listQuestionFail = [];
+      },
    },
 });
 
 // Export action creators and reducer
-export const { setAnswer, updateQuestionIndex, resetState } =
+export const { setAnswer, updateQuestionIndex, resetState, setLessonQuestions } =
    lessionQuestionChoiceSlice.actions;
 export default lessionQuestionChoiceSlice.reducer;

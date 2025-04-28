@@ -1,0 +1,27 @@
+@import '../../variables/colors';
+@import '../../variables/mixins';
+
+// Common styles for all question types
+.question-container {
+  @include flex-column;
+  width: 100%;
+  
+  &.light {
+    @include light-theme;
+  }
+  
+  &.dark {
+    @include dark-theme;
+  }
+  
+  h3 {
+    @include heading-medium;
+    color: var(--text-color);
+    margin: 20px 0;
+  }
+}
+
+// Import specific question type styles
+@import 'radio';
+@import 'cardWord';
+@import 'mappingWord';

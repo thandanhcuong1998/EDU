@@ -6,7 +6,7 @@ import { setAnswer } from '../../../../../Redux/Reducers/LessionQuestionChoiceRe
 const FEEDBACK_DURATION_MS = 300;
 const INITIAL_CHECK_DELAY_MS = 200; // Xem xét có cần delay này không
 
-export default function MappingWord({ listConfigQuestion, classRoot }) {
+export default function MappingWord({ listConfigQuestion, classRoot, theme, handleAnswer, isCorrectRedux }) {
    const dispatch = useDispatch();
 
    const [activeOptions, setActiveOptions] = useState({
@@ -129,7 +129,7 @@ export default function MappingWord({ listConfigQuestion, classRoot }) {
 
    return (
       <div
-         className={`${classRoot} d-flex justify-content-start flex-column align-items-start`}
+         className={`${classRoot} ${theme} d-flex justify-content-start flex-column align-items-start`}
       >
          <h3 className="text-white">{listConfigQuestion.title}</h3>
          <div className="content-answer d-flex justify-content-between align-items-center">
