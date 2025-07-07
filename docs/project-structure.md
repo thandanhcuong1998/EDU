@@ -1,64 +1,79 @@
 # Project Structure
 
-This document provides an overview of the Japanese-EDU project structure and organization.
+This project follows the principles of **Feature-Sliced Design (FSD)**. This architecture helps in organizing the codebase in a scalable and maintainable way by decoupling different parts of the application.
 
-## Directory Structure
+The `src` directory is organized into the following main layers:
 
 ```
 src/
-├── App.jsx                 # Main application component
-├── App.css                 # Global styles
-├── common/                 # Common assets and utilities
-│   └── assest/             # Images, fonts, and other static assets
-├── Helpers/                # Utility functions and helpers
-│   ├── util.jsx            # General utility functions
-│   ├── answerCheckers.js   # Functions for checking answers
-│   └── ListQuestionFakeDataLession.jsx # Mock data for lessons
-├── Hooks/                  # Custom React hooks
-│   ├── useCardWordHook.jsx # Hook for card word question type
-│   └── useLessionHook.js   # Hook for lesson management
-├── Redux/                  # Redux state management
-│   ├── Actions/            # Redux actions
-│   ├── Reducers/           # Redux reducers
-│   └── configureStore.jsx  # Redux store configuration
-└── Routes/                 # Application routes and pages
-    ├── HomePage/           # Home page components
-    ├── MainAppStudy/       # Main study application
-    │   └── Learn/          # Learning components
-    │       └── components/ # Learning UI components
-    └── RootRoute.jsx       # Root routing configuration
+├── app/         # App-wide setup, providers, and root configurations.
+├── pages/       # Pages of the application, composed of features and widgets.
+├── features/    # Business-level features of the application.
+├── components/  # Reusable, business-agnostic UI components.
+├── shared/      # Low-level, reusable code used across the entire project.
+└── ...
 ```
 
-## Key Components
+---
 
-### Question Types
+### `app`
 
-The application supports several types of questions:
+This layer contains the core application setup. It's the entry point of the application and wires everything together.
 
-1. **Radio**: Multiple choice questions with a single correct answer
-2. **Card Word (English)**: Arrange English words to form a sentence
-3. **Card Word (Japanese)**: Arrange Japanese characters to form a word or phrase
-4. **Mapping Word**: Match pairs of related words (e.g., Japanese to English)
+-   **`providers/`**: Contains all React Context providers (e.g., `LanguageProvider`).
+-   **`router/`**: Contains the main application routing configuration (`react-router-dom`).
+-   **`store/`**: Contains the Redux store setup and root reducer.
+-   **`styles/`**: Global styles, resets, and application-wide style definitions.
+-   **`App.jsx`, `main.jsx`**: The root component and the main entry point for React.
 
-### State Management
+---
 
-The application uses Redux for state management:
+### `pages`
 
-- **LessionQuestionChoiceReducer**: Manages the state of the current lesson, including:
-  - Current question index
-  - User answers
-  - Correctness of answers
-  - Progress through the lesson
+Each folder inside `pages` represents a specific page of the application (e.g., `HomePage`, `LearnPage`). A page is a composition layer that arranges features and shared components to form a complete user-facing screen.
 
-### Custom Hooks
+-   **`HomePage/`**: The landing page.
+-   **`LearnPage/`**: The main application page for learning activities.
+-   **`WelcomePage/`**: The initial onboarding and proficiency test pages.
+-   **`AuthPage/`**: Pages for user sign-in and sign-up.
 
-- **useCardWordHook**: Manages the state and interactions for card word questions
-- **useLessionHook**: Manages the overall lesson state and navigation
+---
 
-## Planned Improvements
+### `features`
 
-1. Reorganize components by feature rather than by type
-2. Implement consistent file naming conventions
-3. Add TypeScript typing throughout the application
-4. Create a proper component library with reusable UI components
-5. Implement proper environment configuration
+This layer contains specific business features of the application. Each feature is a self-contained unit of functionality.
+
+-   **`authentication/`**: Handles user login and registration logic.
+-   **`learn/`**: Core learning functionality, including lesson display and progress tracking.
+-   **`japanese-alphabet/`**: Feature for learning Hiragana and Katakana.
+-   **`user-profile/`**: Manages user progress, XP, and unlocked content.
+-   **`welcome/`**: The onboarding flow for new users.
+-   **`theme/`**: Components and logic for theme switching (light/dark).
+
+---
+
+### `components`
+
+This directory was refactored to primarily hold the different types of question components, which are complex, reusable units.
+
+-   **`QuestionTypes/`**: Contains the UI and logic for each type of question (`Radio`, `FillInBlank`, `CardWord`, `MappingWord`). Each question type is a self-contained component with its own styles.
+
+---
+
+### `shared`
+
+This is the lowest-level layer, containing code that can be used anywhere in the project. It has no dependencies on any other layer.
+
+-   **`assets/`**: Global static assets like fonts and shared images.
+-   **`lib/`**: Common utility functions, constants, and helper logic (e.g., `answerCheckers.js`).
+-   **`services/`**: Shared services like audio playback or toast notifications.
+-   **`ui/`**: The most basic, reusable UI components (e.g., a generic `Button` or `Card`). This layer was mostly integrated into more specific components during the refactor.
+-   **`components/`**: Shared, simple components like `Icon`.
+
+---
+
+### Other Directories
+
+-   **`config/`**: Configuration files, such as environment variable setup.
+-   **`styles/`**: Global SCSS setup, including variables and mixins.
+-   **`types/`**: TypeScript type definitions.
