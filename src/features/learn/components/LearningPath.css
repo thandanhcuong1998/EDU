@@ -1,0 +1,180 @@
+
+.learning-path-container {
+  padding: 2rem;
+}
+
+.jlpt-level-section {
+  margin-bottom: 4rem;
+}
+
+.jlpt-level-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--color-primary);
+  display: inline-block;
+}
+
+.topic-unit {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.topic-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.lesson-nodes-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px 60px; /* Vertical and horizontal gap */
+  justify-content: center;
+  padding: 0 5%;
+}
+
+/* The visual path connecting the nodes */
+.lesson-nodes-container::before {
+  content: '';
+  position: absolute;
+  top: 21px; /* Vertically center with the nodes */
+  left: 10%;
+  right: 10%;
+  height: 4px;
+  background-image: repeating-linear-gradient(90deg, var(--color-border), var(--color-border) 10px, transparent 10px, transparent 20px);
+  z-index: 0;
+}
+
+.lesson-node {
+  position: relative;
+  z-index: 1;
+}
+
+.lesson-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--color-border);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  position: relative;
+}
+
+.lesson-button .lucide {
+  color: var(--color-text-secondary);
+}
+
+/* Unlocked state */
+.lesson-node.unlocked .lesson-button {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.lesson-node.unlocked .lesson-button .lucide {
+  color: white;
+}
+
+/* Current (next to learn) state */
+.lesson-node.current .lesson-button {
+  border-color: var(--color-success);
+  background-color: var(--color-success);
+  animation: pulse 1.5s infinite;
+}
+
+.lesson-node.current .lesson-button .lucide {
+  color: white;
+}
+
+/* Locked state */
+.lesson-node.locked .lesson-button {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lesson-node.locked .lesson-button .lucide {
+  color: var(--color-text-secondary);
+}
+
+.lesson-tooltip {
+  visibility: hidden;
+  width: 180px;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  text-align: center;
+  border-radius: var(--border-radius);
+  padding: 10px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -90px;
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--color-border);
+}
+
+.lesson-tooltip::after { /* Tooltip arrow */
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--color-border) transparent transparent transparent;
+}
+
+.lesson-node:hover .lesson-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.tooltip-level {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.start-lesson-button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.start-lesson-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(4, 190, 136, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(4, 190, 136, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(4, 190, 136, 0);
+  }
+}

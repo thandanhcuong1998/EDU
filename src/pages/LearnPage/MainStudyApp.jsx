@@ -1,74 +1,64 @@
-/*services*/
-import React, { useState } from 'react';
 
-/*styles*/
-import './assets/style.css';
-
-/*icons*/
+import React, { useState, useContext } from 'react';
+import { Tab, Nav } from 'react-bootstrap'; // Still using for Tab functionality
 import { Home, Languages, Trophy, User } from 'lucide-react';
 
-/*components*/
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
-import Tab from 'react-bootstrap/Tab';
-import Sidebar from '@/features/learn/components/Sidebar.jsx';
+import './assets/LearnPage.css'; // Import the new CSS
+
 import MainContentStudyApp from './MainContentStudyApp.jsx';
 import MainLearn from '@/features/learn/components/MainLearn.jsx';
 import Logo from './Logo.jsx';
 import ThemeToggle from '@/features/theme/components/ThemeToggle.jsx';
 import JapaneseAlphabet from '@/features/japanese-alphabet/components/JapaneseAlphabet.jsx';
+import Sidebar from '@/features/learn/components/Sidebar.jsx';
 
 export default function MainStudyApp() {
-   const [listMenu, setListMenu] = useState([
-      { menu: 'learn', icon: <Home className="w-5 h-5 mr-10" /> },
-      { menu: 'characters', icon: <Languages className="w-5 h-5 mr-10" /> },
-      { menu: 'leaderboards', icon: <Trophy className="w-5 h-5 mr-10" /> },
-      { menu: 'profile', icon: <User className="w-5 h-5 mr-10" /> },
-   ]);
-   return (
-      <>
-         <div className="left-content">
-            <Tab.Container id="left-tabs" defaultActiveKey={listMenu[0]?.menu}>
-               <Row>
-                  <Col sm={3} style={{ width: '17%' }}>
-                     <Logo />
-                     <div className="theme-toggle-container">
-                        <ThemeToggle />
-                     </div>
-                     <Nav variant="pills" className="flex-column menu">
-                        {listMenu.length > 0 &&
-                           listMenu.map((menuItem, index) => (
-                              <Nav.Item key={index} className="text-left">
-                                 <Nav.Link eventKey={menuItem.menu}>
-                                    {menuItem.icon}
-                                    {menuItem.menu}
-                                 </Nav.Link>
-                              </Nav.Item>
-                           ))}
-                     </Nav>
-                  </Col>
+    const [listMenu] = useState([
+        { key: 'learn', title: 'Learn', icon: <Home className="lucide" /> },
+        { key: 'characters', title: 'Characters', icon: <Languages className="lucide" /> },
+        { key: 'leaderboards', title: 'Leaderboards', icon: <Trophy className="lucide" /> },
+        { key: 'profile', title: 'Profile', icon: <User className="lucide" /> },
+    ]);
 
-                  {/* start content */}
-                  <Col sm={9}>
-                     <Tab.Content>
+    return (
+        <div className="learn-page-container">
+            <Tab.Container id="learn-tabs" defaultActiveKey={listMenu[0]?.key}>
+                <nav className="left-sidebar">
+                    <div className="logo-container">
+                        <Logo />
+                    </div>
+                    <Nav variant="pills" className="nav-menu">
+                        {listMenu.map((menuItem) => (
+                            <Nav.Item key={menuItem.key}>
+                                <Nav.Link eventKey={menuItem.key}>
+                                    {menuItem.icon}
+                                    <span>{menuItem.title}</span>
+                                </Nav.Link>
+                            </Nav.Item>
+                        ))}
+                    </Nav>
+                    <div className="theme-toggle-container">
+                        <ThemeToggle />
+                    </div>
+                </nav>
+
+                <main className="main-content">
+                    <Tab.Content>
                         <Tab.Pane eventKey="learn">
-                           <MainContentStudyApp id="main-learn">
-                              <MainLearn />
-                           </MainContentStudyApp>
+                            <MainLearn />
                         </Tab.Pane>
                         <Tab.Pane eventKey="characters">
-                           <MainContentStudyApp id="characters">
-                              <JapaneseAlphabet />
-                           </MainContentStudyApp>
+                            <JapaneseAlphabet />
                         </Tab.Pane>
-                     </Tab.Content>
-                  </Col>
-                  {/* end content*/}
-               </Row>
+                        {/* Other panes can be added here */}
+                    </Tab.Content>
+                </main>
+
+                <aside className="right-sidebar">
+                    <Sidebar />
+                </aside>
             </Tab.Container>
-         </div>
-         <Sidebar />
-      </>
-   );
+        </div>
+    );
 }
+

@@ -1,0 +1,77 @@
+
+/* Main layout for the Learn page */
+.learn-page-container {
+  display: flex;
+  height: 100vh;
+  background-color: var(--color-background);
+}
+
+/* Left Sidebar Navigation */
+.left-sidebar {
+  width: 260px;
+  padding: 24px;
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-speed);
+}
+
+.logo-container {
+  margin-bottom: 32px;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-menu .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: var(--border-radius);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-speed), background-color var(--transition-speed);
+}
+
+.nav-menu .nav-link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+}
+
+.nav-menu .nav-link.active {
+  color: var(--color-primary);
+  background-color: var(--color-background);
+  font-weight: 600;
+}
+
+.nav-menu .nav-link .lucide {
+  margin-right: 16px;
+  width: 20px;
+  height: 20px;
+}
+
+.theme-toggle-container {
+  margin-top: auto; /* Pushes the theme toggle to the bottom */
+  padding-top: 24px;
+}
+
+/* Main Content Area */
+.main-content {
+  flex-grow: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+/* Right Sidebar */
+.right-sidebar {
+  width: 300px;
+  padding: 24px;
+  background-color: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  transition: background-color var(--transition-speed);
+}

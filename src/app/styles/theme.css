@@ -1,0 +1,50 @@
+
+/* :root defines variables for the default (light) theme */
+:root {
+  /* Color Palette */
+  --color-primary: #4A90E2; /* A professional blue for accents */
+  --color-primary-hover: #357ABD;
+  --color-text-primary: #2D3748; /* Dark gray for main text */
+  --color-text-secondary: #718096; /* Lighter gray for subtext */
+  --color-background: #FDFDF0; /* The warm, off-white background you like */
+  --color-surface: #FFFFFF; /* White for cards and panels to stand out */
+  --color-border: #E2E8F0; /* Subtle border color */
+  --color-success: #48BB78;
+  --color-error: #F56565;
+
+  /* Typography */
+  --font-family-main: "Be Vietnam Pro", "Noto Sans JP", sans-serif;
+
+  /* Other UI variables */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition-speed: 0.2s ease-in-out;
+}
+
+/* Override variables for the dark theme */
+html[data-theme="dark"] {
+  --color-primary: #63B3ED; /* A lighter blue for dark mode */
+  --color-primary-hover: #4299E1;
+  --color-text-primary: #F7FAFC; /* Off-white for main text */
+  --color-text-secondary: #A0AEC0; /* Lighter gray for subtext */
+  --color-background: #1A202C; /* Very dark gray, not pure black */
+  --color-surface: #2D3748; /* A slightly lighter gray for cards */
+  --color-border: #4A5568;
+}
+
+/* Apply the correct font family based on the lang attribute */
+html[lang="vi"] {
+  --font-family-main: "Be Vietnam Pro", sans-serif;
+}
+
+html[lang="ja"] {
+  --font-family-main: "Noto Sans JP", sans-serif;
+}
+
+/* A general reset and base styling */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-main);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}

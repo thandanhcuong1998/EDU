@@ -1,53 +1,59 @@
-// src/components/JapaneseAlphabet.js
 import React, { useState } from 'react';
-import AlphabetGrid from './AlphabetGrid.jsx';
-import { hiraganaData, katakanaData } from '../data/AlphabetData.js'; // Import dữ liệu
-import './Alphabet.css'; // File CSS chung
+import { hiraganaData, katakanaData } from '../data/AlphabetData.js';
+import { playApiAudio } from '@/shared/lib/util.jsx';
+import './JapaneseAlphabet.css'; // Import the new, unified CSS file
+
+// The Grid component is now defined inside the main file for simplicity
+const AlphabetGrid = ({ characters }) => {
+    return (
+        <div className="alphabet-grid">
+            {characters.map((char, index) => {
+                if (!char || !char.kana) {
+                    // Render an empty, non-interactive placeholder
+                    return <div key={`empty-${index}`} className="character-card character-card--empty"></div>;
+                }
+                return (
+                    <button
+                        key={`${char.kana}-${index}`}
+                        className="character-card"
+                        onClick={() => playApiAudio(char.kana)}
+                        aria-label={`Play sound for ${char.kana} (${char.romaji})`}
+                    >
+                        <span className="character-card__kana" lang="ja">{char.kana}</span>
+                        <span className="character-card__romaji">{char.romaji}</span>
+                    </button>
+                );
+            })}
+        </div>
+    );
+};
 
 const JapaneseAlphabet = () => {
-   const [activeTab, setActiveTab] = useState('hiragana');
-   const rootClass =
-      'bg-app-primary whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 text-sm ease-in-out';
-   return (
-      <div className=" p-4 sm:p-6 rounded-lg shadow-md w-full">
-         <div className="border-gray-200 mb-4">
-            <nav className="-mb-px space-x-4 sm:space-x-6" aria-label="Tabs">
-               <button
-                  className={`${rootClass}
-              ${
-                 activeTab === 'hiragana'
-                    ? 'font-semibold tab-active-characters '
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium inactive'
-              }`}
-                  onClick={() => setActiveTab('hiragana')}
-               >
-                  Hiragana (ひらがな)
-               </button>
-               <button
-                  className={`${rootClass}
-              ${
-                 activeTab === 'katakana'
-                    ? 'font-semibold tab-active-characters '
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium inactive'
-              }`}
-                  onClick={() => setActiveTab('katakana')}
-               >
-                  Katakana (カタカナ)
-               </button>
-            </nav>
-         </div>
+    const [activeTab, setActiveTab] = useState('hiragana');
 
-         {/* Tab Content */}
-         <div className="mt-4">
-            {activeTab === 'hiragana' && (
-               <AlphabetGrid characters={hiraganaData} />
-            )}
-            {activeTab === 'katakana' && (
-               <AlphabetGrid characters={katakanaData} />
-            )}
-         </div>
-      </div>
-   );
+    return (
+        <div className="alphabet-container">
+            <nav className="alphabet-tabs" aria-label="Alphabet Tabs">
+                <button
+                    className={`alphabet-tabs__button ${activeTab === 'hiragana' ? 'alphabet-tabs__button--active' : ''}`}
+                    onClick={() => setActiveTab('hiragana')}
+                >
+                    Hiragana (ひらがな)
+                </button>
+                <button
+                    className={`alphabet-tabs__button ${activeTab === 'katakana' ? 'alphabet-tabs__button--active' : ''}`}
+                    onClick={() => setActiveTab('katakana')}
+                >
+                    Katakana (カタカナ)
+                </button>
+            </nav>
+
+            <div className="tab-content">
+                {activeTab === 'hiragana' && <AlphabetGrid characters={hiraganaData} />}
+                {activeTab === 'katakana' && <AlphabetGrid characters={katakanaData} />}
+            </div>
+        </div>
+    );
 };
 
 export default JapaneseAlphabet;

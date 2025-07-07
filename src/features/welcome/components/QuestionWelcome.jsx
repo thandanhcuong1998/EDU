@@ -6,11 +6,11 @@ import { isObject } from '../../../shared/lib/util.jsx';
 import useQuestionWelcomeHook from '../hooks/useQuestionWelcomeHook.jsx';
 import { setQuestionChoice as setQuestionChoiceAction, removeQuestionChoice } from '../state/welcomeSlice.js';
 import { useEffect } from 'react';
+import { useWelcomeNavigation } from '../hooks/useWelcomeNavigation.js';
 
 const QuestionWelcome = ({ IDQuestionSet, title, listQuestionSet }) => {
-    const location = useLocation();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { handleBack } = useWelcomeNavigation();
 
     const {
         questionChoice,
@@ -36,18 +36,9 @@ const QuestionWelcome = ({ IDQuestionSet, title, listQuestionSet }) => {
         setQuestionChoice(id);
     };
 
-    const backQuestion = () => {
-        const step = getValueURLParameters(location.pathname);
-        if (step === 'proficiency') navigate('/welcome/step=two');
-        if (step === 'dailyGoal') navigate('/welcome/step=proficiency');
-
+    const onBack = () => {
         dispatch(removeQuestionChoice({ IDQuestionSet }));
-    };
-
-    const getValueURLParameters = url => {
-        const path = url;
-        const stepPart = path.split('/').find(part => part.startsWith('step='));
-        return stepPart ? stepPart.split('=')[1] : null;
+        handleBack();
     };
 
     return (
@@ -59,7 +50,7 @@ const QuestionWelcome = ({ IDQuestionSet, title, listQuestionSet }) => {
                     width={35}
                     height={35}
                     style={{ color: 'rgb(77, 89, 97)' }}
-                    onClick={backQuestion}
+                    onClick={onBack}
                 />
                 <ProgressBar now={progressBar} style={{ width: '950px' }} />
             </div>

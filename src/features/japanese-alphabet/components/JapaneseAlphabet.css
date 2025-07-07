@@ -1,0 +1,89 @@
+
+.alphabet-container {
+  width: 100%;
+}
+
+/* Tab navigation */
+.alphabet-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 2rem;
+}
+
+.alphabet-tabs__button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  border-bottom: 3px solid transparent;
+  position: relative;
+  top: 2px;
+}
+
+.alphabet-tabs__button:hover {
+  color: var(--color-text-primary);
+}
+
+.alphabet-tabs__button--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* Grid for the characters */
+.alphabet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1; /* Makes the card a perfect square */
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  box-shadow: var(--box-shadow);
+}
+
+.character-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.character-card__kana {
+  font-family: var(--font-family-main); /* Ensures correct font is used */
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.character-card__romaji {
+  font-family: sans-serif; /* Romaji should use a standard font */
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.character-card--empty {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+
+.character-card--empty:hover {
+  transform: none;
+}
