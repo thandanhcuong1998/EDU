@@ -32,8 +32,8 @@
 23. [ ] Consider using React Query for data fetching and caching
 
 ## UI/UX Improvements
-24. [ ] Implement consistent styling approach (currently mixing Bootstrap and Tailwind)
-25. [x] Create a design system with reusable components
+24. [x] Implement consistent styling approach (using CSS variables and a global theme system)
+25. [x] Create a design system with reusable components (via CSS variables)
 26. [ ] Implement proper responsive design for all screen sizes
 27. [ ] Add proper loading indicators for async operations
 28. [ ] Improve accessibility (ARIA attributes, keyboard navigation)
@@ -46,42 +46,49 @@
 33. [x] Fix hardcoded strings and implement i18n for internationalization
 34. [x] Refactor ListQuestionFakeDataLession.jsx to use a proper data structure
 35. [x] Implement proper TypeScript interfaces for all data structures
+36. [x] Refactor Welcome page navigation to be data-driven
 
 ## API and Data Management
-36. [ ] Move hardcoded data to proper API endpoints
-37. [ ] Implement proper API error handling
-38. [ ] Add retry logic for API calls
-39. [ ] Implement proper data validation for API responses
-40. [ ] Create a proper API client with interceptors
+37. [ ] Move hardcoded data to proper API endpoints
+38. [ ] Implement proper API error handling
+39. [ ] Add retry logic for API calls
+40. [ ] Implement proper data validation for API responses
+41. [ ] Create a proper API client with interceptors
 
 ## Security
-41. [ ] Implement proper authentication flow
-42. [ ] Add CSRF protection
-43. [ ] Implement proper input sanitization
-44. [ ] Add rate limiting for API calls
-45. [ ] Implement proper session management
+42. [ ] Implement proper authentication flow
+43. [ ] Add CSRF protection
+44. [ ] Implement proper input sanitization
+45. [ ] Add rate limiting for API calls
+46. [ ] Implement proper session management
 
 ## DevOps and Deployment
-46. [ ] Set up CI/CD pipeline
-47. [ ] Implement automated code quality checks
-48. [ ] Add automated dependency updates
-49. [ ] Implement proper logging
-50. [ ] Set up monitoring and error tracking
+47. [ ] Set up CI/CD pipeline
+48. [ ] Implement automated code quality checks
+49. [ ] Add automated dependency updates
+50. [ ] Implement proper logging
+51. [ ] Set up monitoring and error tracking
 
 ## Documentation
-51. [x] Create comprehensive README.md with setup instructions
-52. [ ] Document API endpoints
-53. [x] Add JSDoc comments to all functions
-54. [ ] Create user documentation
-55. [x] Document state management approach
+52. [x] Create comprehensive README.md with setup instructions
+53. [ ] Document API endpoints
+54. [x] Add JSDoc comments to all functions
+55. [ ] Create user documentation
+56. [x] Document state management approach
 
 ## New Tasks Identified
-56. [x] Implement toast notifications for error messages
-57. [x] Create more reusable UI components (Toast component)
-58. [x] Add unit tests for services and hooks (Toast service tests)
-59. [ ] Implement feature flags for gradual feature rollout
-60. [ ] Create a shared utilities directory for common functions
+57. [x] Implement toast notifications for error messages
+58. [x] Create more reusable UI components (Toast component)
+59. [x] Add unit tests for services and hooks (Toast service tests)
+60. [ ] Implement feature flags for gradual feature rollout
 61. [x] Create a fill-in-blank question type component
 62. [x] Create a hook for the fill-in-blank component
 63. [x] Update the Question component to support new question types
 64. [x] Add sample fill-in-blank questions to the fake data
+65. [x] Implement global theme system (light/dark mode)
+66. [x] Enhance UI/UX for Learn page (Learning Path)
+67. [x] Enhance UI/UX for Japanese Alphabet page
+68. [x] Enhance UI/UX for Lesson Report page
+69. [x] Enhance UI/UX for Homepage
+70. [x] Enhance UI/UX for Language Switcher
+71. [x] Expand i18n to new Homepage content

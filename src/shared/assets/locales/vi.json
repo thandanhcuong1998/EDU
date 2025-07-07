@@ -1,7 +1,7 @@
 {
-    "welcome": "Ngôn ngữ là hộ chiếu của bạn đến với thế giới",
-    "subWelcome": "Đắm mình vào một ngôn ngữ mới với các khóa học tương tác của chúng tôi",
-    "buttonStart": "Bắt đầu",
+    "welcome": "Chào bạn! Cùng học tiếng Nhật nhé!",
+    "subWelcome": "Hành trình chinh phục tiếng Nhật của bạn bắt đầu từ đây.",
+    "buttonStart": "Bắt đầu học",
     "titleSection1": "Trở nên thông thạo bất kỳ ngôn ngữ nào",
     "titleSection2": "Làm thế nào để bắt đầu học?",
     "subTitleSection2": "Bốn bước đơn giản để bắt đầu học",
@@ -13,17 +13,69 @@
     "headingSection32": "Bài kiểm tra thi thử",
     "subHeadingSection32": "Cung cấp các chương trình học tập chất lượng cao dành riêng cho những ai mong muốn đạt được visa đặc định tại Nhật Bản. Chúng tôi hiểu rằng việc chuẩn bị cho kỳ thi visa không chỉ là về kiến thức, mà còn là hành trang cần thiết để bạn tự tin bước vào môi trường mới.",
     "headingSection33": "Bài kiểm tra thi thử",
-    "subHeadingSection33": "Cung cấp các chương trình học tập chất lượng cao dành riêng cho những ai mong muốn đạt được visa đặc định tại Nhật Bản. Chúng tôi hiểu rằng việc chuẩn bị cho kỳ thi visa không chỉ là về kiến thức, mà còn là hành trang cần thiết để bạn tự tin bước vào môi trường mới.",
+    "subHeading33": "Cung cấp các chương trình học tập chất lượng cao dành riêng cho những ai mong muốn đạt được visa đặc định tại Nhật Bản. Chúng tôi hiểu rằng việc chuẩn bị cho kỳ thi visa không chỉ là về kiến thức, mà còn là hành trang cần thiết để bạn tự tin bước vào môi trường mới.",
     "headingSection34": "Bài kiểm tra thi thử",
     "subHeadingSection34": "Cung cấp các chương trình học tập chất lượng cao dành riêng cho những ai mong muốn đạt được visa đặc định tại Nhật Bản. Chúng tôi hiểu rằng việc chuẩn bị cho kỳ thi visa không chỉ là về kiến thức, mà còn là hành trang cần thiết để bạn tự tin bước vào môi trường mới.",
     "titleSection4": "Phương pháp học ngôn ngữ của chúng tôi",
     "headingSection41": "Miễn phí, hiệu quả",
-    "subHeadingSection41": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
+    "subHeading41": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
     "headingSection42": "Miễn phí, hiệu quả",
-    "subHeadingSection42": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
+    "subHeading42": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
     "headingSection43": "Miễn phí, hiệu quả",
-    "subHeadingSection43": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
+    "subHeading43": " các nghiên cứu đã chứng minh tính hiệu quả của ứng dụng! Qua từng bài học ngắn, nhỏ gọn bạn vừa ghi điểm, mở khóa cấp độ mới vừa được luyện tập các kỹ năng giao tiếp hữu dụng.",
 
+    "homepage": {
+        "whyLearn": {
+            "title": "Tại sao nên học tiếng Nhật?",
+            "subtitle": "Khám phá những lý do tuyệt vời để bắt đầu hành trình chinh phục tiếng Nhật của bạn.",
+            "card1": {
+                "title": "Văn hóa phong phú",
+                "description": "Đắm mình vào thế giới của anime, manga, ẩm thực và truyền thống độc đáo."
+            },
+            "card2": {
+                "title": "Cơ hội nghề nghiệp",
+                "description": "Mở rộng cánh cửa sự nghiệp với các công ty Nhật Bản toàn cầu."
+            },
+            "card3": {
+                "title": "Kết nối toàn cầu",
+                "description": "Giao tiếp với hàng triệu người nói tiếng Nhật trên khắp thế giới."
+            },
+            "card4": {
+                "title": "Du lịch khám phá",
+                "description": "Trải nghiệm Nhật Bản một cách chân thực nhất, không rào cản ngôn ngữ."
+            }
+        },
+        "ourApproach": {
+            "title": "Phương pháp học độc đáo của chúng tôi",
+            "subtitle": "Chúng tôi mang đến một lộ trình học tập cá nhân hóa, hiệu quả và đầy hứng thú.",
+            "item1": {
+                "title": "Lộ trình cá nhân hóa",
+                "description": "Hệ thống sẽ phân tích trình độ và mục tiêu của bạn để tạo ra một lộ trình học tập phù hợp nhất."
+            },
+            "item2": {
+                "title": "Bài tập tương tác",
+                "description": "Học qua các dạng bài tập đa dạng, từ nhận diện chữ cái đến xây dựng câu, giúp bạn ghi nhớ sâu hơn."
+            },
+            "item3": {
+                "title": "Theo dõi tiến độ",
+                "description": "Xem rõ sự tiến bộ của bạn qua từng bài học, từng cấp độ JLPT với báo cáo chi tiết."
+            }
+        },
+        "whatLearn": {
+            "title": "Bạn sẽ học được gì?",
+            "subtitle": "Từ cơ bản đến nâng cao, chúng tôi trang bị cho bạn đầy đủ kiến thức để tự tin giao tiếp tiếng Nhật.",
+            "item1": { "title": "Hiragana & Katakana" },
+            "item2": { "title": "Kanji" },
+            "item3": { "title": "Ngữ pháp" },
+            "item4": { "title": "Từ vựng" },
+            "item5": { "title": "Giao tiếp" },
+            "item6": { "title": "Luyện thi JLPT" }
+        },
+        "cta": {
+            "title": "Sẵn sàng bắt đầu hành trình học tiếng Nhật của bạn?",
+            "button": "Bắt đầu học ngay"
+        }
+    },
     "learn": {
         "buttons": {
             "check": "Kiểm tra",

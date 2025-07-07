@@ -17,6 +17,11 @@ src/
 │   │   ├── hooks/             # Hooks specific to the learn feature
 │   │   ├── services/          # Services specific to the learn feature
 │   │   └── redux/             # Redux state management for the learn feature
+│   ├── welcome/               # Welcome/Onboarding feature
+│   │   ├── components/        # Components specific to the welcome feature
+│   │   ├── hooks/             # Hooks specific to the welcome feature
+│   │   ├── data/              # Data for welcome flow (e.g., questions, flow definition)
+│   │   └── state/             # Redux state management for the welcome feature
 │   └── [other-features]/      # Other features follow the same pattern
 ├── shared/                    # Shared modules used across features
 │   ├── components/            # Shared components
@@ -36,6 +41,7 @@ The first step is to identify the main features of the application. For Japanese
 - Learn (lessons, questions, etc.)
 - User Management (login, registration, profile)
 - Dashboard (progress tracking, statistics)
+- Welcome/Onboarding Flow
 
 ### 2. Move Components to Feature Directories
 
@@ -53,6 +59,7 @@ Move hooks to the appropriate feature directory.
 Example:
 - Move `src/Hooks/useCardWordHook.jsx` to `src/features/learn/hooks/useCardWordHook.jsx`
 - Move `src/Hooks/useLessionHook.js` to `src/features/learn/hooks/useLessonHook.js`
+- Move `src/Hooks/useWelcomeHook.js` to `src/features/welcome/hooks/useWelcomeHook.js`
 
 ### 4. Update Imports
 

@@ -5,19 +5,20 @@ This directory contains comprehensive documentation for the Japanese-EDU project
 ## Documentation Structure
 
 - [Project Structure](./project-structure.md): Overview of the codebase organization
-- [Component Library](./component-library.md): Documentation of reusable UI components
-- [State Management](./state-management.md): Redux implementation and data flow
-- [API Documentation](./api-documentation.md): API endpoints and data structures
-- [Testing Strategy](./testing-strategy.md): Testing approach and guidelines
-- [Development Workflow](./development-workflow.md): Development process and guidelines
+- [Feature-Based Organization](./feature-organization.md): Guidelines for organizing code by feature
+- [Internationalization (i18n) Implementation](./i18n.md): Details on multi-language support
+- [Implementation Summary](./implementation-summary.md): Summary of implemented improvements
+- [Lesson Structure](./lesson-structure.md): Documentation of the lesson data structure
+- [Level Progression](./level-progression.md): Details on how users progress through levels
+- [Improvement Tasks](./tasks.md): List of completed and pending improvement tasks
 
 ## Getting Started
 
 For new developers joining the project, start with the following documents:
 
 1. Project Structure
-2. Development Workflow
-3. Component Library
+2. Implementation Summary
+3. Feature-Based Organization
 
 ## Contributing to Documentation
 

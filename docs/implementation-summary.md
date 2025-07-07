@@ -95,6 +95,38 @@ Implemented a comprehensive toast notification system:
 
 This system provides a user-friendly way to display messages and errors, improving the overall user experience.
 
+### 3. Global Theme System
+
+Implemented a global theme system with light and dark modes, utilizing CSS variables for consistent styling across the application.
+
+- Defined theme variables in `src/app/styles/theme.css`.
+- Integrated theme switching logic into `src/app/App.jsx`.
+- Created `ThemeToggle.jsx` component for user-friendly theme switching.
+
+### 4. Enhanced UI/UX for Core Learning Pages
+
+Significantly improved the visual design and user experience of key learning components:
+
+- **Learn Page (Learning Path):** Transformed into an intuitive, visually engaging learning path with clear progression, interactive nodes, and status indicators (completed, current, locked).
+- **Japanese Alphabet Page:** Redesigned as an interactive alphabet chart with a grid layout, character cards displaying Kana and Romaji, and audio playback on click.
+- **Lesson Report Page:** Upgraded to a celebratory, modern report screen with clear performance metrics, Lottie animations, and prominent call-to-action buttons.
+- **Homepage:** Redesigned with a modern, minimalist Japanese aesthetic, featuring structured content sections, refined typography, and integrated language/theme toggles.
+- **Language Switcher:** Improved the UI of the language selection dropdown for better usability and visual appeal.
+
+### 5. Data-Driven Welcome Flow
+
+Refactored the welcome page navigation to be entirely data-driven, enhancing scalability and maintainability.
+
+- Introduced `src/features/welcome/welcomeFlow.js` to define the step sequence.
+- Created `src/features/welcome/hooks/useWelcomeNavigation.js` to encapsulate navigation logic.
+- Updated `src/pages/WelcomePage/index.jsx` to utilize the new data-driven flow.
+
+### 6. Internationalization Expansion
+
+Extended i18n support to new content on the Homepage, ensuring all user-facing text is translatable.
+
+- Updated `src/shared/assets/locales/vi.json` and `ja.json` with new translation keys for Homepage sections.
+
 ## Next Steps
 
 ### 1. Complete Migration to Feature-Based Organization

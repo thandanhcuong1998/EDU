@@ -1,14 +1,13 @@
-
 /* :root defines variables for the default (light) theme */
 :root {
   /* Color Palette */
-  --color-primary: #4A90E2; /* A professional blue for accents */
-  --color-primary-hover: #357ABD;
-  --color-text-primary: #2D3748; /* Dark gray for main text */
-  --color-text-secondary: #718096; /* Lighter gray for subtext */
+  --color-primary: #00A896; /* A soft, calming teal/blue-green for accents */
+  --color-primary-hover: #008C7A;
+  --color-text-primary: #4A4A4A; /* Softer dark gray for main text */
+  --color-text-secondary: #888888; /* Softer medium gray for subtext */
   --color-background: #FDFDF0; /* The warm, off-white background you like */
   --color-surface: #FFFFFF; /* White for cards and panels to stand out */
-  --color-border: #E2E8F0; /* Subtle border color */
+  --color-border: #E0E0E0; /* More subtle border color */
   --color-success: #48BB78;
   --color-error: #F56565;
 

@@ -1,43 +1,65 @@
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import Vietnam from '@/shared/assets/img/vietnam.png';
 import Japan from '@/shared/assets/img/japan.png';
-import { useContext } from 'react';
 import { LanguageContext } from '@/app/providers/LanguageProvider.jsx';
+import { ChevronDown } from 'lucide-react';
+import './ChangeLanguage.css'; // Import the new CSS
 
 export default function ChangeLanguage() {
-    const { changeLanguage } = useContext(LanguageContext);
+    const { changeLanguage, language } = useContext(LanguageContext);
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const languages = [
+        { code: 'vi', name: 'Tiếng Việt', flag: Vietnam },
+        { code: 'ja', name: '日本語', flag: Japan },
+    ];
+
+    const currentLang = languages.find(lang => lang.code === language);
+
+    const handleLanguageChange = (langCode) => {
+        changeLanguage(langCode);
+        setIsOpen(false);
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div className="" id="languages-list">
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <li className="nav-item" role="presentation">
-                                <a
-                                    className="nav-link text-primary"
-                                    href="#"
-                                    onClick={() => changeLanguage('vi')}
-                                >
-                                    <img src={Vietnam} width="23px" /> Tiếng
-                                    việt
-                                </a>
-                            </li>
-                        </div>
-                        <div className="col-md-6">
-                            <li className="nav-item" role="presentation">
-                                <a
-                                    className="nav-link  text-primary"
-                                    href="#"
-                                    onClick={() => {
-                                        changeLanguage('ja');
-                                    }}
-                                >
-                                    <img src={Japan} width="23px" /> Japanese
-                                </a>
-                            </li>
-                        </div>
+        <div className="language-selector" ref={dropdownRef}>
+            <button
+                className="language-selector__button"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+                aria-haspopup="true"
+            >
+                <img src={currentLang?.flag} alt={currentLang?.name} className="language-selector__flag" />
+                <span>{currentLang?.name}</span>
+                <ChevronDown size={16} />
+            </button>
+
+            <div className={`language-selector__dropdown ${isOpen ? 'language-selector__dropdown--active' : ''}`}>
+                {languages.map((lang) => (
+                    <div
+                        key={lang.code}
+                        className="language-selector__item"
+                        onClick={() => handleLanguageChange(lang.code)}
+                    >
+                        <img src={lang.flag} alt={lang.name} className="language-selector__flag" />
+                        <span>{lang.name}</span>
                     </div>
-                </div>
-            </ul>
+                ))}
+            </div>
         </div>
     );
 }

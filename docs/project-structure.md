@@ -23,7 +23,7 @@ This layer contains the core application setup. It's the entry point of the appl
 -   **`providers/`**: Contains all React Context providers (e.g., `LanguageProvider`).
 -   **`router/`**: Contains the main application routing configuration (`react-router-dom`).
 -   **`store/`**: Contains the Redux store setup and root reducer.
--   **`styles/`**: Global styles, resets, and application-wide style definitions.
+-   **`styles/`**: Global styles, resets, and application-wide style definitions (including `theme.css`).
 -   **`App.jsx`, `main.jsx`**: The root component and the main entry point for React.
 
 ---
@@ -64,7 +64,7 @@ This directory was refactored to primarily hold the different types of question 
 
 This is the lowest-level layer, containing code that can be used anywhere in the project. It has no dependencies on any other layer.
 
--   **`assets/`**: Global static assets like fonts and shared images.
+-   **`assets/`**: Global static assets like fonts and shared images (including `locales` for i18n).
 -   **`lib/`**: Common utility functions, constants, and helper logic (e.g., `answerCheckers.js`).
 -   **`services/`**: Shared services like audio playback or toast notifications.
 -   **`ui/`**: The most basic, reusable UI components (e.g., a generic `Button` or `Card`). This layer was mostly integrated into more specific components during the refactor.
