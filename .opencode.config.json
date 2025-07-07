@@ -1,0 +1,27 @@
+{
+  "project": {
+    "name": "Jpannese-EDU Frontend",
+    "description": "Frontend application for Jpannese-EDU"
+  },
+  "settings": {
+    "editor": {
+      "tabSize": 2,
+      "insertSpaces": true,
+      "lineEnding": "lf"
+    },
+    "files": {
+      "exclude": [
+        "node_modules",
+        "dist",
+        ".git"
+      ]
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint"
+    ]
+  }
+}
+

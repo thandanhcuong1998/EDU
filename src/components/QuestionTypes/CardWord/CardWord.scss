@@ -1,185 +1,115 @@
-@import '../../../styles/variables/colors';
-@import '../../../styles/variables/mixins';
+@import '../../../styles/variables/index.scss';
 
-// Common styles for card word components
-.card-word {
-  @include flex-column;
-  align-items: flex-start;
-  width: 600px;
-  
-  &.light {
-    @include light-theme;
-  }
-  
-  &.dark {
-    @include dark-theme;
-  }
-  
-  h3 {
-    @include heading-medium;
+.card-word-question {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Be Vietnam Pro', sans-serif;
+
+  &__title {
     color: var(--text-color);
-    margin-bottom: 1rem;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
   }
-  
-  // Question section
-  .content-question {
-    @include flex;
-    align-items: baseline;
-    
-    // Audio button for English card
-    .radioPlay {
-      margin-right: 0.5rem;
-      
-      button {
-        color: var(--accent-color);
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.25rem;
-        @include transition;
-        
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-    }
-    
-    // Options display
-    .options {
-      font-size: 1.2rem;
-      margin-right: 0.5rem;
-      
-      ruby {
-        font-size: 1.2rem;
-        
-        rt {
-          font-size: 1rem;
-          color: rgba(var(--text-color), 0.6);
-          padding-top: 0.5rem;
-        }
-      }
-    }
-    
-    // Hint text for Japanese card
-    .hint-text {
-      font-size: 1.2rem;
-      color: var(--text-color);
+
+  &__hint-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #1f2937;
+    border: 2px solid #374151;
+    min-height: 80px;
+  }
+
+  &__play-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent-color);
+    margin-right: 15px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
-  
-  // Selected answers section
-  .answer-choice {
-    border-top: 2px solid $slate-gray;
-    border-bottom: 2px solid $slate-gray;
-    height: 4rem;
+
+  &__hint-text {
+    font-size: 22px;
+    color: var(--text-color);
+    font-weight: 500;
+    
+    ruby rt {
+      font-size: 16px;
+      color: var(--secondary-text-color);
+    }
+  }
+
+  &__dropzone {
     width: 100%;
-    margin: 1.25rem 0;
-    padding: 0.5rem 0;
-    
-    // English card specific
-    &.card-word-english {
-      height: 4rem;
-    }
-    
-    // Japanese card specific
-    &.card-word-japan {
-      height: 5rem;
-    }
-    
-    .list-answer {
-      @include flex;
-      list-style-type: none;
-      padding: 0;
-      margin: 0.25rem 0;
-      
-      li {
-        border: 2px solid $slate-gray;
-        border-radius: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 1.2rem;
-        color: var(--text-color);
-        margin-right: 0.75rem;
-        cursor: pointer;
-        @include transition;
-        @include no-select;
-        
-        &:hover {
-          background-color: rgba($slate-gray, 0.1);
-        }
-        
-        ruby {
-          font-size: 1.2rem;
-          
-          rt {
-            font-size: 1rem;
-            color: rgba(var(--text-color), 0.6);
-            padding-top: 0.5rem;
-          }
-        }
-      }
-    }
+    min-height: 80px;
+    border-bottom: 2px solid #374151;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
   }
-  
-  // Available answers section
-  .content-answer {
+
+  &__word-bank {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+.word-card {
+  background-color: #2a3a4a;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #4b5563;
+  font-size: 18px;
+  color: var(--text-color);
+  user-select: none;
+
+  &[draggable="true"] {
+    cursor: grab;
+  }
+
+  &--dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+  }
+
+  &--selected {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: #1f2937;
+    border-color: transparent;
     
-    .list-answer {
-      @include flex;
-      flex-wrap: wrap;
-      list-style-type: none;
-      padding: 0;
-      
-      li {
-        border: 2px solid $slate-gray;
-        border-radius: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 1.2rem;
-        color: var(--text-color);
-        margin-right: 0.75rem;
-        margin-bottom: 0.5rem;
-        cursor: pointer;
-        @include transition;
-        
-        &:hover {
-          background-color: rgba($slate-gray, 0.1);
-        }
-        
-        &.selected {
-          background-color: $slate-gray;
-          color: $slate-gray;
-          cursor: default;
-          
-          rt {
-            color: $slate-gray;
-          }
-        }
-        
-        ruby {
-          font-size: 1.2rem;
-          
-          rt {
-            font-size: 1rem;
-            color: rgba(var(--text-color), 0.6);
-            padding-top: 0.5rem;
-          }
-        }
-      }
+    &:hover {
+      transform: none;
     }
   }
   
-  // Type-specific styles
-  &.card-word-english {
-    .content-question {
-      border: 2px solid $slate-gray;
-      border-radius: 0.5rem;
-      padding: 0.75rem 1rem;
-    }
-  }
-  
-  &.card-word-japan {
-    .content-answer .list-answer li {
-      padding: 0.75rem 1rem;
-    }
+  ruby rt {
+    font-size: 14px;
+    color: var(--secondary-text-color);
   }
 }

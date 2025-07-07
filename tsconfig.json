@@ -47,8 +47,14 @@
         // **QUAN TRỌNG:** TypeScript chỉ kiểm tra kiểu, không tạo ra file JS.
         // Giả định bạn dùng bundler như Vite, Create React App, Next.js, Webpack với Babel để build code.
         // Nếu bạn dùng `tsc` để build thì đặt là `false` và cấu hình "outDir".
-        "skipLibCheck": true
+        "skipLibCheck": true,
         // Bỏ qua kiểm tra kiểu của các file thư viện (.d.ts), tăng tốc độ
+
+        // --- Path Aliases ---
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        }
     },
     // --- Files to Include/Exclude ---
     "include": ["src"],

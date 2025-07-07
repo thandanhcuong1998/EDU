@@ -1,0 +1,229 @@
+@import url('../../shared/assets/fonts/font.css');
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+/* Định nghĩa màu cho Theme Sáng */
+html[data-theme='light'] {
+    --bg-color: #FAF3E0;
+    --text-color: #5A4C43;
+    --accent-color: #6A8E7F;
+    --text-on-accent-color: #FFFFFF;
+    --secondary-text-color: #8A7F78;
+
+    /* Original Variables - Light Theme */
+    --primary-color: #6A8E7F;
+    --primary-color-light: #6A8E7F;
+    --slate-gray: rgb(55, 70, 79);
+    --false: rgb(187, 75, 66);
+    --success-color: #7eb137;
+    --bg-primary-app: #F2EADF;
+}
+
+/* Định nghĩa màu cho Theme Tối */
+html[data-theme='dark'] {
+    --bg-color: #313F57;
+    --text-color: #FFFFFF;
+    --accent-color: #F8D673;
+    --text-on-accent-color: #313F57;
+    --secondary-text-color: #BDBDBD;
+
+    /* Original Variables - Dark Theme */
+    --primary-color: #F8D673;
+    --primary-color-light: #F8D673;
+    --slate-gray: rgb(55, 70, 79);
+    --false: rgb(187, 75, 66);
+    --success-color: #7eb137;
+    --bg-primary-app: #313F57;
+}
+
+/* Default theme (dark) for backward compatibility */
+:root {
+    --bg-color: #313F57;
+    --text-color: #FFFFFF;
+    --accent-color: #F8D673;
+    --text-on-accent-color: #313F57;
+    --secondary-text-color: #BDBDBD;
+
+    --primary-color: #F8D673;
+    --primary-color-light: #F8D673;
+    --slate-gray: rgb(55, 70, 79);
+    --false: rgb(187, 75, 66);
+    --success-color: #7eb137;
+    --bg-primary-app: #313F57;
+}
+
+.section-2 .title,
+.section-3 .title {
+    color: var(--primary-color);
+    font-size: theme('fontSize.title-desktop', '48px');
+}
+
+.theme-text {
+    color: var(--accent-color);
+}
+
+.theme-bg {
+    background-color: var(--accent-color);
+    color: var(--text-on-accent-color);
+}
+
+.radioPlay {
+    margin-right: 7px;
+    color: var(--accent-color);
+}
+
+.radioPlay button {
+    color: var(--accent-color);
+    background: none;
+}
+
+.button-check-question,
+.radioPlay button {
+    box-shadow: none;
+    border: none;
+}
+
+body #ja {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+body #vi {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+body .lession-root {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.bg-app-primary {
+    background-color: var(--bg-primary-app);
+}
+
+#root {
+    margin: 0 auto;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+ul li {
+    list-style: none;
+}
+
+.height-80vh {
+    height: 80vh;
+}
+
+.disabled,
+.disabled:hover {
+    cursor: unset;
+}
+
+button.disabled {
+    background-color: rgb(55, 70, 79);
+    border: none;
+}
+
+button.bg-primary-color {
+    background-color: var(--accent-color);
+    color: var(--text-on-accent-color);
+}
+
+button.success {
+    background-color: var(--success-color) !important;
+}
+
+.success {
+    color: var(--success-color) !important;
+}
+
+.isFail {
+    color: var(--false) !important;
+}
+
+
+button:hover:not(.disabled):not(.isFail):not(.success).hv-primary-color {
+    filter: brightness(1.1) !important;
+}
+
+.root-bg-gray {
+    background-color: rgb(55, 70, 79) !important;
+    color: rgb(82, 101, 109) !important;
+}
+
+.w-1000 {
+    width: 1000px;
+}
+
+.no-select > * {
+    pointer-events: none !important;
+}
+
+.learn-root {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100vh;
+    color: var(--text-color);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.r-64px {
+    right: 64px;
+}
+
+.r-120px {
+    right: 120px;
+}
+
+.ml-48 {
+    margin-left: 48px !important;
+}
+
+.no-select {
+    user-select: none; /* Ngăn không cho chọn văn bản */
+    -webkit-user-select: none; /* Dành cho trình duyệt WebKit (Chrome, Safari) */
+    -moz-user-select: none; /* Dành cho Firefox */
+    -ms-user-select: none; /* Dành cho Internet Explorer/Edge */
+}
+
+/* Theme Toggle Styles */
+.theme-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.theme-toggle-button {
+    background-color: var(--accent-color);
+    color: var(--text-on-accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the icon inside the button */
+.theme-toggle-button svg {
+    width: 20px;
+    height: 20px;
+}

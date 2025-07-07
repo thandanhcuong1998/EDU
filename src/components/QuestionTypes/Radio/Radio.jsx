@@ -1,52 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from '../../../Helpers/util.jsx';
 import RadioOption from './RadioOption';
 import './Radio.scss';
 
-/**
- * Radio component renders a multiple choice question with radio-style options
- * 
- * @param {Object} props - Component props
- * @param {Object} props.questionData - The question data including title, options, and images
- * @param {Function} props.onAnswerSelected - Function to call when an answer is selected
- * @param {boolean} props.isCorrect - Whether the current answer is correct (null if not yet answered)
- * @param {string} props.theme - The current theme ('light' or 'dark')
- * @param {string} props.containerClass - Additional CSS class for the container
- * @returns {React.ReactElement} The rendered Radio component
- */
 const Radio = ({
   questionData,
   onAnswerSelected,
   isCorrect,
-  theme,
-  containerClass
 }) => {
-  // State to track which option is selected
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
 
-  /**
-   * Handle when a user selects an option
-   * @param {string} value - The selected option value
-   * @param {number} index - The index of the selected option
-   */
+  useEffect(() => {
+    // Reset selection when the question changes
+    setSelectedOptionIndex(null);
+  }, [questionData]);
+
   const handleOptionSelect = (value, index) => {
-    if (index !== undefined && index !== null) {
-      onAnswerSelected([
-        {
-          answer: value,
-          index: index + 1,
-        },
-      ]);
-      setSelectedOptionIndex(index);
-    }
+    if (isCorrect !== null) return; // Prevent changing answer after checking
+
+    setSelectedOptionIndex(index);
+    onAnswerSelected([
+      {
+        answer: value,
+        index: index + 1,
+      },
+    ]);
   };
 
   return (
-    <div className={`radio ${theme} ${containerClass}`}>
-      <h3>{questionData.title}</h3>
+    <div className="radio-question">
+      <h3 className="radio-question__title">{questionData.title}</h3>
       <div
-        className={`content-question ${isCorrect === true ? 'no-select' : ''}`}
+        className={`radio-question__options-container ${isCorrect !== null ? 'radio-question__options-container--no-select' : ''}`}
       >
         {questionData?.options?.map((option, index) => (
           <RadioOption
@@ -54,7 +39,7 @@ const Radio = ({
             option={option}
             pronunciation={questionData?.pronunciation?.[index] || ''}
             image={questionData?.images?.[index] || null}
-            isSelected={!isEmpty(selectedOptionIndex) && selectedOptionIndex === index}
+            isSelected={selectedOptionIndex === index}
             isCorrect={isCorrect}
             onSelect={() => handleOptionSelect(option, index)}
           />
@@ -73,13 +58,10 @@ Radio.propTypes = {
   }).isRequired,
   onAnswerSelected: PropTypes.func.isRequired,
   isCorrect: PropTypes.bool,
-  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
-  containerClass: PropTypes.string
 };
 
 Radio.defaultProps = {
   isCorrect: null,
-  containerClass: ''
 };
 
 export default Radio;

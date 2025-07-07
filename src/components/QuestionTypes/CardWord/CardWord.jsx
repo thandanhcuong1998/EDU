@@ -1,79 +1,108 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Volume2 } from 'lucide-react';
-import useCardWordHook from '../../../Hooks/useCardWordHook.jsx';
-import QuestionOptions from './QuestionOptions';
-import SelectedAnswers from './SelectedAnswers';
-import AnswerOptions from './AnswerOptions';
+import useCardWordHook from './useCardWordHook.jsx';
 import './CardWord.scss';
 
-/**
- * CardWord component renders a card-based word matching question
- * 
- * @param {Object} props - Component props
- * @param {Object} props.questionData - The question data
- * @param {Function} props.onAnswerSelected - Function to call when answers are selected
- * @param {string} props.type - Type of card word question (card-word-japan or card-word-english)
- * @param {boolean} props.isCorrect - Whether the current answer is correct (null if not yet answered)
- * @param {string} props.theme - The current theme ('light' or 'dark')
- * @param {string} props.containerClass - Additional CSS class for the container
- * @returns {React.ReactElement} The rendered CardWord component
- */
+const WordCard = ({ word, onClick, isSelected, draggableProps }) => (
+  <div
+    className={`word-card ${isSelected ? 'word-card--selected' : ''}`}
+    onClick={() => !isSelected && onClick(word)}
+    {...draggableProps}
+  >
+    <ruby>
+      {word.text}
+      {word.pronunciation && (
+        <>
+          <rp>(</rp>
+          <rt>{word.pronunciation}</rt>
+          <rp>)</rp>
+        </>
+      )}
+    </ruby>
+  </div>
+);
+
 const CardWord = ({
   questionData,
   onAnswerSelected,
   type,
-  isCorrect,
-  theme,
-  containerClass
 }) => {
   const {
-    listAnswer,
-    onHandleAnswer,
-    removeAnswer,
+    selectedWords,
+    availableWords,
+    initializeWords,
+    selectWord,
+    deselectWord,
     handleDragStart,
+    handleDragOver,
     handleDrop,
     handleDragEnd,
-    handleDragOver,
     handleOnClickPlayAudio,
-  } = useCardWordHook(onAnswerSelected, type);
+  } = useCardWordHook(onAnswerSelected);
+
+  useEffect(() => {
+    if (questionData.options) {
+      initializeWords(questionData.options);
+    }
+  }, [questionData, initializeWords]);
+
+  const Hint = () => {
+    if (type === 'card-word-english') {
+      return (
+        <div className="card-word-question__hint-text">
+          {questionData.hintToken.map((token, index) => (
+            <ruby key={index}>
+              {token.text}
+              <rp>(</rp>
+              <rt>{token.pronunciation}</rt>
+              <rp>)</rp>
+            </ruby>
+          ))}
+        </div>
+      );
+    }
+    return <div className="card-word-question__hint-text">{questionData.hintToken}</div>;
+  };
 
   return (
-    <div className={`card-word ${type} ${theme} ${containerClass}`}>
-      <h3>{questionData.title}</h3>
-      <div className="content-question">
+    <div className="card-word-question">
+      <h3 className="card-word-question__title">{questionData.title}</h3>
+      
+      <div className="card-word-question__hint-container">
         {type === 'card-word-english' && (
-          <div className="radioPlay">
-            <button onClick={() => handleOnClickPlayAudio(questionData)}>
-              <Volume2 />
-            </button>
-          </div>
+          <button className="card-word-question__play-btn" onClick={() => handleOnClickPlayAudio(questionData)}>
+            <Volume2 size={28} />
+          </button>
         )}
-        <QuestionOptions 
-          type={type} 
-          questionData={questionData} 
-        />
+        <Hint />
       </div>
       
-      <div className="answer-choice">
-        <SelectedAnswers
-          type={type}
-          answers={listAnswer}
-          onDragStart={handleDragStart}
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-          onDragEnd={handleDragEnd}
-          onRemove={removeAnswer}
-        />
+      <div className="card-word-question__dropzone" onDragOver={handleDragOver}>
+        {selectedWords.map((word, index) => (
+          <WordCard 
+            key={word.id} 
+            word={word} 
+            onClick={deselectWord}
+            draggableProps={{
+              draggable: true,
+              onDragStart: () => handleDragStart(index),
+              onDrop: () => handleDrop(index),
+              onDragEnd: handleDragEnd,
+            }}
+          />
+        ))}
       </div>
 
-      <div className="content-answer">
-        <AnswerOptions
-          type={type}
-          questionData={questionData}
-          selectedAnswers={listAnswer}
-          onSelect={onHandleAnswer}
-        />
+      <div className="card-word-question__word-bank">
+        {availableWords.map(word => (
+          <WordCard 
+            key={word.id} 
+            word={word} 
+            onClick={selectWord} 
+            isSelected={false}
+          />
+        ))}
       </div>
     </div>
   );
@@ -86,18 +115,10 @@ CardWord.propTypes = {
     hintToken: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.array
-    ])
+    ]).isRequired,
   }).isRequired,
   onAnswerSelected: PropTypes.func.isRequired,
   type: PropTypes.oneOf(['card-word-english', 'card-word-japan']).isRequired,
-  isCorrect: PropTypes.bool,
-  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
-  containerClass: PropTypes.string
-};
-
-CardWord.defaultProps = {
-  isCorrect: null,
-  containerClass: ''
 };
 
 export default CardWord;

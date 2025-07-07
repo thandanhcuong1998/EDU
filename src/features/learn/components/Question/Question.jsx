@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import Radio from './QuestionTypes/Radio';
-import CardWord from './QuestionTypes/CardWord';
-import MappingWord from './QuestionTypes/MappingWord';
-import FillInBlank from './QuestionTypes/FillInBlank/FillInBlank';
-import { Complete } from '../../../../Routes/MainAppStudy/Learn/components/Complete.jsx';
+import Radio from '@/components/QuestionTypes/Radio/Radio.jsx';
+import CardWord from '@/components/QuestionTypes/CardWord/CardWord.jsx';
+import MappingWord from '@/components/QuestionTypes/MappingWord.jsx';
+import FillInBlank from '@/components/QuestionTypes/FillInBlank/FillInBlank.jsx';
+import { Complete } from '../Complete.jsx';
 
 /**
  * Question component that renders different question types based on the current question
@@ -20,9 +20,10 @@ const Question = ({ questions, setAnswerState, isCorrectRedux }) => {
    const currentQuestionIndex = useSelector(
       state => state.LessionQuestionChoice.currentQuestionIndex
    );
+   const { theme } = useSelector(state => state.theme);
    const currentQuestion = questions[currentQuestionIndex];
 
-   const handleAnswerQuestion = answer => {
+   const handleAnswerSelected = answer => {
       setAnswerState({
          index: currentQuestionIndex,
          answer,
@@ -38,38 +39,37 @@ const Question = ({ questions, setAnswerState, isCorrectRedux }) => {
                   case 'radio':
                      return (
                         <Radio
-                           classRoot={'radio'}
-                           listConfigQuestion={currentQuestion}
-                           handleAnswer={handleAnswerQuestion}
-                           isCorrectRedux={isCorrectRedux}
+                           questionData={currentQuestion}
+                           onAnswerSelected={handleAnswerSelected}
+                           isCorrect={isCorrectRedux}
+                           theme={theme}
                         />
                      );
                   case 'card-word-english':
                   case 'card-word-japan':
                      return (
                         <CardWord
-                           classRoot={currentQuestion.type}
-                           listConfigQuestion={currentQuestion}
-                           handleAnswer={handleAnswerQuestion}
+                           questionData={currentQuestion}
+                           onAnswerSelected={handleAnswerSelected}
                            type={currentQuestion.type}
-                           isCorrectRedux={isCorrectRedux}
+                           isCorrect={isCorrectRedux}
+                           theme={theme}
                         />
                      );
                   case 'mapping-word':
                      return (
                         <MappingWord
-                           classRoot={'mapping-word'}
                            listConfigQuestion={currentQuestion}
-                           handleAnswer={handleAnswerQuestion}
+                           handleAnswer={handleAnswerSelected}
                            isCorrectRedux={isCorrectRedux}
+                           theme={theme}
                         />
                      );
                   case 'fill-in-blank':
                      return (
                         <FillInBlank
-                           classRoot={'fill-in-blank'}
                            listConfigQuestion={currentQuestion}
-                           handleAnswer={handleAnswerQuestion}
+                           handleAnswer={handleAnswerSelected}
                            isCorrectRedux={isCorrectRedux}
                         />
                      );

@@ -3,7 +3,7 @@
  * Centralizes access to environment variables
  */
 
-const env = {
+const environment = {
   // API URLs
   apiUrl: process.env.REACT_APP_API_URL || 'https://api.japanese-edu.com',
   audioApiUrl: process.env.REACT_APP_AUDIO_API_URL || 'https://proxy.junookyo.workers.dev/',
@@ -18,16 +18,16 @@ const env = {
   enableMockData: process.env.REACT_APP_ENABLE_MOCK_DATA === 'true',
   
   // Utility function to log only in development
-  log: (...args) => {
+  log: (...arguments_) => {
     if (process.env.REACT_APP_ENABLE_LOGGING === 'true') {
-      console.log(...args);
+      console.log(...arguments_);
     }
   },
   
   // Utility function to log errors in all environments
-  logError: (...args) => {
-    console.error(...args);
+  logError: (...arguments_) => {
+    console.error(...arguments_);
   }
 };
 
-export default env;
+export default environment;
