@@ -8,6 +8,11 @@ import QuestionWelcome from '@/features/welcome/components/QuestionWelcome.jsx';
 import { ListQuestionsSet } from '@/features/welcome/data/ListQuestionSetWelcome.jsx';
 import MainApp from '@/pages/LearnPage/MainApp.jsx';
 import Lession from '@/features/learn/components/Lession.jsx';
+import UserProfile from '@/features/user-profile/components/UserProfile.jsx';
+import Leaderboard from '@/features/leaderboard/components/Leaderboard.jsx';
+import JapaneseAlphabet from '@/features/japanese-alphabet/components/JapaneseAlphabet.jsx';
+import ProtectedRoute from '@/shared/components/ProtectedRoute.jsx';
+import MainStudyApp from '@/pages/LearnPage/MainStudyApp.jsx'; // This is now the main layout
 
 const PATHS = {
    ROOT: '/',
@@ -17,7 +22,9 @@ const PATHS = {
    WELCOME: '/welcome',
    LEARN: '/learn',
    LESSON: '/lession',
-   CHARACTERS: '/characters',
+   CHARACTERS: 'characters',
+   PROFILE: '/profile',
+   LEADERBOARD: '/leaderboard',
    STEP_TWO: 'step=two',
    STEP_PROFICIENCY: 'step=proficiency',
    STEP_DAILY_GOAL: 'step=dailyGoal',
@@ -99,29 +106,50 @@ const router = createBrowserRouter([
       ],
    },
    {
-      path: PATHS.LEARN,
-      element: (
-         <div className="learn-root">
-            <MainApp />
-         </div>
-      ),
+      element: <ProtectedRoute />,
+      children: [
+         {
+            path: PATHS.LEARN,
+            element: (
+               <MainStudyApp />
+            ),
+            children: [
+                {
+                    path: '',
+                    element: <MainApp />,
+                },
+                {
+                    path: 'characters',
+                    element: <JapaneseAlphabet />,
+                },
+            ],
+         },
+         {
+            path: PATHS.LESSON,
+            element: (
+               <div className="lession-root">
+                  <Lession />
+               </div>
+            ),
+         },
+         {
+            path: PATHS.PROFILE,
+            element: (
+               <div className="profile-root">
+                  <UserProfile />
+               </div>
+            ),
+         },
+         {
+            path: PATHS.LEADERBOARD,
+            element: (
+               <div className="leaderboard-root">
+                  <Leaderboard />
+               </div>
+            ),
+         },
+      ],
    },
-   {
-      path: PATHS.LESSON,
-      element: (
-         <div className="lession-root">
-            <Lession />
-         </div>
-      ),
-   },
-   // {
-   //   path: PATHS.CHARACTERS,
-   //   element: (
-   //     <div className="learn-root">
-   //       <Characters />
-   //     </div>
-   //   ),
-   // },
 ]);
 
 export default router;

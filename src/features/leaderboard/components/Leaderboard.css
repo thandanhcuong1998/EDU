@@ -1,0 +1,102 @@
+.leaderboard-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--color-background);
+  min-height: calc(100vh - 64px); /* Adjust based on header height */
+}
+
+.leaderboard-card {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 800px;
+  color: var(--color-text-primary);
+  position: relative; /* For positioning the back button */
+}
+
+.leaderboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.leaderboard-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.leaderboard-list__header,
+.leaderboard-list__item {
+  display: grid;
+  grid-template-columns: 0.5fr 3fr 1fr; /* Rank, Name, XP */
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.leaderboard-list__header {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background-color: var(--color-background);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.leaderboard-list__item {
+  background-color: var(--color-surface);
+}
+
+.leaderboard-list__item:nth-child(odd) {
+  background-color: var(--color-background); /* Zebra striping */
+}
+
+.leaderboard-list__item--current-user {
+  background-color: rgba(var(--color-primary-rgb), 0.1); /* Highlight current user */
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.rank-col {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.crown-icon {
+  color: gold;
+}
+
+.xp-col {
+  text-align: right;
+}
+
+.back-to-learn-button {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--transition-speed);
+}
+
+.back-to-learn-button:hover {
+  color: var(--color-primary);
+}

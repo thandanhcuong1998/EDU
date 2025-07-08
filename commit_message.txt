@@ -1,0 +1,8 @@
+feat: Implement mock authentication (frontend-only)
+
+- Implement mock login/signup functionality using Redux and localStorage.
+- Create `authSlice.js` for authentication state management.
+- Redesign UI for login/signup forms (`FormCustom.jsx`) with `AuthPage.css`.
+- Add logout functionality to `MainStudyApp.jsx`.
+- Update `HomePage` to redirect to login page.
+- Enhance `Const.jsx` with authentication messages.

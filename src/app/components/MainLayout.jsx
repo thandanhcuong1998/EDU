@@ -1,22 +1,26 @@
+
 import React, { useState } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Tab, Nav } from 'react-bootstrap';
 import { Home, Languages, Trophy, User } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, Link, Outlet } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { logout } from '@/features/authentication/state/authSlice.js';
 
-import './assets/LearnPage.css'; // Import the main layout CSS
+import '@/pages/LearnPage/assets/LearnPage.css'; // Import the main layout CSS
 
-import Logo from './Logo.jsx';
+import Logo from '@/pages/LearnPage/Logo.jsx';
 import ThemeToggle from '@/features/theme/components/ThemeToggle.jsx';
 import Sidebar from '@/features/learn/components/Sidebar.jsx';
 
-export default function MainStudyApp() {
+// Outlet from react-router-dom will render the child routes here
+import { Outlet } from 'react-router-dom';
+
+export default function MainLayout() {
     const [listMenu] = useState([
-        { key: 'learn', title: 'Learn', icon: <Home className="lucide" />, path: '/learn' },
-        { key: 'characters', title: 'Characters', icon: <Languages className="lucide" />, path: '/learn/characters' },
-        { key: 'leaderboard', title: 'Leaderboards', icon: <Trophy className="lucide" />, path: '/leaderboard' },
-        { key: 'profile', title: 'Profile', icon: <User className="lucide" />, path: '/profile' },
+        { key: 'learn', title: 'Learn', icon: <Home className="lucide" /> },
+        { key: 'characters', title: 'Characters', icon: <Languages className="lucide" /> },
+        { key: 'leaderboard', title: 'Leaderboards', icon: <Trophy className="lucide" /> },
+        { key: 'profile', title: 'Profile', icon: <User className="lucide" /> },
     ]);
 
     const dispatch = useDispatch();
@@ -37,7 +41,7 @@ export default function MainStudyApp() {
                 <Nav variant="pills" className="nav-menu">
                     {listMenu.map((menuItem) => (
                         <Nav.Item key={menuItem.key}>
-                            <Link to={menuItem.path} className="nav-link">
+                            <Link to={`/${menuItem.key}`} className="nav-link">
                                 {menuItem.icon}
                                 <span>{menuItem.title}</span>
                             </Link>
@@ -62,4 +66,3 @@ export default function MainStudyApp() {
         </div>
     );
 }
-

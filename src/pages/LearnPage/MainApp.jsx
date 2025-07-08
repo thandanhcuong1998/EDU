@@ -1,5 +1,5 @@
-import MainStudyApp from './MainStudyApp.jsx';
+import LearnPageContent from './LearnPageContent.jsx';
 
 export default function MainApp() {
-    return <MainStudyApp />;
+    return <LearnPageContent />;
 }
