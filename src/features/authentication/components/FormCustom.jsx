@@ -1,12 +1,9 @@
-import Form from 'react-bootstrap/Form';
-import { Button, Carousel, InputGroup } from 'react-bootstrap';
-import ImageCarousel from '@/shared/assets/img/macbook-image.jpg';
-import { SIGNUP } from '@/shared/lib/Const.jsx';
-import { Link } from 'react-router-dom';
-
-function ExampleCarouselImage(properties) {
-    return properties.text;
-}
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccess, loginFailure, registerSuccess, registerFailure, setLoading, logout } from '../state/authSlice.js';
+import { SIGNIN, SIGNUP } from '@/shared/lib/Const.jsx';
+import '@/pages/AuthPage/AuthPage.css'; // Import the new AuthPage CSS
 
 const FormCustom = ({
     type,
@@ -17,122 +14,127 @@ const FormCustom = ({
     pragraph_line,
     url_type,
 }) => {
-    return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6">
-                    <Carousel controls={false}>
-                        <Carousel.Item
-                            style={{
-                                backgroundImage: `url(${ImageCarousel})`,
-                                backgroundSize: 'cover',
-                                backgroundRepeat: 'no-repeat',
-                            }}
-                        >
-                            <ExampleCarouselImage text="First slide" />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>
-                                    Nulla vitae elit libero, a pharetra augue
-                                    mollis interdum.
-                                </p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item
-                            style={{
-                                backgroundImage: `url(${ImageCarousel})`,
-                                backgroundSize: 'cover',
-                                backgroundRepeat: 'no-repeat',
-                            }}
-                        >
-                            <ExampleCarouselImage text="Second slide" />
-                            <Carousel.Caption>
-                                <h3>Second slide label</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item
-                            style={{
-                                backgroundImage: `url(${ImageCarousel})`,
-                                backgroundSize: 'cover',
-                                backgroundRepeat: 'no-repeat',
-                            }}
-                        >
-                            <ExampleCarouselImage text="Third slide" />
-                            <Carousel.Caption>
-                                <h3>Third slide label</h3>
-                                <p>
-                                    Praesent commodo cursus magna, vel
-                                    scelerisque nisl consectetur.
-                                </p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                    </Carousel>
-                </div>
-                <div className="col-md-6">
-                    <div className="form-control-signup">
-                        <h4>{title}</h4>
-                        <p>
-                            {sub_title}{' '}
-                            <Link
-                                to={url_type}
-                                // onClick={redirectRoute}
-                            >
-                                {title_login_navigate}
-                            </Link>
-                        </p>
-                        <Form>
-                            {type === SIGNUP.TYPE && (
-                                <InputGroup className="mb-3">
-                                    <Form.Control
-                                        placeholder="First name"
-                                        className="form-input"
-                                    />
-                                    <Form.Control
-                                        placeholder="Last name"
-                                        className="form-input"
-                                    />
-                                </InputGroup>
-                            )}
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState(''); // For signup
+    const [localError, setLocalError] = useState(null);
 
-                            <Form.Control
-                                placeholder="Email"
-                                className="form-input"
+    const dispatch = useDispatch();
+    const { loading, error, isLoggedIn } = useSelector(state => state.auth);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/learn'); // Redirect to learn page if already logged in
+        }
+    }, [isLoggedIn, navigate]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLocalError(null);
+        dispatch(setLoading(true));
+
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        if (type === SIGNUP.TYPE) {
+            // Register logic
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userExists = users.some(u => u.email === email);
+
+            if (userExists) {
+                setLocalError('Email already registered.');
+                dispatch(registerFailure('Email already registered.'));
+            } else {
+                const newUser = { username, email, password };
+                localStorage.setItem('users', JSON.stringify([...users, newUser]));
+                localStorage.setItem('currentUser', JSON.stringify(newUser));
+                dispatch(registerSuccess(newUser));
+            }
+        } else { // SIGNIN.TYPE
+            // Login logic
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const foundUser = users.find(u => u.email === email && u.password === password);
+
+            if (foundUser) {
+                localStorage.setItem('currentUser', JSON.stringify(foundUser));
+                dispatch(loginSuccess(foundUser));
+            } else {
+                setLocalError('Invalid email or password.');
+                dispatch(loginFailure('Invalid email or password.'));
+            }
+        }
+        dispatch(setLoading(false));
+    };
+
+    return (
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2 className="auth-card__title">{title}</h2>
+                <p className="auth-card__subtitle">
+                    {sub_title}{' '}
+                    <Link to={url_type}>{title_login_navigate}</Link>
+                </p>
+
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    {type === SIGNUP.TYPE && (
+                        <div className="form-group">
+                            <label htmlFor="username">Tên người dùng</label>
+                            <input
+                                type="text"
+                                id="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Nhập tên người dùng của bạn"
+                                required
                             />
-                            <br />
-                            <Form.Control
-                                placeholder="Enter your password"
-                                className="form-input"
-                            />
-                            <Form.Check
-                                type="checkbox"
-                                id="checkbox-1"
-                                label={
-                                    type === SIGNUP.TYPE ? (
-                                        <>
-                                            I agree to the{' '}
-                                            <a href="#">Terms & conditions</a>
-                                        </>
-                                    ) : (
-                                        'Remember me'
-                                    )
-                                }
-                            />
-                            <br />
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                className="button-submit"
-                            >
-                                {title_button_submit}
-                            </Button>
-                        </Form>
-                        <div className="line">&emsp;{pragraph_line}&emsp;</div>
+                        </div>
+                    )}
+
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Nhập email của bạn"
+                            required
+                        />
                     </div>
-                </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Mật khẩu</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Nhập mật khẩu của bạn"
+                            required
+                        />
+                    </div>
+
+                    {type === SIGNUP.TYPE && (
+                        <div className="form-group">
+                            <input type="checkbox" id="terms" required />
+                            <label htmlFor="terms" style={{ display: 'inline', marginLeft: '0.5rem' }}>
+                                Tôi đồng ý với <a href="#">Điều khoản & điều kiện</a>
+                            </label>
+                        </div>
+                    )}
+
+                    <button
+                        type="submit"
+                        className="auth-form__button"
+                        disabled={loading}
+                    >
+                        {loading ? 'Đang xử lý...' : title_button_submit}
+                    </button>
+
+                    {localError && <p className="auth-error-message">{localError}</p>}
+                    {error && <p className="auth-error-message">{error}</p>}
+                </form>
             </div>
         </div>
     );

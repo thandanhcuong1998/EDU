@@ -14,7 +14,7 @@ const Index = () => {
     const navigate = useNavigate();
 
     const handleStartLearning = () => {
-        navigate('/welcome');
+        navigate('/auth/signin');
     };
 
     return (

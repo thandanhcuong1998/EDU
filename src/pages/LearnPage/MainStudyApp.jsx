@@ -2,6 +2,9 @@
 import React, { useState, useContext } from 'react';
 import { Tab, Nav } from 'react-bootstrap'; // Still using for Tab functionality
 import { Home, Languages, Trophy, User } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '@/features/authentication/state/authSlice.js';
 
 import './assets/LearnPage.css'; // Import the new CSS
 
@@ -19,6 +22,15 @@ export default function MainStudyApp() {
         { key: 'leaderboards', title: 'Leaderboards', icon: <Trophy className="lucide" /> },
         { key: 'profile', title: 'Profile', icon: <User className="lucide" /> },
     ]);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        localStorage.removeItem('currentUser'); // Clear user from localStorage
+        navigate('/auth/signin'); // Redirect to login page
+    };
 
     return (
         <div className="learn-page-container">
@@ -40,6 +52,9 @@ export default function MainStudyApp() {
                     <div className="theme-toggle-container">
                         <ThemeToggle />
                     </div>
+                    <button className="logout-button" onClick={handleLogout}>
+                        Đăng xuất
+                    </button>
                 </nav>
 
                 <main className="main-content">
