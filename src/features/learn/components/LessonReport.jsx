@@ -80,6 +80,9 @@ export default function LessonReport({ stats, onContinue }) {
                         <span>Tiếp tục</span>
                         <ArrowRight size={20} />
                     </button>
+                    <button className="exit-button" onClick={() => navigate('/learn')}>
+                        Thoát
+                    </button>
                 </footer>
             </div>
         </div>

@@ -10,6 +10,7 @@ import './assets/LearnPage.css'; // Import the main layout CSS
 import Logo from './Logo.jsx';
 import ThemeToggle from '@/features/theme/components/ThemeToggle.jsx';
 import Sidebar from '@/features/learn/components/Sidebar.jsx';
+import DailyChallenge from '@/features/learn/components/DailyChallenge.jsx';
 
 export default function MainStudyApp() {
     const [listMenu] = useState([
@@ -57,6 +58,7 @@ export default function MainStudyApp() {
             </main>
 
             <aside className="right-sidebar">
+                <DailyChallenge /> {/* Add DailyChallenge here */}
                 <Sidebar />
             </aside>
         </div>

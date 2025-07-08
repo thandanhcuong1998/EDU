@@ -99,5 +99,10 @@
             "vocabulary": "語彙",
             "grammar": "文法"
         }
+    },
+    "dailyChallenge": {
+        "title": "今日の目標",
+        "goal": "1レッスンを完了するか、50XPを獲得する",
+        "streakLabel": "連続日"
     }
 }

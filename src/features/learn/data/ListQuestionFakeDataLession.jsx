@@ -75,6 +75,72 @@ const ListQuestionFakeDataLession = {
                   "こんばんは (Konbanwa) means 'Good evening' in Japanese.",
             },
          ],
+          level2: [
+              {
+                  id: 'n5-greet-l1-q1',
+                  type: 'radio',
+                  title: "Which one means 'Good morning' in Japanese?",
+                  options: [
+                      'こんにちは',
+                      'おはようございます',
+                      'こんばんは',
+                      'さようなら',
+                  ],
+                  images: [
+                      'https://placehold.co/400x300',
+                      'https://placehold.co/400x300',
+                      'https://placehold.co/400x300',
+                      'https://placehold.co/400x300',
+                      'https://placehold.co/400x300',
+                  ],
+                  pronunciation: [
+                      'kon ni chi wa',
+                      'o ha yo u go za i ma su',
+                      'kon ban wa',
+                      'sa yo u na ra',
+                  ],
+                  correctAnswer: 2,
+                  explanation:
+                          "おはようございます (Ohayou gozaimasu) is the formal way to say 'Good morning' in Japanese.",
+              },
+              {
+                  id: 'n5-greet-l1-q2',
+                  type: 'fill-in-blank',
+                  title: 'Complete the greeting',
+                  sentence: ['おはよう', '。'],
+                  blankIndex: 0,
+                  options: ['ございます', 'です', 'さん', 'せんせい'],
+                  pronunciation: ['go za i ma su', 'de su', 'sa n', 'sen se i'],
+                  correctAnswer: 1,
+                  explanation:
+                          "おはようございます is the complete formal greeting for 'Good morning'.",
+              },
+              {
+                  id: 'n5-greet-l1-q3',
+                  type: 'card-word-english',
+                  title: 'Arrange the English words to match the Japanese phrase',
+                  options: ['morning', 'good', 'is', 'it'],
+                  hintToken: [
+                      { text: 'おはよう', pronunciation: 'o ha yo u' },
+                      { text: 'ございます', pronunciation: 'go za i ma su' },
+                  ],
+                  correctAnswer: [2, 1],
+                  explanation:
+                          "おはよう ございます translates to 'Good morning' in English.",
+              },
+              {
+                  id: 'n5-greet-l1-q4',
+                  type: 'fill-in-blank',
+                  title: 'Complete the evening greeting',
+                  sentence: ['', 'は。'],
+                  blankIndex: 0,
+                  options: ['こんにち', 'こんばん', 'おはよう', 'さよう'],
+                  pronunciation: ['kon ni chi', 'kon ban', 'o ha yo u', 'sa yo u'],
+                  correctAnswer: 2,
+                  explanation:
+                          "こんばんは (Konbanwa) means 'Good evening' in Japanese.",
+              },
+          ],
       },
       orderFood: {
          metadata: {

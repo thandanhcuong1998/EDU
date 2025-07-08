@@ -3,6 +3,7 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLessonQuestions } from '../redux/lessonSlice.js';
+import { updateDailyProgress } from '@/features/user-profile/state/UserProgressReducer.jsx';
 import ListQuestionFakeDataLession from '../data/ListQuestionFakeDataLession.jsx';
 import { LanguageContext } from '../../../app/providers/LanguageProvider.jsx';
 import './LearningPath.css'; // Import the new Learning Path styles
@@ -59,6 +60,7 @@ export default function MainLearn() {
         if (!lessonData) return;
 
         dispatch(setLessonQuestions({ questions: lessonData }));
+        dispatch(updateDailyProgress()); // Update daily progress when a lesson starts
         navigate(`/lession?level=${jlptLevel}&topic=${topic}&type=${lessonType}`);
     };
 
