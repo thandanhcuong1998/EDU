@@ -40,6 +40,10 @@ const welcomeSlice = createSlice({
         setProgressBar: (state, action) => {
             state.progress = action.payload;
         },
+        resetWelcomeState: (state) => {
+            state.questions = [];
+            state.progress = 0;
+        },
     },
 });
 
@@ -50,6 +54,7 @@ export const {
     updateProgressBar,
     setProgressBar,
     updateProgress,
+    resetWelcomeState,
 } = welcomeSlice.actions;
 
 export default welcomeSlice.reducer;

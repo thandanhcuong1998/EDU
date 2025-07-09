@@ -92,3 +92,5 @@
 69. [x] Enhance UI/UX for Homepage
 70. [x] Enhance UI/UX for Language Switcher
 71. [x] Expand i18n to new Homepage content
+72. [x] Implement personalized learning path based on user proficiency.
+73. [x] Ensure all relevant Redux states are reset upon user logout.

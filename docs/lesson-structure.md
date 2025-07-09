@@ -49,7 +49,11 @@ The top level of the structure represents JLPT proficiency levels:
 Each JLPT level contains multiple topics, such as:
 - **greeting**: Greetings & Basic Communication
 - **orderFood**: Food & Dining
-- **time**: Time & Schedule
+- **selfIntroduction**: Self Introduction
+- **shopping**: Shopping
+- **dailyLife**: Daily Life
+- **business**: Business Japanese
+- **advancedGrammar**: Advanced Grammar
 - (Additional topics as per the comprehensive plan)
 
 ### Lesson Types

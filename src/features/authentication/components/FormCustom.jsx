@@ -24,10 +24,8 @@ const FormCustom = ({
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isLoggedIn) {
-            navigate('/learn'); // Redirect to learn page if already logged in
-        }
-    }, [isLoggedIn, navigate]);
+        // Empty to avoid navigation race condition
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,6 +48,7 @@ const FormCustom = ({
                 localStorage.setItem('users', JSON.stringify([...users, newUser]));
                 localStorage.setItem('currentUser', JSON.stringify(newUser));
                 dispatch(registerSuccess(newUser));
+                navigate('/welcome');
             }
         } else { // SIGNIN.TYPE
             // Login logic
@@ -59,6 +58,7 @@ const FormCustom = ({
             if (foundUser) {
                 localStorage.setItem('currentUser', JSON.stringify(foundUser));
                 dispatch(loginSuccess(foundUser));
+                navigate('/learn');
             } else {
                 setLocalError('Invalid email or password.');
                 dispatch(loginFailure('Invalid email or password.'));

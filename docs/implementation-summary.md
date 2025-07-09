@@ -127,6 +127,22 @@ Extended i18n support to new content on the Homepage, ensuring all user-facing t
 
 - Updated `src/shared/assets/locales/vi.json` and `ja.json` with new translation keys for Homepage sections.
 
+### 7. Personalized Learning Path
+
+Implemented a personalized learning path based on user's proficiency level selected during the welcome flow.
+
+- Modified `UserProgressReducer.jsx` to store `startingLevel` and unlock relevant topics based on user's proficiency.
+- Updated `MainLearn.jsx` to filter and display only JLPT levels from the user's `startingLevel` onwards.
+- Expanded `ListQuestionFakeDataLession.jsx` with sample data for N3, N2, and N1 levels to support higher proficiency levels.
+
+### 8. State Reset on Logout
+
+Ensured that all relevant Redux states are reset upon user logout to provide a clean experience for subsequent logins.
+
+- Added `resetWelcomeState` action to `welcomeSlice.js`.
+- Added `resetProgress` action to `UserProgressReducer.jsx`.
+- Integrated these reset actions into the `handleLogout` functions in `MainStudyApp.jsx` and `MainLayout.jsx`.
+
 ## Next Steps
 
 ### 1. Complete Migration to Feature-Based Organization

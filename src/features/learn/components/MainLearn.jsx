@@ -23,7 +23,25 @@ export default function MainLearn() {
     const userProgress = useSelector(state => state.userProgress);
 
     // Memoize the entire lesson data structure for performance
-    const allLessons = useMemo(() => ListQuestionFakeDataLession, []);
+    const allLessons = useMemo(() => {
+        const JLPT_LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'];
+        const userStartingLevel = userProgress.startingLevel || 'N5';
+        const userLevelIndex = JLPT_LEVELS.indexOf(userStartingLevel);
+
+        if (userLevelIndex === -1) {
+            // Fallback for invalid startingLevel, show all available lessons
+            return ListQuestionFakeDataLession;
+        }
+
+        const filteredLessons = {};
+        for (let i = userLevelIndex; i < JLPT_LEVELS.length; i++) {
+            const level = JLPT_LEVELS[i];
+            if (ListQuestionFakeDataLession[level]) {
+                filteredLessons[level] = ListQuestionFakeDataLession[level];
+            }
+        }
+        return filteredLessons;
+    }, [userProgress.startingLevel]);
 
     // Function to determine the status of a lesson
     const getLessonStatus = (jlptLevel, topic, lessonType, lessonIndex) => {

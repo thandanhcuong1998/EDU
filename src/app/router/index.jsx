@@ -22,7 +22,7 @@ const PATHS = {
    WELCOME: '/welcome',
    LEARN: '/learn',
    LESSON: '/lession',
-   CHARACTERS: '/characters',
+   CHARACTERS: 'characters',
    PROFILE: '/profile',
    LEADERBOARD: '/leaderboard',
    STEP_TWO: 'step=two',

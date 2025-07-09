@@ -10,7 +10,7 @@ import { arraysEqual } from '@/shared/lib/util.jsx';
  * Initial state for the lesson question choice reducer
  */
 const initialState = {
-   questions: ListQuestionFakeDataLession.N5.orderFood.level1,
+   questions: ListQuestionFakeDataLession.N5.basicGreetings.level1,
    currentQuestionIndex: 0,
    answers: [],
    isCorrect: null,

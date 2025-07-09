@@ -5,6 +5,9 @@ import { Home, Languages, Trophy, User } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { logout } from '@/features/authentication/state/authSlice.js';
+import { resetWelcomeState } from '@/features/welcome/state/welcomeSlice.js';
+import { resetProgress } from '@/features/user-profile/state/UserProgressReducer.jsx';
+import { resetState as resetLessonState } from '@/features/learn/redux/lessonSlice.js';
 
 import '@/pages/LearnPage/assets/LearnPage.css'; // Import the main layout CSS
 
@@ -28,6 +31,9 @@ export default function MainLayout() {
 
     const handleLogout = () => {
         dispatch(logout());
+        dispatch(resetWelcomeState());
+        dispatch(resetProgress());
+        dispatch(resetLessonState());
         localStorage.removeItem('currentUser'); // Clear user from localStorage
         navigate('/auth/signin'); // Redirect to login page
     };

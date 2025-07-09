@@ -2,13 +2,18 @@ import { useState } from 'react';
 import './index.css';
 import { Outlet } from 'react-router-dom';
 import { useWelcomeNavigation } from '@/features/welcome/hooks/useWelcomeNavigation.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeUserProgress } from '@/features/user-profile/state/UserProgressReducer.jsx';
 
 const Welcome = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { handleNext, isNextDisabled, currentStepId } = useWelcomeNavigation();
+    const dispatch = useDispatch();
+    const welcomeQuestions = useSelector(state => state.welcome.questions);
 
     const handleContinue = () => {
         if (currentStepId === 'dailyGoal') {
+            dispatch(initializeUserProgress(welcomeQuestions));
             setIsLoading(true);
             setTimeout(() => {
                 handleNext(); // Navigate to /learn after timeout
