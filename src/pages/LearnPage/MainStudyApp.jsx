@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { Home, Languages, Trophy, User } from 'lucide-react';
+import { LayoutDashboard, Book, Languages, Trophy, User } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link, Outlet } from 'react-router-dom';
 import { logout } from '@/features/authentication/state/authSlice.js';
@@ -17,7 +17,8 @@ import DailyChallenge from '@/features/learn/components/DailyChallenge.jsx';
 
 export default function MainStudyApp() {
     const [listMenu] = useState([
-        { key: 'learn', title: 'Learn', icon: <Home className="lucide" />, path: '/learn' },
+        { key: 'dashboard', title: 'Dashboard', icon: <LayoutDashboard className="lucide" />, path: '/learn' },
+        { key: 'learn', title: 'Learn', icon: <Book className="lucide" />, path: '/learn/path' },
         { key: 'characters', title: 'Characters', icon: <Languages className="lucide" />, path: '/learn/characters' },
         { key: 'leaderboard', title: 'Leaderboards', icon: <Trophy className="lucide" />, path: '/leaderboard' },
         { key: 'profile', title: 'Profile', icon: <User className="lucide" />, path: '/profile' },

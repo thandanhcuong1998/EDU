@@ -12,6 +12,8 @@ const loadInitialState = () => {
         ...parsedState,
         currentStreak: parsedState.currentStreak || 0,
         lastDailyGoalCompletionDate: parsedState.lastDailyGoalCompletionDate || null,
+        srsItems: parsedState.srsItems || [],
+        unlockedAchievements: parsedState.unlockedAchievements || [],
       };
     }
   } catch (error) {
@@ -28,6 +30,8 @@ const loadInitialState = () => {
     startingLevel: 'N5', // Add startingLevel
     currentStreak: 0,
     lastDailyGoalCompletionDate: null,
+    srsItems: [], // Add srsItems
+    unlockedAchievements: [], // Add unlockedAchievements
   };
 };
 
@@ -137,8 +141,25 @@ const userProgressSlice = createSlice({
       Object.assign(state, defaultState);
       localStorage.removeItem('userProgress');
     },
+    unlockAchievement: (state, action) => {
+        if (!state.unlockedAchievements.includes(action.payload)) {
+            state.unlockedAchievements.push(action.payload);
+            localStorage.setItem('userProgress', JSON.stringify(state));
+        }
+    },
+    updateSrsItem: (state, action) => {
+        const { questionId, ...srsData } = action.payload;
+        const existingIndex = state.srsItems.findIndex(item => item.questionId === questionId);
+
+        if (existingIndex !== -1) {
+            state.srsItems[existingIndex] = { ...state.srsItems[existingIndex], ...srsData };
+        } else {
+            state.srsItems.push({ questionId, ...srsData });
+        }
+        localStorage.setItem('userProgress', JSON.stringify(state));
+    },
   }
 });
 
-export const { addExperience, completeLevel, unlockTopic, updateDailyProgress, initializeUserProgress, resetProgress } = userProgressSlice.actions;
+export const { addExperience, completeLevel, unlockTopic, updateDailyProgress, initializeUserProgress, resetProgress, unlockAchievement, updateSrsItem } = userProgressSlice.actions;
 export default userProgressSlice.reducer;

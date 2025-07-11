@@ -10,24 +10,24 @@ export default function VocabularyItem({ item }) {
   };
 
   return (
-    <div className="vocabulary-item flex items-start mb-2 p-2 rounded-md bg-gray-800/50 hover:bg-gray-700/50 transition-colors">
-      <div className="flex-grow">
-        <div className="flex items-center">
-          <span className="font-bold text-lg text-white">{item.japanese}</span>
+    <div className="vocabulary-item">
+      <div className="vocabulary-item__content">
+        <div className="vocabulary-item__japanese-row">
+          <span className="vocabulary-item__japanese">{item.japanese}</span>
           {item.audio && (
             <button 
               onClick={playAudio}
-              className="ml-2 p-1 rounded-full hover:bg-gray-600 transition-colors"
+              className="vocabulary-item__audio-button"
               aria-label="Play pronunciation"
             >
-              <Volume2 size={18} className="text-blue-400" />
+              <Volume2 size={20} />
             </button>
           )}
         </div>
-        <div className="text-gray-300">({item.romaji})</div>
-        <div className="text-gray-200">{item.vietnamese}</div>
+        {item.romaji && <div className="vocabulary-item__romaji">({item.romaji})</div>}
+        {item.vietnamese && <div className="vocabulary-item__vietnamese">{item.vietnamese}</div>}
         {item.usage && (
-          <div className="text-gray-400 text-sm mt-1">{item.usage}</div>
+          <div className="vocabulary-item__usage">{item.usage}</div>
         )}
       </div>
     </div>

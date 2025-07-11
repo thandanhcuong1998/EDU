@@ -12,7 +12,9 @@ import UserProfile from '@/features/user-profile/components/UserProfile.jsx';
 import Leaderboard from '@/features/leaderboard/components/Leaderboard.jsx';
 import JapaneseAlphabet from '@/features/japanese-alphabet/components/JapaneseAlphabet.jsx';
 import ProtectedRoute from '@/shared/components/ProtectedRoute.jsx';
-import MainStudyApp from '@/pages/LearnPage/MainStudyApp.jsx'; // This is now the main layout
+import MainStudyApp from '@/pages/LearnPage/MainStudyApp.jsx';
+import DashboardPage from '@/pages/DashboardPage/index.jsx';
+import ReviewPage from '@/pages/ReviewPage/index.jsx';
 
 const PATHS = {
    ROOT: '/',
@@ -21,6 +23,7 @@ const PATHS = {
    SIGNIN: '/auth/signin',
    WELCOME: '/welcome',
    LEARN: '/learn',
+   LEARN_PATH: 'path',
    LESSON: '/lession',
    CHARACTERS: 'characters',
    PROFILE: '/profile',
@@ -28,6 +31,7 @@ const PATHS = {
    STEP_TWO: 'step=two',
    STEP_PROFICIENCY: 'step=proficiency',
    STEP_DAILY_GOAL: 'step=dailyGoal',
+   REVIEW: '/review',
 };
 
 const router = createBrowserRouter([
@@ -110,12 +114,14 @@ const router = createBrowserRouter([
       children: [
          {
             path: PATHS.LEARN,
-            element: (
-               <MainStudyApp />
-            ),
+            element: <MainStudyApp />,
             children: [
                 {
                     path: '',
+                    element: <DashboardPage />,
+                },
+                {
+                    path: PATHS.LEARN_PATH,
                     element: <MainApp />,
                 },
                 {
@@ -149,6 +155,14 @@ const router = createBrowserRouter([
             ),
          },
       ],
+   },
+   {
+      path: PATHS.REVIEW,
+      element: (
+         <div className="review-root">
+            <ReviewPage />
+         </div>
+      ),
    },
 ]);
 

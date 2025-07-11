@@ -25,19 +25,8 @@ export default function UserProfile() {
 
     // Mock achievements based on user progress
     const achievements = useMemo(() => {
-        const achieved = [];
-        if (userProgress.experience >= 500) {
-            achieved.push({ id: 'xp500', name: 'Người học chăm chỉ', description: 'Đạt 500 XP', icon: <Trophy size={24} /> });
-        }
-        if (userProgress.experience >= 1000) {
-            achieved.push({ id: 'xp1000', name: 'Chuyên gia XP', description: 'Đạt 1000 XP', icon: <Award size={24} /> });
-        }
-        if (totalCompletedLessons >= 5) {
-            achieved.push({ id: 'lessons5', name: 'Người hoàn thành bài học', description: 'Hoàn thành 5 bài học', icon: <BookOpen size={24} /> });
-        }
-        // Add more achievements here
-        return achieved;
-    }, [userProgress.experience, totalCompletedLessons]);
+        return userProgress.unlockedAchievements.map(id => achievementsData[id]);
+    }, [userProgress.unlockedAchievements]);
 
     return (
         <div className="user-profile-container">

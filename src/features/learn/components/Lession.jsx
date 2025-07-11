@@ -1,5 +1,5 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { CheckCircle2, XCircle } from 'lucide-react';
+import { BookOpenText, Lightbulb, GraduationCap } from 'lucide-react';
 import Question from './Question/Question.jsx';
 import { useLessionHook } from '../hooks/useLessionHook.js';
 import ListQuestionFakeDataLession from '../data/ListQuestionFakeDataLession.jsx';
@@ -154,32 +154,32 @@ export default function Lession() {
                      <div className="question-step text-white d-flex justify-content-center align-items-center flex-column">
                         {/* Display lesson title if it's a theory lesson */}
                         {lessonType === 'theory' && currentQuestions.title && (
-                           <div className="mb-4 text-center">
-                              <h2 className="text-2xl font-bold">
-                                 {currentQuestions.title}
+                           <div className="theory-header">
+                              <h2 className="theory-title">
+                                 <BookOpenText size={32} /> {currentQuestions.title}
                               </h2>
                            </div>
                         )}
 
                         {/* Display theory content if available */}
                         {lessonType === 'theory' && currentQuestions.content ? (
-                           <div className="theory-content mb-6 p-4 bg-gray-800 rounded-lg">
+                           <div className="theory-content-blocks">
                               {currentQuestions.content.map(
                                  (paragraph, index) => (
-                                    <p key={index} className="mb-3">
-                                       {paragraph}
-                                    </p>
+                                    <div key={index} className="theory-content-block">
+                                       <p>{paragraph}</p>
+                                    </div>
                                  )
                               )}
 
                               {/* Display vocabulary section if available */}
                               {currentQuestions.vocabulary &&
                                  currentQuestions.vocabulary.length > 0 && (
-                                    <div className="vocabulary-section mt-4">
-                                       <h3 className="text-xl font-semibold mb-2">
-                                          Từ vựng
+                                    <div className="vocabulary-section">
+                                       <h3 className="section-title">
+                                          <Lightbulb size={24} /> {translations.learn.lessons.vocabulary}
                                        </h3>
-                                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                       <div className="vocabulary-list">
                                           {currentQuestions.vocabulary.map(
                                              (item, index) => (
                                                 <VocabularyItem
@@ -198,28 +198,29 @@ export default function Lession() {
                               {/* Display grammar section if available */}
                               {currentQuestions.grammar &&
                                  currentQuestions.grammar.length > 0 && (
-                                    <div className="grammar-section mt-4">
-                                       <h3 className="text-xl font-semibold mb-2">
-                                          Ngữ pháp
+                                    <div className="grammar-section">
+                                       <h3 className="section-title">
+                                          <GraduationCap size={24} /> {translations.learn.lessons.grammar}
                                        </h3>
-                                       <ul className="list-disc pl-5">
+                                       <ul className="grammar-list">
                                           {currentQuestions.grammar.map(
                                              (item, index) => (
                                                 <li
                                                    key={index}
-                                                   className="mb-2"
+                                                   className="grammar-item"
                                                 >
-                                                   <span className="font-bold">
+                                                   <p className="grammar-pattern">
                                                       {item.pattern}
-                                                   </span>{' '}
-                                                   - {item.explanation}
+                                                   </p>
+                                                   <p className="grammar-explanation">
+                                                      {item.explanation}
+                                                   </p>
                                                    {item.examples && (
-                                                      <ul className="list-circle pl-5 mt-1">
+                                                      <ul className="grammar-examples">
                                                          {item.examples.map(
                                                             (example, index_) => (
                                                                <li
                                                                   key={index_}
-                                                                  className="text-sm"
                                                                >
                                                                   {example}
                                                                </li>
@@ -349,14 +350,14 @@ export default function Lession() {
                         onClick={handleButtonClick}
                         // Sử dụng Tailwind classes cho trạng thái button
                         className={`py-2 px-6 rounded text-white font-semibold button-check-question ${
-                           lessonType === 'theory' || isActiveButtonContinue
+                           (lessonType === 'theory' || isActiveButtonContinue) && currentQuestions.length > 0
                               ? `theme-bg ${isCorrect === false ? 'bg-danger' : ''}`
                               : 'bg-slate-gray cursor-not-allowed opacity-50' // Lớp disabled từ config Tailwind
                         }`}
                         disabled={
-                           lessonType !== 'theory' &&
+                           (lessonType !== 'theory' &&
                            !isActiveButtonContinue &&
-                           isCorrect === null
+                           isCorrect === null) || currentQuestions.length === 0
                         } // Enable button on theory pages
                      >
                         {buttonValue}

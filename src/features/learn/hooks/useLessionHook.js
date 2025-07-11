@@ -11,6 +11,8 @@ import {
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ListQuestionFakeDataLession from '../data/ListQuestionFakeDataLession.jsx';
 import { LanguageContext } from '@/app/providers/LanguageProvider.jsx';
+import srsService from '@/shared/services/srsService.js';
+import achievementService from '@/features/achievements/services/achievementService.js';
 
 export const useLessionHook = () => {
    const navigation = useNavigate();
@@ -112,6 +114,10 @@ export const useLessionHook = () => {
    const checkAnswer = () => {
       if ('answer' in answerState) {
          dispatch(setAnswer(answerState));
+         const { isCorrect, currentQuestion } = LessionQuestionChoice;
+         const srsItem = userProgress.srsItems.find(item => item.questionId === currentQuestion.id);
+         const updatedSrsItem = srsService.calculateSrsItem(srsItem, isCorrect);
+         dispatch(updateSrsItem({ ...updatedSrsItem, questionId: currentQuestion.id }));
       }
    };
 
