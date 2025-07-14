@@ -28,8 +28,8 @@
 }
 
 .radio-option {
-  background-color: #1f2937; // A dark, neutral background
-  border: 2px solid #374151; // A slightly lighter border
+  background-color: var(--color-surface); // A dark, neutral background
+  border: 2px solid var(--color-border); // A slightly lighter border
   border-radius: 16px;
   padding: 20px;
   display: flex;

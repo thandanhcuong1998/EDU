@@ -1,7 +1,9 @@
 /* :root defines variables for the default (light) theme */
+@import './App.css';
 :root {
   /* Color Palette */
   --color-primary: #00A896; /* A soft, calming teal/blue-green for accents */
+  --color-primary-rgb: 0, 168, 150;
   --color-primary-hover: #008C7A;
   --color-text-primary: #4A4A4A; /* Softer dark gray for main text */
   --color-text-secondary: #888888; /* Softer medium gray for subtext */
@@ -23,6 +25,7 @@
 /* Override variables for the dark theme */
 html[data-theme="dark"] {
   --color-primary: #63B3ED; /* A lighter blue for dark mode */
+  --color-primary-rgb: 99, 179, 237;
   --color-primary-hover: #4299E1;
   --color-text-primary: #F7FAFC; /* Off-white for main text */
   --color-text-secondary: #A0AEC0; /* Lighter gray for subtext */

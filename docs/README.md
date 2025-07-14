@@ -6,6 +6,7 @@ This directory contains comprehensive documentation for the Japanese-EDU project
 
 - [Project Structure](./project-structure.md): Overview of the codebase organization
 - [Feature-Based Organization](./feature-organization.md): Guidelines for organizing code by feature
+- [Business Logic](./business-logic.md): Detailed explanation of the application's core business logic.
 - [Internationalization (i18n) Implementation](./i18n.md): Details on multi-language support
 - [Implementation Summary](./implementation-summary.md): Summary of implemented improvements
 - [Lesson Structure](./lesson-structure.md): Documentation of the lesson data structure

@@ -9,11 +9,11 @@
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Be Vietnam Pro', sans-serif;
-  
+
   &.light {
     @include light-theme;
   }
-  
+
   &.dark {
     @include dark-theme;
   }
@@ -22,12 +22,24 @@
 // Header with progress bar
 .header-top {
   @include flex-center;
-  padding: 1rem 0;
-  
+  padding: 0.75rem 1rem; /* Adjusted padding */
+  //position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Ensure it stays on top */
+  //background-color: var(--bg-color); /* Match background */
+  box-shadow: var(--box-shadow); /* Add shadow for depth */
+
   .progress {
     width: 95%;
     height: 0.5rem;
     border-radius: 0.25rem;
+
+    .progress-bar { /* Targeting react-bootstrap's inner progress bar */
+      background-color: var(--color-primary); /* Ensure it uses theme color */
+      transition: width 0.5s ease-in-out; /* Smooth transition */
+    }
   }
 }
 
@@ -36,12 +48,12 @@
   @include flex-column;
   @include flex-center;
   padding: 2rem;
-  
+
   h2 {
     @include heading-large;
     margin-bottom: 1.5rem;
   }
-  
+
   h3 {
     @include heading-medium;
     margin-bottom: 1rem;
@@ -104,72 +116,91 @@
 
 .vocabulary-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reverted min-width to 280px for better content fit */
+  gap: 1.5rem; /* Increased gap for better visual separation */
 }
 
 // Vocabulary item
 .vocabulary-item {
   @include transition;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--box-shadow);
-  
+  padding: 1.5rem; /* Increased padding for more breathing room */
+  border-radius: var(--border-radius); /* Consistent border-radius */
+  background-color: var(--color-surface); /* Card background */
+  border: 1px solid var(--color-border); /* Subtle border */
+  box-shadow: var(--box-shadow); /* Standard shadow */
+  position: relative;
+  min-height: 180px; /* Increased min-height for better consistency */
+
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px); /* More pronounced lift effect */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    border-color: var(--color-primary); /* Highlight border on hover */
   }
 
   &__japanese-row {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.25rem;
+    justify-content: space-between; /* Space between Japanese text and audio button */
+    gap: 0.75rem;
+    margin-bottom: 0.75rem; /* More space below Japanese row */
+    width: 100%;
   }
 
   &__japanese {
-    font-size: 1.25rem;
+    font-size: 1.75rem; /* Even larger Japanese text */
     font-weight: 700;
     color: var(--color-text-primary);
+    line-height: 1.2; /* Tighter line height */
   }
 
   &__audio-button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.25rem;
+    padding: 0.6rem; /* Larger clickable area */
     border-radius: 50%;
     transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent button from shrinking */
 
     &:hover {
-      background-color: rgba(var(--color-primary-rgb), 0.1);
+      background-color: rgba(var(--color-primary-rgb), 0.2); /* More visible hover */
     }
 
     .lucide {
       color: var(--color-primary);
+      width: 28px; /* Larger icon */
+      height: 28px;
     }
   }
 
   &__romaji {
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* Larger romaji */
     color: var(--color-text-secondary);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.75rem; /* More space below romaji */
   }
 
   &__vietnamese {
-    font-size: 1rem;
-    color: var(--color-text-primary);
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem; /* Larger Vietnamese translation */
+    font-weight: 600; /* Bolder Vietnamese */
+    color: var(--color-primary); /* Use primary color for emphasis */
+    margin-bottom: 1rem; /* More space below Vietnamese */
   }
 
   &__usage {
-    font-size: 0.85rem;
+    font-size: 0.95rem; /* Slightly larger usage text */
     color: var(--color-text-secondary);
     font-style: italic;
+    line-height: 1.6;
+    border-top: 1px dashed var(--color-border); /* Subtle separator */
+    padding-top: 1rem; /* Padding above separator */
+    margin-top: auto; /* Pushes usage to the bottom if content is short */
+    width: 100%;
   }
 }
 
@@ -226,11 +257,29 @@
 .level-introduction {
   animation: fadeIn 0.5s ease-in-out;
   max-width: 800px;
-  
+
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+}
+
+// Lesson scrollable content area
+.lesson-scrollable-content {
+  position: relative;
+  padding-top: 70px; /* Space for fixed header */
+  padding-bottom: 100px; /* Space for fixed footer */
+  //overflow-y: auto; /* Enable scrolling */
+  height: 100vh; /* Take full viewport height */
+  width: 100%;
+  max-width: 1000px; /* Max width for content */
+  margin: 0 auto; /* Center content */
 }
 
 // Footer
@@ -242,15 +291,16 @@
   padding: 1rem;
   background-color: var(--bg-color);
   border-top: 1px solid rgba(var(--text-color), 0.1);
-  
+  z-index: 100; /* Ensure it stays on top */
+
   .content-footer {
     @include flex-between;
     max-width: 1200px;
     margin: 0 auto;
-    
+
     .status-resutl-question {
       @include flex-center;
-      
+
       .text {
         margin-left: 1rem;
         font-weight: 500;

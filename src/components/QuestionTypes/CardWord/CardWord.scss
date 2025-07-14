@@ -22,8 +22,8 @@
     margin-bottom: 30px;
     padding: 20px;
     border-radius: 12px;
-    background-color: #1f2937;
-    border: 2px solid #374151;
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-border);
     min-height: 80px;
   }
 
@@ -54,7 +54,7 @@
   &__dropzone {
     width: 100%;
     min-height: 80px;
-    border-bottom: 2px solid #374151;
+    border-bottom: 2px solid var(--color-border);
     margin-bottom: 30px;
     padding-bottom: 10px;
     display: flex;
@@ -73,12 +73,12 @@
 }
 
 .word-card {
-  background-color: #2a3a4a;
+  background-color: var(--color-surface);
   padding: 12px 20px;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  border: 2px solid #4b5563;
+  border: 2px solid var(--color-border);
   font-size: 18px;
   color: var(--text-color);
   user-select: none;
@@ -100,7 +100,7 @@
   &--selected {
     opacity: 0.4;
     cursor: not-allowed;
-    background-color: #1f2937;
+    background-color: var(--color-surface);
     border-color: transparent;
     
     &:hover {

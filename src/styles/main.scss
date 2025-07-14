@@ -1,8 +1,10 @@
+//@import '../../pages/WelcomePage/index.css';
+@import '../pages/WelcomePage/index.css';
 @import 'variables/colors';
 @import 'variables/mixins';
 
 // Import component styles
-@import 'components/Lesson/lesson';
+@import 'components/Lesson/_lesson';
 @import 'components/QuestionTypes/questionTypes';
 
 // Global styles
@@ -42,11 +44,11 @@ body {
   @include button-primary;
   box-shadow: none;
   border: none;
-  
+
   &.success {
     background-color: $success-color !important;
   }
-  
+
   &.disabled {
     background-color: $slate-gray;
     cursor: not-allowed;
@@ -58,7 +60,7 @@ body {
 .radioPlay {
   margin-right: 7px;
   color: var(--accent-color);
-  
+
   button {
     color: var(--accent-color);
     background: none;

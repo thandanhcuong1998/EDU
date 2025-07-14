@@ -1,5 +1,10 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { BookOpenText, Lightbulb, GraduationCap } from 'lucide-react';
+import {
+   BookOpenText,
+   Lightbulb,
+   GraduationCap,
+   CheckCircle2,
+} from 'lucide-react';
 import Question from './Question/Question.jsx';
 import { useLessionHook } from '../hooks/useLessionHook.js';
 import ListQuestionFakeDataLession from '../data/ListQuestionFakeDataLession.jsx';
@@ -13,7 +18,6 @@ import {
    updateQuestionIndex,
    setLessonQuestions,
 } from '../redux/lessonSlice.js';
-
 
 export default function Lession() {
    // Get URL parameters for dynamic lesson selection
@@ -82,24 +86,31 @@ export default function Lession() {
             ListQuestionFakeDataLession[jlptLevel][topic][lessonType]
          ) {
             // Dispatch action to set questions in Redux store
-            dispatch(setLessonQuestions({
-               questions: ListQuestionFakeDataLession[jlptLevel][topic][lessonType]
-            }));
+            dispatch(
+               setLessonQuestions({
+                  questions:
+                     ListQuestionFakeDataLession[jlptLevel][topic][lessonType],
+               })
+            );
          } else {
             // Fallback to default content if requested path doesn't exist
             console.warn(
                `Lesson content not found for ${jlptLevel}.${topic}.${lessonType}, using default content`
             );
-            dispatch(setLessonQuestions({
-               questions: ListQuestionFakeDataLession.N5.orderFood.level1
-            }));
+            dispatch(
+               setLessonQuestions({
+                  questions: ListQuestionFakeDataLession.N5.orderFood.level1,
+               })
+            );
          }
       } catch (error) {
          console.error('Error loading lesson content:', error);
          // Fallback to default content in case of error
-         dispatch(setLessonQuestions({
-            questions: ListQuestionFakeDataLession.N5.orderFood.level1
-         }));
+         dispatch(
+            setLessonQuestions({
+               questions: ListQuestionFakeDataLession.N5.orderFood.level1,
+            })
+         );
       }
    }, [jlptLevel, topic, lessonType, dispatch]);
    return (
@@ -123,7 +134,9 @@ export default function Lession() {
                            createCombinedQuestions(nextLevelInfo);
 
                         // Update Redux store with the new questions
-                        dispatch(setLessonQuestions({ questions: combinedQuestions }));
+                        dispatch(
+                           setLessonQuestions({ questions: combinedQuestions })
+                        );
 
                         // Navigate to the next level
                         navigate(
@@ -137,26 +150,20 @@ export default function Lession() {
                />
             </div>
          )}
-         <div className="container-fluid d-flex justify-content-center align-items-center">
+         <div className="container-fluid">
             <div className="row">
                <div className="col-md-12">
-                  {/* Sử dụng lớp Tailwind thay thế nếu có thể */}
-                  <div className="max-w-5xl mx-auto h-[80vh]">
-                     {' '}
-                     {/* Ví dụ thay thế w-1000 và height-80vh */}
-                     <div className="header-top d-flex align-items-center">
-                        <ProgressBar
-                           now={progressBar}
-                           // Cân nhắc dùng lớp Tailwind cho width nếu ProgressBar hỗ trợ className
-                           style={{ width: '95%' }} // Hoặc dùng % hay lớp w-[950px]
-                        />
+                  <div className="lesson-scrollable-content">
+                     <div className="header-top">
+                        <ProgressBar now={progressBar} />
                      </div>
                      <div className="question-step text-white d-flex justify-content-center align-items-center flex-column">
                         {/* Display lesson title if it's a theory lesson */}
                         {lessonType === 'theory' && currentQuestions.title && (
                            <div className="theory-header">
                               <h2 className="theory-title">
-                                 <BookOpenText size={32} /> {currentQuestions.title}
+                                 <BookOpenText size={32} />{' '}
+                                 {currentQuestions.title}
                               </h2>
                            </div>
                         )}
@@ -166,7 +173,10 @@ export default function Lession() {
                            <div className="theory-content-blocks">
                               {currentQuestions.content.map(
                                  (paragraph, index) => (
-                                    <div key={index} className="theory-content-block">
+                                    <div
+                                       key={index}
+                                       className="theory-content-block"
+                                    >
                                        <p>{paragraph}</p>
                                     </div>
                                  )
@@ -177,7 +187,11 @@ export default function Lession() {
                                  currentQuestions.vocabulary.length > 0 && (
                                     <div className="vocabulary-section">
                                        <h3 className="section-title">
-                                          <Lightbulb size={24} /> {translations.learn.lessons.vocabulary}
+                                          <Lightbulb size={24} />{' '}
+                                          {
+                                             translations.learn.lessons
+                                                .vocabulary
+                                          }
                                        </h3>
                                        <div className="vocabulary-list">
                                           {currentQuestions.vocabulary.map(
@@ -200,7 +214,8 @@ export default function Lession() {
                                  currentQuestions.grammar.length > 0 && (
                                     <div className="grammar-section">
                                        <h3 className="section-title">
-                                          <GraduationCap size={24} /> {translations.learn.lessons.grammar}
+                                          <GraduationCap size={24} />{' '}
+                                          {translations.learn.lessons.grammar}
                                        </h3>
                                        <ul className="grammar-list">
                                           {currentQuestions.grammar.map(
@@ -218,10 +233,11 @@ export default function Lession() {
                                                    {item.examples && (
                                                       <ul className="grammar-examples">
                                                          {item.examples.map(
-                                                            (example, index_) => (
-                                                               <li
-                                                                  key={index_}
-                                                               >
+                                                            (
+                                                               example,
+                                                               index_
+                                                            ) => (
+                                                               <li key={index_}>
                                                                   {example}
                                                                </li>
                                                             )
@@ -350,14 +366,17 @@ export default function Lession() {
                         onClick={handleButtonClick}
                         // Sử dụng Tailwind classes cho trạng thái button
                         className={`py-2 px-6 rounded text-white font-semibold button-check-question ${
-                           (lessonType === 'theory' || isActiveButtonContinue) && currentQuestions.length > 0
+                           (lessonType === 'theory' ||
+                              isActiveButtonContinue) &&
+                           currentQuestions.length > 0
                               ? `theme-bg ${isCorrect === false ? 'bg-danger' : ''}`
                               : 'bg-slate-gray cursor-not-allowed opacity-50' // Lớp disabled từ config Tailwind
                         }`}
                         disabled={
                            (lessonType !== 'theory' &&
-                           !isActiveButtonContinue &&
-                           isCorrect === null) || currentQuestions.length === 0
+                              !isActiveButtonContinue &&
+                              isCorrect === null) ||
+                           currentQuestions.length === 0
                         } // Enable button on theory pages
                      >
                         {buttonValue}

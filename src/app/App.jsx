@@ -5,7 +5,7 @@ import router from './router/index.jsx';
 import { LanguageProvider, LanguageContext } from './providers/LanguageProvider.jsx';
 import ToastContainer from '@/shared/ui/Toast/ToastContainer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/App.css';
+
 import './styles/theme.css'; // Import our new theme system
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '@/features/authentication/state/authSlice.js';

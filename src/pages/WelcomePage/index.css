@@ -1,7 +1,6 @@
-.welcome-root,
-.lession-root {
+.welcome-root, .lession-root {
     height: 100vh;
-    background: rgb(19, 31, 36);
+    background: var(--color-background);
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -12,14 +11,14 @@
 
 .chat-bubble {
     position: relative;
-    background: rgb(19, 31, 36);
-    color: white;
+    background: var(--color-surface);
+    color: var(--color-text-primary);
     padding: 10px 15px;
     border-radius: 10px;
     width: 300px;
     max-width: 400px;
     margin: 20px;
-    border: 2px solid #6a6a6a;
+    border: 2px solid var(--color-border);
     font-size: 14px;
 }
 
@@ -30,7 +29,7 @@
     left: 88px; /* Định vị mũi tên */
     border-width: 10px;
     border-style: solid;
-    border-color: #6a6a6a transparent transparent transparent; /* Mũi tên chỉ vào hộp thoại */
+    border-color: var(--color-border) transparent transparent transparent; /* Mũi tên chỉ vào hộp thoại */
 }
 
 .fade-in {

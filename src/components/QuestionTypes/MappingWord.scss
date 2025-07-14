@@ -37,8 +37,8 @@
 }
 
 .mapping-card {
-  background-color: #1f2937;
-  border: 2px solid #374151;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
   border-radius: 12px;
   padding: 15px 20px;
   cursor: pointer;
@@ -54,7 +54,7 @@
 
   &--selected {
     border-color: var(--primary-color);
-    background-color: lighten($color: #1f2937, $amount: 5);
+    background-color: var(--color-background);
     transform: scale(1.02);
   }
 
