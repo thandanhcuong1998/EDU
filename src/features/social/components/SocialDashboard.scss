@@ -1,0 +1,237 @@
+.social-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 12px 0;
+      background: linear-gradient(135deg, var(--primary-color), #9C27B0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dashboard-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  .tab-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 140px;
+      justify-content: center;
+
+      &:hover {
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      &.active {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .tab-icon {
+        font-size: 1.2rem;
+      }
+
+      .tab-label {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .tab-content {
+    margin-bottom: 32px;
+  }
+
+  .social-stats {
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+
+      .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+          font-size: 2.5rem;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--bg-secondary);
+          border-radius: 12px;
+          flex-shrink: 0;
+        }
+
+        .stat-info {
+          flex: 1;
+
+          .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+          }
+
+          .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .social-dashboard {
+    padding: 16px;
+
+    .dashboard-header {
+      margin-bottom: 24px;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .dashboard-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    .tab-navigation {
+      margin-bottom: 24px;
+      padding: 6px;
+
+      .tab-btn {
+        padding: 10px 16px;
+        min-width: 120px;
+        font-size: 0.9rem;
+
+        .tab-icon {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .social-stats {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+
+        .stat-card {
+          padding: 16px;
+          gap: 12px;
+
+          .stat-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+          }
+
+          .stat-info {
+            .stat-value {
+              font-size: 1.5rem;
+            }
+
+            .stat-label {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .social-dashboard {
+    .dashboard-header {
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .tab-navigation {
+      flex-direction: column;
+      gap: 4px;
+
+      .tab-btn {
+        min-width: auto;
+        width: 100%;
+      }
+    }
+
+    .social-stats {
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+
+        .stat-card {
+          flex-direction: column;
+          text-align: center;
+          gap: 12px;
+
+          .stat-info {
+            .stat-value {
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+} 

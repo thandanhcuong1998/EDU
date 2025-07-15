@@ -5,21 +5,21 @@
 
 const environment = {
   // API URLs
-  apiUrl: process.env.REACT_APP_API_URL || 'https://api.japanese-edu.com',
-  audioApiUrl: process.env.REACT_APP_AUDIO_API_URL || 'https://proxy.junookyo.workers.dev/',
+  apiUrl: import.meta.env.VITE_API_URL || 'https://api.japanese-edu.com',
+  audioApiUrl: import.meta.env.VITE_AUDIO_API_URL || 'https://proxy.junookyo.workers.dev/',
   
   // Environment
-  environment: process.env.REACT_APP_ENV || 'development',
-  isDevelopment: process.env.REACT_APP_ENV === 'development',
-  isProduction: process.env.REACT_APP_ENV === 'production',
+  environment: import.meta.env.VITE_ENV || 'development',
+  isDevelopment: import.meta.env.VITE_ENV === 'development',
+  isProduction: import.meta.env.VITE_ENV === 'production',
   
   // Feature Flags
-  enableLogging: process.env.REACT_APP_ENABLE_LOGGING === 'true',
-  enableMockData: process.env.REACT_APP_ENABLE_MOCK_DATA === 'true',
+  enableLogging: import.meta.env.VITE_ENABLE_LOGGING === 'true',
+  enableMockData: import.meta.env.VITE_ENABLE_MOCK_DATA === 'true',
   
   // Utility function to log only in development
   log: (...arguments_) => {
-    if (process.env.REACT_APP_ENABLE_LOGGING === 'true') {
+    if (import.meta.env.VITE_ENABLE_LOGGING === 'true') {
       console.log(...arguments_);
     }
   },

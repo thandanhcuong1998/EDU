@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Volume2 } from 'lucide-react';
 import useCardWordHook from './useCardWordHook.jsx';
+import audioService from '@/shared/services/audioService.js';
 import './CardWord.scss';
 
-const WordCard = ({ word, onClick, isSelected, draggableProps }) => (
+const WordCard = ({ word, onClick, isSelected, draggableProps, onPlayAudio }) => (
   <div
     className={`word-card ${isSelected ? 'word-card--selected' : ''}`}
     onClick={() => !isSelected && onClick(word)}
@@ -20,6 +21,16 @@ const WordCard = ({ word, onClick, isSelected, draggableProps }) => (
         </>
       )}
     </ruby>
+    <button 
+      className="word-card__audio-btn"
+      onClick={(e) => {
+        e.stopPropagation();
+        onPlayAudio(word);
+      }}
+      title="Nghe phát âm"
+    >
+      <Volume2 size={16} />
+    </button>
   </div>
 );
 
@@ -38,8 +49,26 @@ const CardWord = ({
     handleDragOver,
     handleDrop,
     handleDragEnd,
-    handleOnClickPlayAudio,
   } = useCardWordHook(onAnswerSelected);
+
+  // Xử lý phát âm thanh cho từ vựng
+  const handlePlayAudio = async (word) => {
+    if (word.pronunciation) {
+      await audioService.playJapaneseWord(word.pronunciation);
+    } else if (word.text) {
+      await audioService.playJapaneseWord(word.text);
+    }
+  };
+
+  // Xử lý phát âm thanh cho hint
+  const handlePlayHintAudio = async () => {
+    if (type === 'card-word-english' && questionData.hintToken) {
+      const hintText = questionData.hintToken.map(token => token.text).join(' ');
+      await audioService.playJapaneseSentence(hintText);
+    } else if (questionData.hintToken) {
+      await audioService.playJapaneseSentence(questionData.hintToken);
+    }
+  };
 
   useEffect(() => {
     if (questionData.options) {
@@ -70,11 +99,13 @@ const CardWord = ({
       <h3 className="card-word-question__title">{questionData.title}</h3>
       
       <div className="card-word-question__hint-container">
-        {type === 'card-word-english' && (
-          <button className="card-word-question__play-btn" onClick={() => handleOnClickPlayAudio(questionData)}>
-            <Volume2 size={28} />
-          </button>
-        )}
+        <button 
+          className="card-word-question__play-btn" 
+          onClick={handlePlayHintAudio}
+          title="Nghe phát âm"
+        >
+          <Volume2 size={28} />
+        </button>
         <Hint />
       </div>
       
@@ -84,6 +115,7 @@ const CardWord = ({
             key={word.id} 
             word={word} 
             onClick={deselectWord}
+            onPlayAudio={handlePlayAudio}
             draggableProps={{
               draggable: true,
               onDragStart: () => handleDragStart(index),
@@ -100,6 +132,7 @@ const CardWord = ({
             key={word.id} 
             word={word} 
             onClick={selectWord} 
+            onPlayAudio={handlePlayAudio}
             isSelected={false}
           />
         ))}

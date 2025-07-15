@@ -1,0 +1,618 @@
+.friends-list {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+  .friends-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .tab-navigation {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 4px;
+
+      .tab-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--text-secondary);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+
+        &:hover {
+          color: var(--text-primary);
+        }
+
+        &.active {
+          background: var(--primary-color);
+          color: white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  .friends-content {
+    .friends-section {
+      .online-friends {
+        margin-bottom: 24px;
+
+        h3 {
+          margin: 0 0 16px 0;
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+      }
+
+      .all-friends {
+        h3 {
+          margin: 0 0 16px 0;
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+      }
+
+      .friends-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+
+        .friend-card {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-secondary);
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border: 2px solid transparent;
+          position: relative;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          }
+
+          &.online {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.05);
+          }
+
+          .friend-avatar {
+            position: relative;
+            min-width: 50px;
+
+            .avatar-emoji {
+              font-size: 2.5rem;
+              display: block;
+            }
+
+            .online-indicator {
+              position: absolute;
+              bottom: 2px;
+              right: 2px;
+              width: 12px;
+              height: 12px;
+              background: #4CAF50;
+              border: 2px solid var(--card-bg);
+              border-radius: 50%;
+            }
+          }
+
+          .friend-info {
+            flex: 1;
+            min-width: 0;
+
+            .friend-name {
+              font-size: 1rem;
+              font-weight: 600;
+              color: var(--text-primary);
+              margin-bottom: 4px;
+            }
+
+            .friend-level {
+              margin-bottom: 8px;
+
+              .level-badge {
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: white;
+              }
+            }
+
+            .friend-stats {
+              display: flex;
+              gap: 12px;
+              margin-bottom: 4px;
+
+              .stat {
+                font-size: 0.8rem;
+                color: var(--text-secondary);
+              }
+            }
+
+            .last-active {
+              font-size: 0.75rem;
+              color: var(--text-secondary);
+              opacity: 0.8;
+            }
+          }
+
+          .friend-actions {
+            .action-btn {
+              background: none;
+              border: none;
+              font-size: 1rem;
+              cursor: pointer;
+              padding: 4px;
+              border-radius: 4px;
+              transition: all 0.2s ease;
+
+              &:hover {
+                background: var(--border-color);
+              }
+            }
+          }
+        }
+      }
+
+      .no-friends {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-secondary);
+
+        .no-friends-icon {
+          font-size: 3rem;
+          margin-bottom: 16px;
+          opacity: 0.5;
+        }
+
+        p {
+          margin: 0 0 8px 0;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        small {
+          font-size: 0.9rem;
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .requests-section {
+      h3 {
+        margin: 0 0 16px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .requests-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 16px;
+
+        .friend-request-card {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-secondary);
+          border-radius: 12px;
+          border: 2px solid #FF9800;
+
+          .request-avatar {
+            min-width: 50px;
+
+            .avatar-emoji {
+              font-size: 2.5rem;
+              display: block;
+            }
+          }
+
+          .request-info {
+            flex: 1;
+            min-width: 0;
+
+            .request-name {
+              font-size: 1rem;
+              font-weight: 600;
+              color: var(--text-primary);
+              margin-bottom: 4px;
+            }
+
+            .request-level {
+              margin-bottom: 8px;
+
+              .level-badge {
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: white;
+              }
+            }
+
+            .request-message {
+              font-size: 0.85rem;
+              color: var(--text-secondary);
+              margin-bottom: 8px;
+              line-height: 1.4;
+            }
+
+            .request-time {
+              font-size: 0.75rem;
+              color: var(--text-secondary);
+              opacity: 0.8;
+            }
+          }
+
+          .request-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .action-btn {
+              width: 32px;
+              height: 32px;
+              border: none;
+              border-radius: 50%;
+              font-size: 1rem;
+              cursor: pointer;
+              transition: all 0.2s ease;
+
+              &.accept-btn {
+                background: #4CAF50;
+                color: white;
+
+                &:hover {
+                  background: #45a049;
+                }
+              }
+
+              &.reject-btn {
+                background: #F44336;
+                color: white;
+
+                &:hover {
+                  background: #da190b;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .no-requests {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-secondary);
+
+        .no-requests-icon {
+          font-size: 3rem;
+          margin-bottom: 16px;
+          opacity: 0.5;
+        }
+
+        p {
+          margin: 0 0 8px 0;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        small {
+          font-size: 0.9rem;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
+// Modal styles
+.friend-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+
+  .friend-modal {
+    background: var(--card-bg);
+    border-radius: 16px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+
+    .modal-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px;
+
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: var(--bg-secondary);
+          color: var(--text-primary);
+        }
+      }
+    }
+
+    .modal-content {
+      padding: 0 24px 24px;
+
+      .friend-detail {
+        text-align: center;
+
+        .detail-avatar {
+          position: relative;
+          display: inline-block;
+          margin-bottom: 16px;
+
+          .avatar-emoji {
+            font-size: 4rem;
+          }
+
+          .online-indicator {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 16px;
+            height: 16px;
+            background: #4CAF50;
+            border: 3px solid var(--card-bg);
+            border-radius: 50%;
+          }
+        }
+
+        h2 {
+          margin: 0 0 4px 0;
+          font-size: 1.4rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        .friend-username {
+          margin: 0 0 20px 0;
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+        }
+
+        .friend-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-bottom: 24px;
+
+          .stat-item {
+            text-align: center;
+
+            .stat-value {
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--primary-color);
+              margin-bottom: 4px;
+            }
+
+            .stat-label {
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+            }
+          }
+        }
+
+        .friend-actions-modal {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+
+          button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &.btn-primary {
+              background: var(--primary-color);
+              color: white;
+
+              &:hover {
+                background: var(--primary-color-dark);
+              }
+            }
+
+            &.btn-secondary {
+              background: var(--bg-secondary);
+              color: var(--text-primary);
+              border: 1px solid var(--border-color);
+
+              &:hover {
+                background: var(--border-color);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .friends-list {
+    padding: 16px;
+
+    .friends-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+
+      .tab-navigation {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .friends-content {
+      .friends-section {
+        .friends-grid {
+          grid-template-columns: 1fr;
+
+          .friend-card {
+            padding: 12px;
+
+            .friend-avatar {
+              .avatar-emoji {
+                font-size: 2rem;
+              }
+            }
+
+            .friend-info {
+              .friend-stats {
+                flex-direction: column;
+                gap: 4px;
+              }
+            }
+          }
+        }
+      }
+
+      .requests-section {
+        .requests-grid {
+          grid-template-columns: 1fr;
+
+          .friend-request-card {
+            padding: 12px;
+
+            .request-avatar {
+              .avatar-emoji {
+                font-size: 2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .friend-modal-overlay {
+    .friend-modal {
+      width: 95%;
+      margin: 20px;
+
+      .modal-content {
+        padding: 0 16px 16px;
+
+        .friend-detail {
+          .detail-avatar {
+            .avatar-emoji {
+              font-size: 3rem;
+            }
+          }
+
+          h2 {
+            font-size: 1.2rem;
+          }
+
+          .friend-stats-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+
+          .friend-actions-modal {
+            flex-direction: column;
+
+            button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .friends-list {
+    .friends-content {
+      .friends-section {
+        .friends-grid {
+          .friend-card {
+            flex-direction: column;
+            text-align: center;
+            gap: 8px;
+
+            .friend-info {
+              .friend-stats {
+                justify-content: center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} 

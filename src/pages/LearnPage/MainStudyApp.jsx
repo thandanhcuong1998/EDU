@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { LayoutDashboard, Book, Languages, Trophy, User } from 'lucide-react';
+import { LayoutDashboard, Book, Languages, Trophy, User, RefreshCw } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link, Outlet } from 'react-router-dom';
 import { logout } from '@/features/authentication/state/authSlice.js';
@@ -12,6 +12,8 @@ import './assets/LearnPage.css'; // Import the main layout CSS
 
 import Logo from './Logo.jsx';
 import ThemeToggle from '@/features/theme/components/ThemeToggle.jsx';
+import AudioControls from '@/shared/ui/AudioControls/AudioControls.jsx';
+import XPDisplay from '@/features/xp/components/XPDisplay.jsx';
 import Sidebar from '@/features/learn/components/Sidebar.jsx';
 import DailyChallenge from '@/features/learn/components/DailyChallenge.jsx';
 
@@ -20,6 +22,7 @@ export default function MainStudyApp() {
         { key: 'dashboard', title: 'Dashboard', icon: <LayoutDashboard className="lucide" />, path: '/learn' },
         { key: 'learn', title: 'Learn', icon: <Book className="lucide" />, path: '/learn/path' },
         { key: 'characters', title: 'Characters', icon: <Languages className="lucide" />, path: '/learn/characters' },
+        { key: 'srs-review', title: 'Ôn tập', icon: <RefreshCw className="lucide" />, path: '/srs-review' },
         { key: 'leaderboard', title: 'Leaderboards', icon: <Trophy className="lucide" />, path: '/leaderboard' },
         { key: 'profile', title: 'Profile', icon: <User className="lucide" />, path: '/profile' },
     ]);
@@ -53,7 +56,9 @@ export default function MainStudyApp() {
                     ))}
                 </Nav>
                 <div className="theme-toggle-container">
+                    <XPDisplay className="xp-display--compact" />
                     <ThemeToggle />
+                    <AudioControls />
                 </div>
                 <button className="logout-button" onClick={handleLogout}>
                     Đăng xuất

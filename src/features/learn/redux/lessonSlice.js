@@ -5,6 +5,9 @@ import {
    checkCardWordAnswer,
 } from '@/shared/lib/answerCheckers.js';
 import { arraysEqual } from '@/shared/lib/util.jsx';
+import audioService from '@/shared/services/audioService.js';
+import srsService from '@/shared/services/srsService.js';
+import xpService from '@/shared/services/xpService.js';
 
 /**
  * Initial state for the lesson question choice reducer
@@ -107,6 +110,48 @@ const lessionQuestionChoiceSlice = createSlice({
          state.isCorrect = isCorrect;
          updateProgressBar(state, isCorrect);
          updateFailedQuestions(state, index, isCorrect);
+
+         // Play feedback sound
+         audioService.playFeedbackSound(isCorrect);
+
+         // Update SRS data
+         if (currentQuestion && currentQuestion.id) {
+            // Khởi tạo SRS item nếu chưa có
+            let srsItem = srsService.getItemData(currentQuestion.id);
+            if (!srsItem) {
+               srsItem = srsService.initializeItem(
+                  currentQuestion.id,
+                  'question',
+                  {
+                     title: currentQuestion.title,
+                     type: currentQuestion.type,
+                     answer: currentQuestion.options ? currentQuestion.options[currentQuestion.correctAnswer] : 'Đáp án'
+                  }
+               );
+            }
+
+            // Đánh giá độ khó dựa trên kết quả
+            const difficulty = isCorrect ? 4 : 1; // 4 = dễ, 1 = rất khó
+            srsService.reviewItem(currentQuestion.id, difficulty);
+         }
+
+         // Update XP data
+         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+         if (currentUser && currentUser.id) {
+            // Khởi tạo XP user nếu chưa có
+            let xpUser = xpService.getUserData(currentUser.id);
+            if (!xpUser) {
+               xpUser = xpService.initializeUser(currentUser.id);
+            }
+
+            // Thêm XP dựa trên kết quả
+            const action = isCorrect ? 'questionCorrect' : 'questionIncorrect';
+            xpService.addXP(currentUser.id, action, {
+               questionId: currentQuestion?.id,
+               questionType: currentQuestion?.type,
+               isCorrect
+            });
+         }
       },
 
       /**

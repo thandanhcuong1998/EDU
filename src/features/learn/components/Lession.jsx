@@ -4,7 +4,12 @@ import {
    Lightbulb,
    GraduationCap,
    CheckCircle2,
+   XCircle,
 } from 'lucide-react';
+
+// Debug imports
+console.log('XCircle imported:', XCircle);
+console.log('CheckCircle2 imported:', CheckCircle2);
 import Question from './Question/Question.jsx';
 import { useLessionHook } from '../hooks/useLessionHook.js';
 import ListQuestionFakeDataLession from '../data/ListQuestionFakeDataLession.jsx';
@@ -20,371 +25,422 @@ import {
 } from '../redux/lessonSlice.js';
 
 export default function Lession() {
-   // Get URL parameters for dynamic lesson selection
-   const [searchParameters] = useSearchParams();
-   const jlptLevel = searchParameters.get('level') || 'N5';
-   const topic = searchParameters.get('topic') || 'orderFood';
-   const lessonType = searchParameters.get('type') || 'level1';
+   // Add error boundary
+   try {
+      // Get URL parameters for dynamic lesson selection
+      const [searchParameters] = useSearchParams();
+      const jlptLevel = searchParameters.get('level') || 'N5';
+      const topic = searchParameters.get('topic') || 'orderFood';
+      const lessonType = searchParameters.get('type') || 'level1';
 
-   // Get translations from context
-   const { translations } = useContext(LanguageContext);
+      // Get translations from context
+      const { translations } = useContext(LanguageContext);
 
-   // Navigation and dispatch hooks
-   const navigate = useNavigate();
-   const dispatch = useDispatch();
+      // Navigation and dispatch hooks
+      const navigate = useNavigate();
+      const dispatch = useDispatch();
 
-   // Get questions from Redux store
-   const currentQuestions = useSelector(
-      state => state.LessionQuestionChoice.questions
-   );
+      // Get questions from Redux store
+      const currentQuestions = useSelector(
+         state => state.LessionQuestionChoice.questions
+      );
 
-   // State to track whether to show introduction or questions
-   const [showIntroduction, setShowIntroduction] = useState(true);
+      // State to track whether to show introduction or questions
+      const [showIntroduction, setShowIntroduction] = useState(true);
 
-   // Get current question index from Redux store
-   const currentQuestionIndex = useSelector(
-      state => state.LessionQuestionChoice.currentQuestionIndex
-   );
+      // Get current question index from Redux store
+      const currentQuestionIndex = useSelector(
+         state => state.LessionQuestionChoice.currentQuestionIndex
+      );
 
-   // Get theme from Redux store
-   const { theme } = useSelector(state => state.theme);
+      // Get theme from Redux store
+      const { theme } = useSelector(state => state.theme);
 
-   // Get lesson hook functionality
-   const {
-      isActiveButtonContinue,
-      buttonValue,
-      setAnswerState,
-      handleButtonClick,
-      isCorrect,
-      progressBar,
-      showReport,
-      lessonStats,
-      setShowReport,
-      getNextLevel,
-      createCombinedQuestions,
-      getLessonName,
-   } = useLessionHook();
+      // Get lesson hook functionality
+      const {
+         isActiveButtonContinue,
+         buttonValue,
+         setAnswerState,
+         handleButtonClick,
+         isCorrect,
+         progressBar,
+         showReport,
+         lessonStats,
+         setShowReport,
+         getNextLevel,
+         createCombinedQuestions,
+         getLessonName,
+      } = useLessionHook();
 
-   // Update showIntroduction state when currentQuestionIndex changes
-   useEffect(() => {
-      // If currentQuestionIndex is greater than 0, we're no longer on the introduction screen
-      if (currentQuestionIndex > 0) {
-         setShowIntroduction(false);
-      }
-   }, [currentQuestionIndex]);
+      // Update showIntroduction state when currentQuestionIndex changes
+      useEffect(() => {
+         // If currentQuestionIndex is greater than 0, we're no longer on the introduction screen
+         if (currentQuestionIndex > 0) {
+            setShowIntroduction(false);
+         }
+      }, [currentQuestionIndex]);
 
-   // Load questions based on URL parameters
-   useEffect(() => {
-      try {
-         // Reset introduction state when lesson changes
-         setShowIntroduction(true);
+      // Load questions based on URL parameters
+      useEffect(() => {
+         try {
+            // Reset introduction state when lesson changes
+            setShowIntroduction(true);
 
-         // Check if the requested lesson content exists
-         if (
-            ListQuestionFakeDataLession[jlptLevel] &&
-            ListQuestionFakeDataLession[jlptLevel][topic] &&
-            ListQuestionFakeDataLession[jlptLevel][topic][lessonType]
-         ) {
-            // Dispatch action to set questions in Redux store
-            dispatch(
-               setLessonQuestions({
-                  questions:
-                     ListQuestionFakeDataLession[jlptLevel][topic][lessonType],
-               })
-            );
-         } else {
-            // Fallback to default content if requested path doesn't exist
-            console.warn(
-               `Lesson content not found for ${jlptLevel}.${topic}.${lessonType}, using default content`
-            );
+            // Check if the requested lesson content exists
+            if (
+               ListQuestionFakeDataLession[jlptLevel] &&
+               ListQuestionFakeDataLession[jlptLevel][topic] &&
+               ListQuestionFakeDataLession[jlptLevel][topic][lessonType]
+            ) {
+               // Dispatch action to set questions in Redux store
+               dispatch(
+                  setLessonQuestions({
+                     questions:
+                        ListQuestionFakeDataLession[jlptLevel][topic][lessonType],
+                  })
+               );
+            } else {
+               // Fallback to default content if requested path doesn't exist
+               console.warn(
+                  `Lesson content not found for ${jlptLevel}.${topic}.${lessonType}, using default content`
+               );
+               dispatch(
+                  setLessonQuestions({
+                     questions: ListQuestionFakeDataLession.N5.orderFood.level1,
+                  })
+               );
+            }
+         } catch (error) {
+            console.error('Error loading lesson content:', error);
+            // Fallback to default content in case of error
             dispatch(
                setLessonQuestions({
                   questions: ListQuestionFakeDataLession.N5.orderFood.level1,
                })
             );
          }
-      } catch (error) {
-         console.error('Error loading lesson content:', error);
-         // Fallback to default content in case of error
-         dispatch(
-            setLessonQuestions({
-               questions: ListQuestionFakeDataLession.N5.orderFood.level1,
-            })
-         );
-      }
-   }, [jlptLevel, topic, lessonType, dispatch]);
-   return (
-      <>
-         {showReport && lessonStats && (
-            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-               <LessonReport
-                  stats={lessonStats}
-                  onContinue={() => {
-                     setShowReport(false);
+      }, [jlptLevel, topic, lessonType, dispatch]);
+      return (
+         <>
+            {showReport && lessonStats && (
+               <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+                  <LessonReport
+                     stats={lessonStats}
+                     onContinue={() => {
+                        setShowReport(false);
 
-                     // Get next level info
-                     const nextLevelInfo = getNextLevel();
+                        // Get next level info
+                        const nextLevelInfo = getNextLevel();
 
-                     if (nextLevelInfo) {
-                        // Navigate to the next level
-                        const { level, topic, type } = nextLevelInfo;
+                        if (nextLevelInfo) {
+                           // Navigate to the next level
+                           const { level, topic, type } = nextLevelInfo;
 
-                        // Create combined questions with review
-                        const combinedQuestions =
-                           createCombinedQuestions(nextLevelInfo);
+                           // Create combined questions with review
+                           const combinedQuestions =
+                              createCombinedQuestions(nextLevelInfo);
 
-                        // Update Redux store with the new questions
-                        dispatch(
-                           setLessonQuestions({ questions: combinedQuestions })
-                        );
+                           // Update Redux store with the new questions
+                           dispatch(
+                              setLessonQuestions({ questions: combinedQuestions })
+                           );
 
-                        // Navigate to the next level
-                        navigate(
-                           `/lession?level=${level}&topic=${topic}&type=${type}`
-                        );
-                     } else {
-                        // If no next level, go back to learn page
-                        navigate('/learn');
-                     }
-                  }}
-               />
+                           // Navigate to the next level
+                           navigate(
+                              `/lession?level=${level}&topic=${topic}&type=${type}`
+                           );
+                        } else {
+                           // If no next level, go back to learn page
+                           navigate('/learn');
+                        }
+                     }}
+                  />
+               </div>
+            )}
+            <div className="container-fluid">
+               <div className="row">
+                  <div className="col-md-12">
+                     <div className="lesson-scrollable-content">
+                        <div className="header-top">
+                           <ProgressBar now={progressBar} />
+                        </div>
+                        <div className="question-step text-white d-flex justify-content-center align-items-center flex-column">
+                           {/* Display lesson title if it's a theory lesson */}
+                           {lessonType === 'theory' && currentQuestions.title && (
+                              <div className="theory-header">
+                                 <h2 className="theory-title">
+                                    {/* Test BookOpenText component */}
+                                    {(() => {
+                                       try {
+                                          console.log('Rendering BookOpenText with size 32');
+                                          return <BookOpenText size={32} />;
+                                       } catch (error) {
+                                          console.error('Error rendering BookOpenText:', error);
+                                          return <span>📚</span>;
+                                       }
+                                    })()}{' '}
+                                    {currentQuestions.title}
+                                 </h2>
+                              </div>
+                           )}
+
+                           {/* Display theory content if available */}
+                           {lessonType === 'theory' && currentQuestions.content ? (
+                              <div className="theory-content-blocks">
+                                 {currentQuestions.content.map(
+                                    (paragraph, index) => (
+                                       <div
+                                          key={index}
+                                          className="theory-content-block"
+                                       >
+                                          <p>{paragraph}</p>
+                                       </div>
+                                    )
+                                 )}
+
+                                 {/* Display vocabulary section if available */}
+                                 {currentQuestions.vocabulary &&
+                                    currentQuestions.vocabulary.length > 0 && (
+                                       <div className="vocabulary-section">
+                                          <h3 className="section-title">
+                                             <Lightbulb size={24} />{' '}
+                                             {
+                                                translations.learn.lessons
+                                                   .vocabulary
+                                             }
+                                          </h3>
+                                          <div className="vocabulary-list">
+                                             {currentQuestions.vocabulary.map(
+                                                (item, index) => (
+                                                   <VocabularyItem
+                                                      key={index}
+                                                      item={{
+                                                         ...item,
+                                                         audio: true, // Enable audio for all vocabulary items
+                                                      }}
+                                                   />
+                                                )
+                                             )}
+                                          </div>
+                                       </div>
+                                    )}
+
+                                 {/* Display grammar section if available */}
+                                 {currentQuestions.grammar &&
+                                    currentQuestions.grammar.length > 0 && (
+                                       <div className="grammar-section">
+                                          <h3 className="section-title">
+                                             <GraduationCap size={24} />{' '}
+                                             {translations.learn.lessons.grammar}
+                                          </h3>
+                                          <ul className="grammar-list">
+                                             {currentQuestions.grammar.map(
+                                                (item, index) => (
+                                                   <li
+                                                      key={index}
+                                                      className="grammar-item"
+                                                   >
+                                                      <p className="grammar-pattern">
+                                                         {item.pattern}
+                                                      </p>
+                                                      <p className="grammar-explanation">
+                                                         {item.explanation}
+                                                      </p>
+                                                      {item.examples && (
+                                                         <ul className="grammar-examples">
+                                                            {item.examples.map(
+                                                               (
+                                                                  example,
+                                                                  index_
+                                                               ) => (
+                                                                  <li key={index_}>
+                                                                     {example}
+                                                                  </li>
+                                                               )
+                                                            )}
+                                                         </ul>
+                                                      )}
+                                                   </li>
+                                                )
+                                             )}
+                                          </ul>
+                                       </div>
+                                    )}
+                              </div>
+                           ) : /* Display introduction or practice questions for non-theory lessons */
+                           lessonType !== 'theory' &&
+                             showIntroduction &&
+                             currentQuestions.introduction ? (
+                            <div className="level-introduction mb-6 p-4 bg-gray-800 rounded-lg">
+                               <h2 className="text-2xl font-bold mb-4">
+                                  {currentQuestions.introduction.title ||
+                                     `Giới thiệu ${getLessonName(lessonType)}`}
+                               </h2>
+
+                               {currentQuestions.introduction.content &&
+                                  currentQuestions.introduction.content.map(
+                                     (paragraph, index) => (
+                                        <p key={index} className="mb-3">
+                                           {paragraph}
+                                        </p>
+                                     )
+                                  )}
+
+                               {currentQuestions.introduction.vocabulary &&
+                                  currentQuestions.introduction.vocabulary
+                                     .length > 0 && (
+                                     <div className="vocabulary-section mt-4">
+                                        <h3 className="text-xl font-semibold mb-2">
+                                           Từ vựng mới
+                                        </h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                           {currentQuestions.introduction.vocabulary.map(
+                                              (item, index) => (
+                                                 <VocabularyItem
+                                                    key={index}
+                                                    item={{
+                                                       ...item,
+                                                       audio: true,
+                                                    }}
+                                                 />
+                                              )
+                                           )}
+                                        </div>
+                                     </div>
+                                  )}
+
+                               <div className="mt-6 text-center">
+                                  <button
+                                     onClick={() => {
+                                        setShowIntroduction(false);
+                                        dispatch(
+                                           updateQuestionIndex({
+                                              isIntroduction: true,
+                                           })
+                                        );
+                                     }}
+                                     className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-colors"
+                                  >
+                                     Bắt đầu học
+                                  </button>
+                               </div>
+                            </div>
+                           ) : (
+                              <Question
+                                 questions={currentQuestions}
+                                 isCorrectRedux={isCorrect}
+                                 setAnswerState={setAnswerState}
+                                 theme={theme}
+                              />
+                           )}
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-         )}
+            {/* Hide footer on introduction page */}
+            {!(
+               lessonType !== 'theory' &&
+               showIntroduction &&
+               currentQuestions.introduction
+            ) && (
+               <div className="footer-lession">
+                  {/* Cân nhắc dùng Tailwind cho layout footer */}
+                  <div className="content-footer content d-flex justify-content-around align-items-center">
+                     <div
+                        // Sử dụng Tailwind classes cho màu sắc thay vì .success/.isFail nếu có thể
+                        className={`status-resutl-question d-flex justify-content-center align-items-center ${isCorrect === null ? '' : isCorrect ? 'theme-text' : 'text-danger'}`} // Ví dụ dùng text-success/text-danger từ config
+                     >
+                        {isCorrect ? (
+                           <>
+                              {/* Test CheckCircle2 component */}
+                              {(() => {
+                                 try {
+                                    console.log('Rendering CheckCircle2 with props:', { className: 'theme-text-success', size: 80 });
+                                    return (
+                                       <CheckCircle2
+                                          className="theme-text-success" // Hoặc dùng theme('colors.success') nếu CSS xử lý
+                                          size={80} // Dùng size thay cho height/width
+                                       />
+                                    );
+                                 } catch (error) {
+                                    console.error('Error rendering CheckCircle2:', error);
+                                    return <div style={{ width: 80, height: 80, backgroundColor: '#28a745', borderRadius: '50%' }}></div>;
+                                 }
+                              })()}
+                              <div className="text">
+                                 <p>{translations.learn.feedback.greatJob}</p>
+                              </div>
+                           </>
+                        ) : isCorrect === false ? (
+                           <>
+                              {/* Test XCircle component */}
+                              {(() => {
+                                 try {
+                                    console.log('Rendering XCircle with props:', { color: '#bb4b42', size: 80 });
+                                    return (
+                                       <XCircle
+                                          color={'#bb4b42'} // Hoặc dùng theme('colors.danger')
+                                          size={80}
+                                       />
+                                    );
+                                 } catch (error) {
+                                    console.error('Error rendering XCircle:', error);
+                                    return <div style={{ width: 80, height: 80, backgroundColor: '#bb4b42', borderRadius: '50%' }}></div>;
+                                 }
+                              })()}
+                              <div className="text">
+                                 <p>{translations.learn.feedback.notCorrect}</p>
+                              </div>
+                           </>
+                        ) : (
+                           <div style={{ height: '80px', width: '80px' }}></div> // Placeholder để giữ layout
+                        )}
+                     </div>
+                     <div className="button button-check-question">
+                        <button
+                           onClick={handleButtonClick}
+                           // Sử dụng Tailwind classes cho trạng thái button
+                           className={`py-2 px-6 rounded text-white font-semibold button-check-question ${
+                              (lessonType === 'theory' ||
+                                 isActiveButtonContinue) &&
+                              currentQuestions.length > 0
+                                 ? `theme-bg ${isCorrect === false ? 'bg-danger' : ''}`
+                                 : 'bg-slate-gray cursor-not-allowed opacity-50' // Lớp disabled từ config Tailwind
+                           }`}
+                           disabled={
+                              (lessonType !== 'theory' &&
+                                 !isActiveButtonContinue &&
+                                 isCorrect === null) ||
+                              currentQuestions.length === 0
+                           } // Enable button on theory pages
+                        >
+                           {buttonValue}
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            )}
+         </>
+      );
+   } catch (error) {
+      console.error('Error in Lession component:', error);
+      return (
          <div className="container-fluid">
             <div className="row">
                <div className="col-md-12">
                   <div className="lesson-scrollable-content">
                      <div className="header-top">
-                        <ProgressBar now={progressBar} />
+                        <ProgressBar now={0} />
                      </div>
                      <div className="question-step text-white d-flex justify-content-center align-items-center flex-column">
-                        {/* Display lesson title if it's a theory lesson */}
-                        {lessonType === 'theory' && currentQuestions.title && (
-                           <div className="theory-header">
-                              <h2 className="theory-title">
-                                 <BookOpenText size={32} />{' '}
-                                 {currentQuestions.title}
-                              </h2>
-                           </div>
-                        )}
-
-                        {/* Display theory content if available */}
-                        {lessonType === 'theory' && currentQuestions.content ? (
-                           <div className="theory-content-blocks">
-                              {currentQuestions.content.map(
-                                 (paragraph, index) => (
-                                    <div
-                                       key={index}
-                                       className="theory-content-block"
-                                    >
-                                       <p>{paragraph}</p>
-                                    </div>
-                                 )
-                              )}
-
-                              {/* Display vocabulary section if available */}
-                              {currentQuestions.vocabulary &&
-                                 currentQuestions.vocabulary.length > 0 && (
-                                    <div className="vocabulary-section">
-                                       <h3 className="section-title">
-                                          <Lightbulb size={24} />{' '}
-                                          {
-                                             translations.learn.lessons
-                                                .vocabulary
-                                          }
-                                       </h3>
-                                       <div className="vocabulary-list">
-                                          {currentQuestions.vocabulary.map(
-                                             (item, index) => (
-                                                <VocabularyItem
-                                                   key={index}
-                                                   item={{
-                                                      ...item,
-                                                      audio: true, // Enable audio for all vocabulary items
-                                                   }}
-                                                />
-                                             )
-                                          )}
-                                       </div>
-                                    </div>
-                                 )}
-
-                              {/* Display grammar section if available */}
-                              {currentQuestions.grammar &&
-                                 currentQuestions.grammar.length > 0 && (
-                                    <div className="grammar-section">
-                                       <h3 className="section-title">
-                                          <GraduationCap size={24} />{' '}
-                                          {translations.learn.lessons.grammar}
-                                       </h3>
-                                       <ul className="grammar-list">
-                                          {currentQuestions.grammar.map(
-                                             (item, index) => (
-                                                <li
-                                                   key={index}
-                                                   className="grammar-item"
-                                                >
-                                                   <p className="grammar-pattern">
-                                                      {item.pattern}
-                                                   </p>
-                                                   <p className="grammar-explanation">
-                                                      {item.explanation}
-                                                   </p>
-                                                   {item.examples && (
-                                                      <ul className="grammar-examples">
-                                                         {item.examples.map(
-                                                            (
-                                                               example,
-                                                               index_
-                                                            ) => (
-                                                               <li key={index_}>
-                                                                  {example}
-                                                               </li>
-                                                            )
-                                                         )}
-                                                      </ul>
-                                                   )}
-                                                </li>
-                                             )
-                                          )}
-                                       </ul>
-                                    </div>
-                                 )}
-                           </div>
-                        ) : /* Display introduction or practice questions for non-theory lessons */
-                        lessonType !== 'theory' &&
-                          showIntroduction &&
-                          currentQuestions.introduction ? (
-                           <div className="level-introduction mb-6 p-4 bg-gray-800 rounded-lg">
-                              <h2 className="text-2xl font-bold mb-4">
-                                 {currentQuestions.introduction.title ||
-                                    `Giới thiệu ${getLessonName(lessonType)}`}
-                              </h2>
-
-                              {currentQuestions.introduction.content &&
-                                 currentQuestions.introduction.content.map(
-                                    (paragraph, index) => (
-                                       <p key={index} className="mb-3">
-                                          {paragraph}
-                                       </p>
-                                    )
-                                 )}
-
-                              {currentQuestions.introduction.vocabulary &&
-                                 currentQuestions.introduction.vocabulary
-                                    .length > 0 && (
-                                    <div className="vocabulary-section mt-4">
-                                       <h3 className="text-xl font-semibold mb-2">
-                                          Từ vựng mới
-                                       </h3>
-                                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                          {currentQuestions.introduction.vocabulary.map(
-                                             (item, index) => (
-                                                <VocabularyItem
-                                                   key={index}
-                                                   item={{
-                                                      ...item,
-                                                      audio: true,
-                                                   }}
-                                                />
-                                             )
-                                          )}
-                                       </div>
-                                    </div>
-                                 )}
-
-                              <div className="mt-6 text-center">
-                                 <button
-                                    onClick={() => {
-                                       setShowIntroduction(false);
-                                       dispatch(
-                                          updateQuestionIndex({
-                                             isIntroduction: true,
-                                          })
-                                       );
-                                    }}
-                                    className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-colors"
-                                 >
-                                    Bắt đầu học
-                                 </button>
-                              </div>
-                           </div>
-                        ) : (
-                           <Question
-                              questions={currentQuestions}
-                              isCorrectRedux={isCorrect}
-                              setAnswerState={setAnswerState}
-                              theme={theme}
-                           />
-                        )}
+                        <h2>Error loading lesson content.</h2>
+                        <p>Please try again later or contact support.</p>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-         {/* Hide footer on introduction page */}
-         {!(
-            lessonType !== 'theory' &&
-            showIntroduction &&
-            currentQuestions.introduction
-         ) && (
-            <div className="footer-lession">
-               {/* Cân nhắc dùng Tailwind cho layout footer */}
-               <div className="content-footer content d-flex justify-content-around align-items-center">
-                  <div
-                     // Sử dụng Tailwind classes cho màu sắc thay vì .success/.isFail nếu có thể
-                     className={`status-resutl-question d-flex justify-content-center align-items-center ${isCorrect === null ? '' : isCorrect ? 'theme-text' : 'text-danger'}`} // Ví dụ dùng text-success/text-danger từ config
-                  >
-                     {isCorrect ? (
-                        <>
-                           {/* Thay thế icon và props */}
-                           <CheckCircle2
-                              className="theme-text-success" // Hoặc dùng theme('colors.success') nếu CSS xử lý
-                              size={80} // Dùng size thay cho height/width
-                           />
-                           <div className="text">
-                              <p>{translations.learn.feedback.greatJob}</p>
-                           </div>
-                        </>
-                     ) : isCorrect === false ? (
-                        <>
-                           {/* Thay thế icon và props */}
-                           <XCircle
-                              color={'#bb4b42'} // Hoặc dùng theme('colors.danger')
-                              size={80}
-                           />
-                           <div className="text">
-                              <p>{translations.learn.feedback.notCorrect}</p>
-                           </div>
-                        </>
-                     ) : (
-                        <div style={{ height: '80px', width: '80px' }}></div> // Placeholder để giữ layout
-                     )}
-                  </div>
-                  <div className="button button-check-question">
-                     <button
-                        onClick={handleButtonClick}
-                        // Sử dụng Tailwind classes cho trạng thái button
-                        className={`py-2 px-6 rounded text-white font-semibold button-check-question ${
-                           (lessonType === 'theory' ||
-                              isActiveButtonContinue) &&
-                           currentQuestions.length > 0
-                              ? `theme-bg ${isCorrect === false ? 'bg-danger' : ''}`
-                              : 'bg-slate-gray cursor-not-allowed opacity-50' // Lớp disabled từ config Tailwind
-                        }`}
-                        disabled={
-                           (lessonType !== 'theory' &&
-                              !isActiveButtonContinue &&
-                              isCorrect === null) ||
-                           currentQuestions.length === 0
-                        } // Enable button on theory pages
-                     >
-                        {buttonValue}
-                     </button>
-                  </div>
-               </div>
-            </div>
-         )}
-      </>
-   );
+      );
+   }
 }

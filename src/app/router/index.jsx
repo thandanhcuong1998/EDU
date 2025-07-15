@@ -15,6 +15,7 @@ import ProtectedRoute from '@/shared/components/ProtectedRoute.jsx';
 import MainStudyApp from '@/pages/LearnPage/MainStudyApp.jsx';
 import DashboardPage from '@/pages/DashboardPage/index.jsx';
 import ReviewPage from '@/pages/ReviewPage/index.jsx';
+import SRSReview from '@/features/srs/components/SRSReview.jsx';
 
 const PATHS = {
    ROOT: '/',
@@ -32,6 +33,7 @@ const PATHS = {
    STEP_PROFICIENCY: 'step=proficiency',
    STEP_DAILY_GOAL: 'step=dailyGoal',
    REVIEW: '/review',
+   SRS_REVIEW: '/srs-review',
 };
 
 const router = createBrowserRouter([
@@ -161,6 +163,14 @@ const router = createBrowserRouter([
       element: (
          <div className="review-root">
             <ReviewPage />
+         </div>
+      ),
+   },
+   {
+      path: PATHS.SRS_REVIEW,
+      element: (
+         <div className="srs-review-root">
+            <SRSReview />
          </div>
       ),
    },

@@ -48,36 +48,15 @@ export const arraysEqual = (array1, array2) => {
    return true;
 };
 
+// Import AudioService để sử dụng thay vì có hàm riêng
+import audioService from '@/shared/services/audioService.js';
+
 export const playApiAudio = kanaCharacter => {
    if (!kanaCharacter) {
       console.warn('No character provided to play audio.');
       return;
    }
 
-   // --- Sử dụng API bạn cung cấp ---
-   const baseApiUrl = 'https://proxy.junookyo.workers.dev/';
-   const parameters = new URLSearchParams({
-      language: 'ja-JP',
-      text: kanaCharacter, // Ký tự kana cần đọc
-      speed: '1', // Tốc độ bạn đã cung cấp
-   });
-
-   // Tạo URL đầy đủ
-   const apiUrl = `${baseApiUrl}?${parameters.toString()}`;
-   console.log('Playing audio from:', apiUrl); // Log URL để kiểm tra
-
-   // Tạo đối tượng Audio và phát
-   try {
-      const audio = new Audio(apiUrl);
-      audio.play().catch(error => {
-         console.error('Error playing audio from API:', error);
-         // Có thể thông báo lỗi cho người dùng nếu cần
-         alert(
-            `Không thể phát âm thanh cho "${kanaCharacter}". Có lỗi xảy ra hoặc API không phản hồi.`
-         );
-      });
-   } catch (error) {
-      console.error('Error creating Audio object:', error);
-      alert(`Có lỗi khi tạo đối tượng Audio cho "${kanaCharacter}".`);
-   }
+   // Sử dụng AudioService thay vì tạo Audio object trực tiếp
+   audioService.playKanaAudio(kanaCharacter);
 };

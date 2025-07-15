@@ -1,0 +1,411 @@
+.activity-feed {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+  .feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .feed-actions {
+      .refresh-btn {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 8px 16px;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: var(--border-color);
+        }
+      }
+    }
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+
+    .filter-tab {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 8px 16px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+
+      &:hover {
+        color: var(--text-primary);
+        border-color: var(--primary-color);
+      }
+
+      &.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  .feed-content {
+    .activities-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .activity-card {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 12px;
+
+          .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .user-avatar {
+              .avatar-emoji {
+                font-size: 2.5rem;
+                display: block;
+              }
+            }
+
+            .user-details {
+              .user-name {
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                margin-bottom: 2px;
+              }
+
+              .activity-time {
+                font-size: 0.8rem;
+                color: var(--text-secondary);
+              }
+            }
+          }
+
+          .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          }
+        }
+
+        .activity-content {
+          margin-bottom: 16px;
+
+          .activity-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+          }
+
+          .activity-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 12px;
+          }
+
+          .xp-earned {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 20px;
+            padding: 6px 12px;
+
+            .xp-icon {
+              font-size: 0.9rem;
+            }
+
+            .xp-amount {
+              font-size: 0.85rem;
+              font-weight: 600;
+              color: #4CAF50;
+            }
+          }
+        }
+
+        .activity-footer {
+          display: flex;
+          gap: 16px;
+          border-top: 1px solid var(--border-color);
+          padding-top: 12px;
+
+          .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background: var(--bg-primary);
+              color: var(--text-primary);
+            }
+
+            .like-icon,
+            .comment-icon,
+            .share-icon {
+              font-size: 1rem;
+            }
+
+            .like-count,
+            .comment-count {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .load-more-section {
+        text-align: center;
+        padding: 20px 0;
+
+        .load-more-btn {
+          background: var(--primary-color);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          padding: 12px 24px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover:not(:disabled) {
+            background: var(--primary-color-dark);
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    .no-activities {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+
+      .no-activities-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        opacity: 0.5;
+      }
+
+      p {
+        margin: 0 0 8px 0;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      small {
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .loading-state {
+    text-align: center;
+    padding: 40px 20px;
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-color);
+      border-top: 3px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    h3 {
+      margin: 0 0 12px 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    p {
+      margin: 0 0 20px 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--primary-color-dark);
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .activity-feed {
+    padding: 16px;
+
+    .feed-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      .feed-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    .filter-tabs {
+      gap: 6px;
+
+      .filter-tab {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    .feed-content {
+      .activities-list {
+        .activity-card {
+          padding: 12px;
+
+          .activity-header {
+            .user-info {
+              .user-avatar {
+                .avatar-emoji {
+                  font-size: 2rem;
+                }
+              }
+            }
+
+            .activity-icon {
+              width: 35px;
+              height: 35px;
+              font-size: 1rem;
+            }
+          }
+
+          .activity-footer {
+            gap: 12px;
+
+            .action-btn {
+              padding: 4px 8px;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-feed {
+    .feed-content {
+      .activities-list {
+        .activity-card {
+          .activity-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+
+            .activity-icon {
+              align-self: flex-end;
+            }
+          }
+
+          .activity-footer {
+            justify-content: space-around;
+          }
+        }
+      }
+    }
+  }
+} 

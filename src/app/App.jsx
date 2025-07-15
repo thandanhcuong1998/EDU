@@ -4,6 +4,8 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router/index.jsx';
 import { LanguageProvider, LanguageContext } from './providers/LanguageProvider.jsx';
 import ToastContainer from '@/shared/ui/Toast/ToastContainer.jsx';
+import XPNotifications from '@/features/xp/components/XPNotifications.jsx';
+import BadgeNotification from '@/features/achievements/components/BadgeNotification.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './styles/theme.css'; // Import our new theme system
@@ -35,6 +37,8 @@ const ThemedApp = () => {
         <>
             <RouterProvider router={router} />
             <ToastContainer />
+            <XPNotifications />
+            <BadgeNotification />
         </>
     );
 };

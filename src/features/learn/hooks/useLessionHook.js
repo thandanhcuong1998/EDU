@@ -7,6 +7,7 @@ import {
 } from '../redux/lessonSlice.js';
 import {
    completeLevel,
+   updateSrsItem,
 } from '@/features/user-profile/state/UserProgressReducer.jsx';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ListQuestionFakeDataLession from '../data/ListQuestionFakeDataLession.jsx';
@@ -33,6 +34,12 @@ export const useLessionHook = () => {
    );
    const listQuestionFail = useSelector(
       state => state.LessionQuestionChoice.listQuestionFail
+   );
+   const currentQuestion = useSelector(
+      state => state.LessionQuestionChoice.currentQuestion
+   );
+   const userProgress = useSelector(
+      state => state.userProgress
    );
 
    const [isActiveButtonContinue, setIsActiveButtonContinue] = useState(false);
@@ -114,10 +121,15 @@ export const useLessionHook = () => {
    const checkAnswer = () => {
       if ('answer' in answerState) {
          dispatch(setAnswer(answerState));
-         const { isCorrect, currentQuestion } = LessionQuestionChoice;
-         const srsItem = userProgress.srsItems.find(item => item.questionId === currentQuestion.id);
-         const updatedSrsItem = srsService.calculateSrsItem(srsItem, isCorrect);
-         dispatch(updateSrsItem({ ...updatedSrsItem, questionId: currentQuestion.id }));
+         
+         // Sử dụng state từ useSelector
+         if (currentQuestion && userProgress?.srsItems) {
+            const srsItem = userProgress.srsItems.find(item => item.questionId === currentQuestion.id);
+            if (srsItem) {
+               const updatedSrsItem = srsService.calculateSrsItem(srsItem, isCorrect);
+               dispatch(updateSrsItem({ ...updatedSrsItem, questionId: currentQuestion.id }));
+            }
+         }
       }
    };
 

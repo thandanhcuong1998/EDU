@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RadioOption from './RadioOption';
+import { useAudio } from '@/shared/hooks/useAudio.js';
 import './Radio.scss';
 
 const Radio = ({
@@ -9,6 +10,7 @@ const Radio = ({
   isCorrect,
 }) => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+  const { playWord } = useAudio();
 
   useEffect(() => {
     // Reset selection when the question changes
@@ -25,6 +27,11 @@ const Radio = ({
         index: index + 1,
       },
     ]);
+
+    // Play pronunciation if available
+    if (questionData.pronunciation && questionData.pronunciation[index]) {
+      playWord(questionData.pronunciation[index]);
+    }
   };
 
   return (

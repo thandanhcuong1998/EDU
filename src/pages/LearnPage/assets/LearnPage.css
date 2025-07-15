@@ -57,6 +57,10 @@
 .theme-toggle-container {
   margin-top: auto; /* Pushes the theme toggle to the bottom */
   padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
 }
 
 /* Main Content Area */
