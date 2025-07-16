@@ -16,6 +16,11 @@ import MainStudyApp from '@/pages/LearnPage/MainStudyApp.jsx';
 import DashboardPage from '@/pages/DashboardPage/index.jsx';
 import ReviewPage from '@/pages/ReviewPage/index.jsx';
 import SRSReview from '@/features/srs/components/SRSReview.jsx';
+import SocialDashboard from '@/features/social/components/SocialDashboard.jsx';
+import GameCenter from '@/features/mini-games/components/GameCenter.jsx';
+import MemoryMatch from '@/features/mini-games/components/MemoryMatch.jsx';
+import WordScramble from '@/features/mini-games/components/WordScramble.jsx';
+import SpeedTyping from '@/features/mini-games/components/SpeedTyping.jsx';
 
 const PATHS = {
    ROOT: '/',
@@ -29,6 +34,8 @@ const PATHS = {
    CHARACTERS: 'characters',
    PROFILE: '/profile',
    LEADERBOARD: '/leaderboard',
+   SOCIAL: '/social',
+   GAMES: '/games',
    STEP_TWO: 'step=two',
    STEP_PROFICIENCY: 'step=proficiency',
    STEP_DAILY_GOAL: 'step=dailyGoal',
@@ -129,6 +136,26 @@ const router = createBrowserRouter([
                 {
                     path: PATHS.CHARACTERS,
                     element: <JapaneseAlphabet />,
+                },
+                {
+                    path: 'social',
+                    element: <SocialDashboard />,
+                },
+                {
+                    path: 'games',
+                    element: <GameCenter />,
+                },
+                {
+                    path: 'games/memory-match',
+                    element: <MemoryMatch />,
+                },
+                {
+                    path: 'games/word-scramble',
+                    element: <WordScramble />,
+                },
+                {
+                    path: 'games/speed-typing',
+                    element: <SpeedTyping />,
                 },
             ],
          },

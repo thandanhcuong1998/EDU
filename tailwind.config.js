@@ -1,6 +1,6 @@
 // tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
    content: [
       './index.html', // Nếu bạn dùng Vite hoặc có file index.html ở gốc
       './src/**/*.{js,ts,jsx,tsx}', // Quét tất cả các file JS/TS/JSX/TSX trong thư mục src

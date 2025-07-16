@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
-import { Tab, Nav } from 'react-bootstrap';
-import { Home, Languages, Trophy, User } from 'lucide-react';
+import { useState } from 'react';
+import { Home, Languages, Trophy, User, Users, Gamepad2 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { logout } from '@/features/authentication/state/authSlice.js';
 import { resetWelcomeState } from '@/features/welcome/state/welcomeSlice.js';
 import { resetProgress } from '@/features/user-profile/state/UserProgressReducer.jsx';
@@ -19,6 +18,7 @@ import Sidebar from '@/features/learn/components/Sidebar.jsx';
 import { Outlet } from 'react-router-dom';
 
 export default function MainLayout() {
+    const location = useLocation();
     const [listMenu] = useState([
         { key: 'learn', title: 'Learn', icon: <Home className="lucide" /> },
         { key: 'characters', title: 'Characters', icon: <Languages className="lucide" /> },
@@ -44,16 +44,21 @@ export default function MainLayout() {
                 <div className="logo-container">
                     <Logo />
                 </div>
-                <Nav variant="pills" className="nav-menu">
-                    {listMenu.map((menuItem) => (
-                        <Nav.Item key={menuItem.key}>
-                            <Link to={`/${menuItem.key}`} className="nav-link">
+                <nav className="nav-menu">
+                    {listMenu.map((menuItem) => {
+                        const isActive = location.pathname === `/${menuItem.key}`;
+                        return (
+                            <Link 
+                                key={menuItem.key} 
+                                to={`/${menuItem.key}`} 
+                                className={`nav-link ${isActive ? 'active' : ''}`}
+                            >
                                 {menuItem.icon}
                                 <span>{menuItem.title}</span>
                             </Link>
-                        </Nav.Item>
-                    ))}
-                </Nav>
+                        );
+                    })}
+                </nav>
                 <div className="theme-toggle-container">
                     <ThemeToggle />
                 </div>

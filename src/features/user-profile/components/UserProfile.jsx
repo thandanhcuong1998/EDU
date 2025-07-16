@@ -1,5 +1,5 @@
 
-import React, { useContext, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './UserProfile.css'; // We will create this CSS file
@@ -25,7 +25,28 @@ export default function UserProfile() {
 
     // Mock achievements based on user progress
     const achievements = useMemo(() => {
-        return userProgress.unlockedAchievements.map(id => achievementsData[id]);
+        // Create mock achievements data
+        const mockAchievementsData = {
+            'first_lesson': {
+                id: 'first_lesson',
+                name: 'Bước đầu tiên',
+                description: 'Hoàn thành bài học đầu tiên',
+                icon: '🎯'
+            },
+            'perfect_score': {
+                id: 'perfect_score',
+                name: 'Hoàn hảo',
+                description: 'Trả lời đúng 10 câu liên tiếp',
+                icon: '⭐'
+            },
+            'week_streak': {
+                id: 'week_streak',
+                name: 'Kiên trì',
+                description: 'Học liên tiếp 7 ngày',
+                icon: '🔥'
+            }
+        };
+        return userProgress.unlockedAchievements.map(id => mockAchievementsData[id]).filter(Boolean);
     }, [userProgress.unlockedAchievements]);
 
     return (

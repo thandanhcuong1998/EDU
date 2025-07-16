@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectNotifications, removeNotification } from '../state/xpSlice.js';
 import { X, Star, TrendingUp, Trophy } from 'lucide-react';

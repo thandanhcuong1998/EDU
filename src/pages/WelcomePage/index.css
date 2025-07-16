@@ -7,12 +7,13 @@
     align-items: center;
     font-family: 'Be Vietnam Pro', sans-serif;
     flex-direction: column;
+    color: var(--color-text-primary) !important;
 }
 
 .chat-bubble {
     position: relative;
     background: var(--color-surface);
-    color: var(--color-text-primary);
+    color: var(--color-text-primary) !important;
     padding: 10px 15px;
     border-radius: 10px;
     width: 300px;
@@ -20,6 +21,7 @@
     margin: 20px;
     border: 2px solid var(--color-border);
     font-size: 14px;
+    font-weight: 500;
 }
 
 .chat-bubble::after {
@@ -120,19 +122,24 @@
 
 .welcome-root ul.list-question-step li,
 .lession-root ul.list-question-step li {
-    padding: 8px 16px;
-    border: 2px solid rgb(55, 70, 79);
+    padding: 12px 16px;
+    border: 2px solid var(--color-border);
     border-radius: 15px;
     text-align: left;
     margin-bottom: 13px;
     font-size: 16px;
     white-space: pre-wrap;
+    color: var(--color-text-primary) !important;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .welcome-root ul.list-question-step li:hover,
 .lession-root ul.list-question-step li:hover {
-    background: rgb(33, 41, 47);
+    background: rgba(0, 168, 150, 0.05);
     cursor: pointer;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
 }
 
 .welcome-root ul.list-question-step li svg,
@@ -142,12 +149,33 @@
 
 .welcome-root ul.list-question-step li.active,
 .lession-root ul.list-question-step li.active {
-    border: 1px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    background-color: rgb(33, 41, 47);
+    background-color: rgba(0, 168, 150, 0.1);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 168, 150, 0.2);
 }
 
 .welcome-root .progress-bar,
 .lession-root .progress-bar {
     background-color: var(--primary-color) !important;
+}
+
+.loading-text {
+    color: var(--color-text-primary) !important;
+    font-weight: 500;
+}
+
+.welcome-title {
+    color: var(--color-text-primary) !important;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.question-step {
+    color: var(--color-text-primary) !important;
+}
+
+.question-step p {
+    color: var(--color-text-primary) !important;
 }

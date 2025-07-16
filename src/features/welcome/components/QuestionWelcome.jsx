@@ -54,8 +54,8 @@ const QuestionWelcome = ({ IDQuestionSet, title, listQuestionSet }) => {
                 />
                 <ProgressBar now={progressBar} style={{ width: '950px' }} />
             </div>
-            <h3 className="text-white m-5">{title}</h3>
-            <div className="question-step text-white d-flex justify-content-center align-items-center">
+            <h3 className="welcome-title m-5">{title}</h3>
+            <div className="question-step d-flex justify-content-center align-items-center">
                 <ul className="list-question-step">
                     {listQuestionSet.map((item, index) => (
                         <li

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { LayoutDashboard, Book, Languages, Trophy, User, RefreshCw } from 'lucide-react';
+import { LayoutDashboard, Book, Languages, Trophy, User, RefreshCw, Users, Gamepad2 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link, Outlet } from 'react-router-dom';
 import { logout } from '@/features/authentication/state/authSlice.js';
@@ -22,6 +22,8 @@ export default function MainStudyApp() {
         { key: 'dashboard', title: 'Dashboard', icon: <LayoutDashboard className="lucide" />, path: '/learn' },
         { key: 'learn', title: 'Learn', icon: <Book className="lucide" />, path: '/learn/path' },
         { key: 'characters', title: 'Characters', icon: <Languages className="lucide" />, path: '/learn/characters' },
+        { key: 'social', title: 'Social', icon: <Users className="lucide" />, path: '/learn/social' },
+        { key: 'games', title: 'Games', icon: <Gamepad2 className="lucide" />, path: '/learn/games' },
         { key: 'srs-review', title: 'Ôn tập', icon: <RefreshCw className="lucide" />, path: '/srs-review' },
         { key: 'leaderboard', title: 'Leaderboards', icon: <Trophy className="lucide" />, path: '/leaderboard' },
         { key: 'profile', title: 'Profile', icon: <User className="lucide" />, path: '/profile' },

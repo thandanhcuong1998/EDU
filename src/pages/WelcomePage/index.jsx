@@ -26,7 +26,7 @@ const Welcome = () => {
     if (isLoading) {
         return (
             <div className="w-1000 height-80vh d-flex justify-content-center align-items-center">
-                <h3 className="text-white">Generating your personalized learning plan...</h3>
+                <h3 className="loading-text">Generating your personalized learning plan...</h3>
             </div>
         );
     }

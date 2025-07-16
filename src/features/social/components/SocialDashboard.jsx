@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FriendsList from './FriendsList.jsx';
 import ActivityFeed from './ActivityFeed.jsx';
 import Leaderboard from './Leaderboard.jsx';
